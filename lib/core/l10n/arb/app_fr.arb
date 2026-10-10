@@ -22,5 +22,116 @@
         "format": "decimalPattern"
       }
     }
-  }
+  },
+  "navHome": "Accueil",
+  "navHistory": "Historique",
+  "navProfits": "Bénéfices",
+  "navNodes": "Nœuds",
+  "openReceipts": "Ouvrir la photothèque",
+  "openSettings": "Ouvrir les paramètres",
+  "todayEarned": "Aujourd'hui tu as gagné {amount} FCFA",
+  "@todayEarned": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "todayLost": "Aujourd'hui tu as perdu {amount} FCFA",
+  "@todayLost": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "comparedMore": "C'est {amount} FCFA de plus qu'hier",
+  "@comparedMore": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "comparedLess": "C'est {amount} FCFA de moins qu'hier",
+  "@comparedLess": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "comparedSame": "Autant qu'hier",
+  "summaryError": "Impossible de calculer le résumé du jour",
+  "recentTransactions": "Dernières transactions",
+  "noTransactions": "Aucune transaction pour l'instant. Appuie sur le micro pour commencer.",
+  "recordTransaction": "Dicter une transaction",
+  "saleAmount": "+{amount} FCFA",
+  "@saleAmount": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "expenseAmount": "−{amount} FCFA",
+  "@expenseAmount": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "transcriptLabel": "Ce que tu as dit",
+  "transcriptHint": "Ex. : J'ai vendu 2 tas de tomates à 1 000 francs",
+  "analyze": "Analyser",
+  "analyzeTooltip": "Analyser la phrase",
+  "typeLabel": "Type",
+  "amountLabel": "Montant (FCFA)",
+  "quantityLabel": "Quantité",
+  "unitLabel": "Unité",
+  "noUnit": "Aucune",
+  "productLabel": "Produit",
+  "categoryLabel": "Catégorie",
+  "categoryVegetables": "Légumes",
+  "categoryCereals": "Céréales",
+  "categoryTransport": "Transport",
+  "categorySupplies": "Fournitures",
+  "categoryOther": "Autre",
+  "lowConfidenceWarning": "Je n'ai peut-être pas bien compris. Vérifie les champs signalés.",
+  "fieldToCheck": "À vérifier",
+  "unknownUnit": "Unité inconnue : « {unit} »",
+  "@unknownUnit": {
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "addThisUnit": "Ajouter cette unité",
+  "addUnitTooltip": "Ajouter « {unit} » à tes unités",
+  "@addUnitTooltip": {
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "unitAdded": "Unité « {unit} » ajoutée",
+  "@unitAdded": {
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "save": "Enregistrer",
+  "saveTooltip": "Enregistrer la transaction",
+  "transactionSaved": "Transaction enregistrée"
 }

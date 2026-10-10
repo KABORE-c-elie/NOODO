@@ -35,21 +35,33 @@ final class DriftTransactionRepository implements TransactionRepository {
 
   @override
   Stream<List<Transaction>> watchDay(DateTime day) =>
-      _selectInRange(DateRange.of(PeriodUnit.day, day))
-          .watch()
-          .map(_toDomainList)
-          .distinct(listEquals);
+      watchInRange(DateRange.of(PeriodUnit.day, day));
+
+  @override
+  Stream<List<Transaction>> watchInRange(DateRange range) =>
+      _watch(_selectInRange(range));
+
+  @override
+  Stream<List<Transaction>> watchLatest(int limit) =>
+      _watch(_selectNewestFirst()..limit(limit));
+
+  Stream<List<Transaction>> _watch(
+    JoinedSelectStatement<HasResultSet, dynamic> query,
+  ) => query.watch().map(_toDomainList).distinct(listEquals);
+
+  JoinedSelectStatement<HasResultSet, dynamic> _selectNewestFirst() {
+    final t = _db.transactions;
+    return _db.select(t).join([
+      leftOuterJoin(_db.localUnits, _db.localUnits.id.equalsExp(t.unitId)),
+    ])..orderBy([OrderingTerm.desc(t.date)]);
+  }
 
   JoinedSelectStatement<HasResultSet, dynamic> _selectInRange(DateRange range) {
     final t = _db.transactions;
-    return _db.select(t).join([
-        leftOuterJoin(_db.localUnits, _db.localUnits.id.equalsExp(t.unitId)),
-      ])
-      ..where(
-        t.date.isBiggerOrEqualValue(range.start) &
-            t.date.isSmallerThanValue(range.end),
-      )
-      ..orderBy([OrderingTerm.desc(t.date)]);
+    return _selectNewestFirst()..where(
+      t.date.isBiggerOrEqualValue(range.start) &
+          t.date.isSmallerThanValue(range.end),
+    );
   }
 
   List<Transaction> _toDomainList(List<TypedResult> rows) =>

@@ -169,6 +169,258 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'{amount} FCFA'**
   String amountFcfa(int amount);
+
+  /// No description provided for @navHome.
+  ///
+  /// In fr, this message translates to:
+  /// **'Accueil'**
+  String get navHome;
+
+  /// No description provided for @navHistory.
+  ///
+  /// In fr, this message translates to:
+  /// **'Historique'**
+  String get navHistory;
+
+  /// No description provided for @navProfits.
+  ///
+  /// In fr, this message translates to:
+  /// **'Bénéfices'**
+  String get navProfits;
+
+  /// No description provided for @navNodes.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nœuds'**
+  String get navNodes;
+
+  /// No description provided for @openReceipts.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ouvrir la photothèque'**
+  String get openReceipts;
+
+  /// No description provided for @openSettings.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ouvrir les paramètres'**
+  String get openSettings;
+
+  /// No description provided for @todayEarned.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aujourd\'hui tu as gagné {amount} FCFA'**
+  String todayEarned(int amount);
+
+  /// No description provided for @todayLost.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aujourd\'hui tu as perdu {amount} FCFA'**
+  String todayLost(int amount);
+
+  /// No description provided for @comparedMore.
+  ///
+  /// In fr, this message translates to:
+  /// **'C\'est {amount} FCFA de plus qu\'hier'**
+  String comparedMore(int amount);
+
+  /// No description provided for @comparedLess.
+  ///
+  /// In fr, this message translates to:
+  /// **'C\'est {amount} FCFA de moins qu\'hier'**
+  String comparedLess(int amount);
+
+  /// No description provided for @comparedSame.
+  ///
+  /// In fr, this message translates to:
+  /// **'Autant qu\'hier'**
+  String get comparedSame;
+
+  /// No description provided for @summaryError.
+  ///
+  /// In fr, this message translates to:
+  /// **'Impossible de calculer le résumé du jour'**
+  String get summaryError;
+
+  /// No description provided for @recentTransactions.
+  ///
+  /// In fr, this message translates to:
+  /// **'Dernières transactions'**
+  String get recentTransactions;
+
+  /// No description provided for @noTransactions.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune transaction pour l\'instant. Appuie sur le micro pour commencer.'**
+  String get noTransactions;
+
+  /// No description provided for @recordTransaction.
+  ///
+  /// In fr, this message translates to:
+  /// **'Dicter une transaction'**
+  String get recordTransaction;
+
+  /// No description provided for @saleAmount.
+  ///
+  /// In fr, this message translates to:
+  /// **'+{amount} FCFA'**
+  String saleAmount(int amount);
+
+  /// No description provided for @expenseAmount.
+  ///
+  /// In fr, this message translates to:
+  /// **'−{amount} FCFA'**
+  String expenseAmount(int amount);
+
+  /// No description provided for @transcriptLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ce que tu as dit'**
+  String get transcriptLabel;
+
+  /// No description provided for @transcriptHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ex. : J\'ai vendu 2 tas de tomates à 1 000 francs'**
+  String get transcriptHint;
+
+  /// No description provided for @analyze.
+  ///
+  /// In fr, this message translates to:
+  /// **'Analyser'**
+  String get analyze;
+
+  /// No description provided for @analyzeTooltip.
+  ///
+  /// In fr, this message translates to:
+  /// **'Analyser la phrase'**
+  String get analyzeTooltip;
+
+  /// No description provided for @typeLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Type'**
+  String get typeLabel;
+
+  /// No description provided for @amountLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Montant (FCFA)'**
+  String get amountLabel;
+
+  /// No description provided for @quantityLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Quantité'**
+  String get quantityLabel;
+
+  /// No description provided for @unitLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Unité'**
+  String get unitLabel;
+
+  /// No description provided for @noUnit.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune'**
+  String get noUnit;
+
+  /// No description provided for @productLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Produit'**
+  String get productLabel;
+
+  /// No description provided for @categoryLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Catégorie'**
+  String get categoryLabel;
+
+  /// No description provided for @categoryVegetables.
+  ///
+  /// In fr, this message translates to:
+  /// **'Légumes'**
+  String get categoryVegetables;
+
+  /// No description provided for @categoryCereals.
+  ///
+  /// In fr, this message translates to:
+  /// **'Céréales'**
+  String get categoryCereals;
+
+  /// No description provided for @categoryTransport.
+  ///
+  /// In fr, this message translates to:
+  /// **'Transport'**
+  String get categoryTransport;
+
+  /// No description provided for @categorySupplies.
+  ///
+  /// In fr, this message translates to:
+  /// **'Fournitures'**
+  String get categorySupplies;
+
+  /// No description provided for @categoryOther.
+  ///
+  /// In fr, this message translates to:
+  /// **'Autre'**
+  String get categoryOther;
+
+  /// No description provided for @lowConfidenceWarning.
+  ///
+  /// In fr, this message translates to:
+  /// **'Je n\'ai peut-être pas bien compris. Vérifie les champs signalés.'**
+  String get lowConfidenceWarning;
+
+  /// No description provided for @fieldToCheck.
+  ///
+  /// In fr, this message translates to:
+  /// **'À vérifier'**
+  String get fieldToCheck;
+
+  /// No description provided for @unknownUnit.
+  ///
+  /// In fr, this message translates to:
+  /// **'Unité inconnue : « {unit} »'**
+  String unknownUnit(String unit);
+
+  /// No description provided for @addThisUnit.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter cette unité'**
+  String get addThisUnit;
+
+  /// No description provided for @addUnitTooltip.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter « {unit} » à tes unités'**
+  String addUnitTooltip(String unit);
+
+  /// No description provided for @unitAdded.
+  ///
+  /// In fr, this message translates to:
+  /// **'Unité « {unit} » ajoutée'**
+  String unitAdded(String unit);
+
+  /// No description provided for @save.
+  ///
+  /// In fr, this message translates to:
+  /// **'Enregistrer'**
+  String get save;
+
+  /// No description provided for @saveTooltip.
+  ///
+  /// In fr, this message translates to:
+  /// **'Enregistrer la transaction'**
+  String get saveTooltip;
+
+  /// No description provided for @transactionSaved.
+  ///
+  /// In fr, this message translates to:
+  /// **'Transaction enregistrée'**
+  String get transactionSaved;
 }
 
 class _AppLocalizationsDelegate

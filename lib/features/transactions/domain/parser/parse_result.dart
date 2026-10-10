@@ -5,6 +5,8 @@ import 'package:noodo/features/transactions/domain/transaction_type.dart';
 
 part 'parse_result.freezed.dart';
 
+const lowConfidenceThreshold = 0.6;
+
 @freezed
 abstract class ParseResult with _$ParseResult {
   const factory ParseResult({

@@ -97,3 +97,42 @@ final class UnitRepositoryProvider
 }
 
 String _$unitRepositoryHash() => r'f91dbcb5528a79fab4a7d8b1dd4be5ecd3aed31d';
+
+@ProviderFor(units)
+final unitsProvider = UnitsProvider._();
+
+final class UnitsProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<List<LocalUnit>>,
+          List<LocalUnit>,
+          FutureOr<List<LocalUnit>>
+        >
+    with $FutureModifier<List<LocalUnit>>, $FutureProvider<List<LocalUnit>> {
+  UnitsProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'unitsProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$unitsHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<List<LocalUnit>> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<List<LocalUnit>> create(Ref ref) {
+    return units(ref);
+  }
+}
+
+String _$unitsHash() => r'48ba241de1744adbdabf4c5960925362ba8128ca';

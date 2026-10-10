@@ -11,4 +11,8 @@ abstract interface class TransactionRepository {
   Future<List<Transaction>> listInRange(DateRange range);
 
   Stream<List<Transaction>> watchDay(DateTime day);
+
+  Stream<List<Transaction>> watchInRange(DateRange range);
+
+  Stream<List<Transaction>> watchLatest(int limit);
 }
