@@ -6,11 +6,20 @@ part 'tax_node.freezed.dart';
 abstract class TaxNode with _$TaxNode {
   const TaxNode._();
 
+  static const defaultId = 'tax';
+  static const defaultRateBasisPoints = 500;
+
   const factory TaxNode({
     required String id,
     required int rateBasisPoints,
     required int savedBalanceFcfa,
   }) = _TaxNode;
+
+  factory TaxNode.initial() => const TaxNode(
+    id: defaultId,
+    rateBasisPoints: defaultRateBasisPoints,
+    savedBalanceFcfa: 0,
+  );
 
   double get ratePercent => rateBasisPoints / 100;
 }

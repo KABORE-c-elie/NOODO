@@ -4,6 +4,7 @@ import 'package:noodo/features/nodes/data/tables/creditor_nodes_table.dart';
 import 'package:noodo/features/nodes/data/tables/tax_nodes_table.dart';
 import 'package:noodo/features/transactions/data/tables/local_units_table.dart';
 import 'package:noodo/features/transactions/data/tables/transactions_table.dart';
+import 'package:noodo/features/transactions/domain/transaction_category.dart';
 import 'package:noodo/features/transactions/domain/transaction_type.dart';
 
 part 'app_database.g.dart';

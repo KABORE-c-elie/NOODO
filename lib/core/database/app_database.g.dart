@@ -333,17 +333,16 @@ class $TransactionsTable extends Transactions
     type: DriftSqlType.string,
     requiredDuringInsert: false,
   );
-  static const VerificationMeta _categoryMeta = const VerificationMeta(
-    'category',
-  );
   @override
-  late final GeneratedColumn<String> category = GeneratedColumn<String>(
+  late final GeneratedColumnWithTypeConverter<TransactionCategory, String>
+  category = GeneratedColumn<String>(
     'category',
     aliasedName,
-    true,
+    false,
     type: DriftSqlType.string,
     requiredDuringInsert: false,
-  );
+    defaultValue: Constant(TransactionCategory.other.name),
+  ).withConverter<TransactionCategory>($TransactionsTable.$convertercategory);
   static const VerificationMeta _rawTextMeta = const VerificationMeta(
     'rawText',
   );
@@ -419,12 +418,6 @@ class $TransactionsTable extends Transactions
         product.isAcceptableOrUnknown(data['product']!, _productMeta),
       );
     }
-    if (data.containsKey('category')) {
-      context.handle(
-        _categoryMeta,
-        category.isAcceptableOrUnknown(data['category']!, _categoryMeta),
-      );
-    }
     if (data.containsKey('raw_text')) {
       context.handle(
         _rawTextMeta,
@@ -476,9 +469,11 @@ class $TransactionsTable extends Transactions
         DriftSqlType.string,
         data['${effectivePrefix}product'],
       ),
-      category: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}category'],
+      category: $TransactionsTable.$convertercategory.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}category'],
+        )!,
       ),
       rawText: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
@@ -498,6 +493,10 @@ class $TransactionsTable extends Transactions
 
   static JsonTypeConverter2<TransactionType, String, String> $convertertype =
       const EnumNameConverter<TransactionType>(TransactionType.values);
+  static JsonTypeConverter2<TransactionCategory, String, String>
+  $convertercategory = const EnumNameConverter<TransactionCategory>(
+    TransactionCategory.values,
+  );
 }
 
 class TransactionRow extends DataClass implements Insertable<TransactionRow> {
@@ -507,7 +506,7 @@ class TransactionRow extends DataClass implements Insertable<TransactionRow> {
   final double? quantity;
   final String? unitId;
   final String? product;
-  final String? category;
+  final TransactionCategory category;
   final String rawText;
   final DateTime date;
   const TransactionRow({
@@ -517,7 +516,7 @@ class TransactionRow extends DataClass implements Insertable<TransactionRow> {
     this.quantity,
     this.unitId,
     this.product,
-    this.category,
+    required this.category,
     required this.rawText,
     required this.date,
   });
@@ -540,8 +539,10 @@ class TransactionRow extends DataClass implements Insertable<TransactionRow> {
     if (!nullToAbsent || product != null) {
       map['product'] = Variable<String>(product);
     }
-    if (!nullToAbsent || category != null) {
-      map['category'] = Variable<String>(category);
+    {
+      map['category'] = Variable<String>(
+        $TransactionsTable.$convertercategory.toSql(category),
+      );
     }
     map['raw_text'] = Variable<String>(rawText);
     map['date'] = Variable<DateTime>(date);
@@ -562,9 +563,7 @@ class TransactionRow extends DataClass implements Insertable<TransactionRow> {
       product: product == null && nullToAbsent
           ? const Value.absent()
           : Value(product),
-      category: category == null && nullToAbsent
-          ? const Value.absent()
-          : Value(category),
+      category: Value(category),
       rawText: Value(rawText),
       date: Value(date),
     );
@@ -584,7 +583,9 @@ class TransactionRow extends DataClass implements Insertable<TransactionRow> {
       quantity: serializer.fromJson<double?>(json['quantity']),
       unitId: serializer.fromJson<String?>(json['unitId']),
       product: serializer.fromJson<String?>(json['product']),
-      category: serializer.fromJson<String?>(json['category']),
+      category: $TransactionsTable.$convertercategory.fromJson(
+        serializer.fromJson<String>(json['category']),
+      ),
       rawText: serializer.fromJson<String>(json['rawText']),
       date: serializer.fromJson<DateTime>(json['date']),
     );
@@ -601,7 +602,9 @@ class TransactionRow extends DataClass implements Insertable<TransactionRow> {
       'quantity': serializer.toJson<double?>(quantity),
       'unitId': serializer.toJson<String?>(unitId),
       'product': serializer.toJson<String?>(product),
-      'category': serializer.toJson<String?>(category),
+      'category': serializer.toJson<String>(
+        $TransactionsTable.$convertercategory.toJson(category),
+      ),
       'rawText': serializer.toJson<String>(rawText),
       'date': serializer.toJson<DateTime>(date),
     };
@@ -614,7 +617,7 @@ class TransactionRow extends DataClass implements Insertable<TransactionRow> {
     Value<double?> quantity = const Value.absent(),
     Value<String?> unitId = const Value.absent(),
     Value<String?> product = const Value.absent(),
-    Value<String?> category = const Value.absent(),
+    TransactionCategory? category,
     String? rawText,
     DateTime? date,
   }) => TransactionRow(
@@ -624,7 +627,7 @@ class TransactionRow extends DataClass implements Insertable<TransactionRow> {
     quantity: quantity.present ? quantity.value : this.quantity,
     unitId: unitId.present ? unitId.value : this.unitId,
     product: product.present ? product.value : this.product,
-    category: category.present ? category.value : this.category,
+    category: category ?? this.category,
     rawText: rawText ?? this.rawText,
     date: date ?? this.date,
   );
@@ -694,7 +697,7 @@ class TransactionsCompanion extends UpdateCompanion<TransactionRow> {
   final Value<double?> quantity;
   final Value<String?> unitId;
   final Value<String?> product;
-  final Value<String?> category;
+  final Value<TransactionCategory> category;
   final Value<String> rawText;
   final Value<DateTime> date;
   final Value<int> rowid;
@@ -759,7 +762,7 @@ class TransactionsCompanion extends UpdateCompanion<TransactionRow> {
     Value<double?>? quantity,
     Value<String?>? unitId,
     Value<String?>? product,
-    Value<String?>? category,
+    Value<TransactionCategory>? category,
     Value<String>? rawText,
     Value<DateTime>? date,
     Value<int>? rowid,
@@ -802,7 +805,9 @@ class TransactionsCompanion extends UpdateCompanion<TransactionRow> {
       map['product'] = Variable<String>(product.value);
     }
     if (category.present) {
-      map['category'] = Variable<String>(category.value);
+      map['category'] = Variable<String>(
+        $TransactionsTable.$convertercategory.toSql(category.value),
+      );
     }
     if (rawText.present) {
       map['raw_text'] = Variable<String>(rawText.value);
@@ -1767,7 +1772,7 @@ typedef $$TransactionsTableCreateCompanionBuilder =
       Value<double?> quantity,
       Value<String?> unitId,
       Value<String?> product,
-      Value<String?> category,
+      Value<TransactionCategory> category,
       required String rawText,
       required DateTime date,
       Value<int> rowid,
@@ -1780,7 +1785,7 @@ typedef $$TransactionsTableUpdateCompanionBuilder =
       Value<double?> quantity,
       Value<String?> unitId,
       Value<String?> product,
-      Value<String?> category,
+      Value<TransactionCategory> category,
       Value<String> rawText,
       Value<DateTime> date,
       Value<int> rowid,
@@ -1843,9 +1848,14 @@ class $$TransactionsTableFilterComposer
     builder: (column) => ColumnFilters(column),
   );
 
-  ColumnFilters<String> get category => $composableBuilder(
+  ColumnWithTypeConverterFilters<
+    TransactionCategory,
+    TransactionCategory,
+    String
+  >
+  get category => $composableBuilder(
     column: $table.category,
-    builder: (column) => ColumnFilters(column),
+    builder: (column) => ColumnWithTypeConverterFilters(column),
   );
 
   ColumnFilters<String> get rawText => $composableBuilder(
@@ -1981,7 +1991,7 @@ class $$TransactionsTableAnnotationComposer
   GeneratedColumn<String> get product =>
       $composableBuilder(column: $table.product, builder: (column) => column);
 
-  GeneratedColumn<String> get category =>
+  GeneratedColumnWithTypeConverter<TransactionCategory, String> get category =>
       $composableBuilder(column: $table.category, builder: (column) => column);
 
   GeneratedColumn<String> get rawText =>
@@ -2048,7 +2058,7 @@ class $$TransactionsTableTableManager
                 Value<double?> quantity = const Value.absent(),
                 Value<String?> unitId = const Value.absent(),
                 Value<String?> product = const Value.absent(),
-                Value<String?> category = const Value.absent(),
+                Value<TransactionCategory> category = const Value.absent(),
                 Value<String> rawText = const Value.absent(),
                 Value<DateTime> date = const Value.absent(),
                 Value<int> rowid = const Value.absent(),
@@ -2072,7 +2082,7 @@ class $$TransactionsTableTableManager
                 Value<double?> quantity = const Value.absent(),
                 Value<String?> unitId = const Value.absent(),
                 Value<String?> product = const Value.absent(),
-                Value<String?> category = const Value.absent(),
+                Value<TransactionCategory> category = const Value.absent(),
                 required String rawText,
                 required DateTime date,
                 Value<int> rowid = const Value.absent(),

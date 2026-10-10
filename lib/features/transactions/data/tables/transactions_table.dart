@@ -1,5 +1,6 @@
 import 'package:drift/drift.dart';
 import 'package:noodo/features/transactions/data/tables/local_units_table.dart';
+import 'package:noodo/features/transactions/domain/transaction_category.dart';
 import 'package:noodo/features/transactions/domain/transaction_type.dart';
 
 @DataClassName('TransactionRow')
@@ -10,7 +11,9 @@ class Transactions extends Table {
   RealColumn get quantity => real().nullable()();
   TextColumn get unitId => text().nullable().references(LocalUnits, #id)();
   TextColumn get product => text().nullable()();
-  TextColumn get category => text().nullable()();
+  TextColumn get category => textEnum<TransactionCategory>().withDefault(
+    Constant(TransactionCategory.other.name),
+  )();
   TextColumn get rawText => text()();
   DateTimeColumn get date => dateTime()();
 

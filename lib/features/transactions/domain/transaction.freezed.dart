@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Transaction {
 
- String get id; TransactionType get type; int get amountFcfa; double? get quantity; LocalUnit? get unit; String? get product; String? get category; String get rawText; DateTime get date;
+ String get id; TransactionType get type; int get amountFcfa; double? get quantity; LocalUnit? get unit; String? get product; TransactionCategory get category; String get rawText; DateTime get date;
 /// Create a copy of Transaction
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -51,7 +51,7 @@ abstract mixin class $TransactionCopyWith<$Res>  {
   factory $TransactionCopyWith(Transaction value, $Res Function(Transaction) _then) = _$TransactionCopyWithImpl;
 @useResult
 $Res call({
- String id, TransactionType type, int amountFcfa, double? quantity, LocalUnit? unit, String? product, String? category, String rawText, DateTime date
+ String id, TransactionType type, int amountFcfa, double? quantity, LocalUnit? unit, String? product, TransactionCategory category, String rawText, DateTime date
 });
 
 
@@ -68,7 +68,7 @@ class _$TransactionCopyWithImpl<$Res>
 
 /// Create a copy of Transaction
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? type = null,Object? amountFcfa = null,Object? quantity = freezed,Object? unit = freezed,Object? product = freezed,Object? category = freezed,Object? rawText = null,Object? date = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? type = null,Object? amountFcfa = null,Object? quantity = freezed,Object? unit = freezed,Object? product = freezed,Object? category = null,Object? rawText = null,Object? date = null,}) {
   return _then(Transaction(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
@@ -76,8 +76,8 @@ as TransactionType,amountFcfa: null == amountFcfa ? _self.amountFcfa : amountFcf
 as int,quantity: freezed == quantity ? _self.quantity : quantity // ignore: cast_nullable_to_non_nullable
 as double?,unit: freezed == unit ? _self.unit : unit // ignore: cast_nullable_to_non_nullable
 as LocalUnit?,product: freezed == product ? _self.product : product // ignore: cast_nullable_to_non_nullable
-as String?,category: freezed == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
-as String?,rawText: null == rawText ? _self.rawText : rawText // ignore: cast_nullable_to_non_nullable
+as String?,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
+as TransactionCategory,rawText: null == rawText ? _self.rawText : rawText // ignore: cast_nullable_to_non_nullable
 as String,date: null == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
 as DateTime,
   ));
@@ -176,7 +176,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  TransactionType type,  int amountFcfa,  double? quantity,  LocalUnit? unit,  String? product,  String? category,  String rawText,  DateTime date)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  TransactionType type,  int amountFcfa,  double? quantity,  LocalUnit? unit,  String? product,  TransactionCategory category,  String rawText,  DateTime date)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Transaction() when $default != null:
 return $default(_that.id,_that.type,_that.amountFcfa,_that.quantity,_that.unit,_that.product,_that.category,_that.rawText,_that.date);case _:
@@ -197,7 +197,7 @@ return $default(_that.id,_that.type,_that.amountFcfa,_that.quantity,_that.unit,_
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  TransactionType type,  int amountFcfa,  double? quantity,  LocalUnit? unit,  String? product,  String? category,  String rawText,  DateTime date)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  TransactionType type,  int amountFcfa,  double? quantity,  LocalUnit? unit,  String? product,  TransactionCategory category,  String rawText,  DateTime date)  $default,) {final _that = this;
 switch (_that) {
 case _Transaction():
 return $default(_that.id,_that.type,_that.amountFcfa,_that.quantity,_that.unit,_that.product,_that.category,_that.rawText,_that.date);case _:
@@ -217,7 +217,7 @@ return $default(_that.id,_that.type,_that.amountFcfa,_that.quantity,_that.unit,_
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  TransactionType type,  int amountFcfa,  double? quantity,  LocalUnit? unit,  String? product,  String? category,  String rawText,  DateTime date)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  TransactionType type,  int amountFcfa,  double? quantity,  LocalUnit? unit,  String? product,  TransactionCategory category,  String rawText,  DateTime date)?  $default,) {final _that = this;
 switch (_that) {
 case _Transaction() when $default != null:
 return $default(_that.id,_that.type,_that.amountFcfa,_that.quantity,_that.unit,_that.product,_that.category,_that.rawText,_that.date);case _:
@@ -232,7 +232,7 @@ return $default(_that.id,_that.type,_that.amountFcfa,_that.quantity,_that.unit,_
 
 
 class _Transaction implements Transaction {
-  const _Transaction({required this.id, required this.type, required this.amountFcfa, this.quantity, this.unit, this.product, this.category, required this.rawText, required this.date});
+  const _Transaction({required this.id, required this.type, required this.amountFcfa, this.quantity, this.unit, this.product, this.category = TransactionCategory.other, required this.rawText, required this.date});
   
 
 @override final  String id;
@@ -241,7 +241,7 @@ class _Transaction implements Transaction {
 @override final  double? quantity;
 @override final  LocalUnit? unit;
 @override final  String? product;
-@override final  String? category;
+@override@JsonKey() final  TransactionCategory category;
 @override final  String rawText;
 @override final  DateTime date;
 
@@ -277,7 +277,7 @@ abstract mixin class _$TransactionCopyWith<$Res> implements $TransactionCopyWith
   factory _$TransactionCopyWith(_Transaction value, $Res Function(_Transaction) _then) = __$TransactionCopyWithImpl;
 @override @useResult
 $Res call({
- String id, TransactionType type, int amountFcfa, double? quantity, LocalUnit? unit, String? product, String? category, String rawText, DateTime date
+ String id, TransactionType type, int amountFcfa, double? quantity, LocalUnit? unit, String? product, TransactionCategory category, String rawText, DateTime date
 });
 
 
@@ -294,7 +294,7 @@ class __$TransactionCopyWithImpl<$Res>
 
 /// Create a copy of Transaction
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? type = null,Object? amountFcfa = null,Object? quantity = freezed,Object? unit = freezed,Object? product = freezed,Object? category = freezed,Object? rawText = null,Object? date = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? type = null,Object? amountFcfa = null,Object? quantity = freezed,Object? unit = freezed,Object? product = freezed,Object? category = null,Object? rawText = null,Object? date = null,}) {
   return _then(_Transaction(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,type: null == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
@@ -302,8 +302,8 @@ as TransactionType,amountFcfa: null == amountFcfa ? _self.amountFcfa : amountFcf
 as int,quantity: freezed == quantity ? _self.quantity : quantity // ignore: cast_nullable_to_non_nullable
 as double?,unit: freezed == unit ? _self.unit : unit // ignore: cast_nullable_to_non_nullable
 as LocalUnit?,product: freezed == product ? _self.product : product // ignore: cast_nullable_to_non_nullable
-as String?,category: freezed == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
-as String?,rawText: null == rawText ? _self.rawText : rawText // ignore: cast_nullable_to_non_nullable
+as String?,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
+as TransactionCategory,rawText: null == rawText ? _self.rawText : rawText // ignore: cast_nullable_to_non_nullable
 as String,date: null == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
 as DateTime,
   ));
