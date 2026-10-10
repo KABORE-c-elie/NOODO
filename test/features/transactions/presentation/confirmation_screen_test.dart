@@ -140,7 +140,7 @@ void main() {
     await tester.tap(buttonWithText(frenchL10n.save));
     await tester.pumpAndSettle();
 
-    expect(find.text(frenchL10n.transactionSaved), findsOneWidget);
+    expect(find.text(frenchL10n.transactionSavedWithTax(75)), findsOneWidget);
     expect(find.text(frenchL10n.todayEarned(1500)), findsOneWidget);
     expect(find.text('oseille'), findsOneWidget);
 

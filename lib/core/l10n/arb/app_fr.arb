@@ -365,5 +365,233 @@
       }
     }
   },
-  "historyError": "Impossible de charger l'historique."
+  "historyError": "Impossible de charger l'historique.",
+  "filters": "Filtres",
+  "filtersTooltip": "Filtrer par catégorie",
+  "clearCategoryFilter": "Retirer le filtre de catégorie",
+  "transactionSavedWithTax": "Transaction enregistrée · {amount} FCFA mis de côté pour tes impôts",
+  "@transactionSavedWithTax": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "taxNodeTitle": "Nœud Impôts",
+  "taxSaved": "Épargné : {amount} FCFA",
+  "@taxSaved": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "taxRate": "Taux : {rate} %",
+  "@taxRate": {
+    "placeholders": {
+      "rate": {
+        "type": "String"
+      }
+    }
+  },
+  "taxNextDue": "Prochaine échéance : {date}",
+  "@taxNextDue": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "taxNoDue": "Aucune échéance renseignée",
+  "creditorsTitle": "Mes créanciers",
+  "noCreditors": "Aucun créancier pour l'instant.",
+  "addCreditor": "Ajouter un créancier",
+  "addCreditorTooltip": "Ajouter un fournisseur à qui tu dois de l'argent",
+  "overdue": "En retard",
+  "dueOn": "Échéance : {date}",
+  "@dueOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "noDueDate": "Sans échéance",
+  "balanceDue": "Reste à payer : {amount} FCFA",
+  "@balanceDue": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "creditorNameLabel": "Nom du fournisseur",
+  "creditorPhoneLabel": "Téléphone (facultatif)",
+  "amountDueLabel": "Montant dû (FCFA)",
+  "dueDateLabel": "Échéance (facultatif)",
+  "chooseDueDate": "Choisir une échéance",
+  "clearDueDate": "Retirer l'échéance",
+  "requiredField": "Obligatoire",
+  "invalidAmount": "Montant invalide",
+  "creditorAdded": "Créancier ajouté",
+  "totalPaid": "Déjà payé : {amount} FCFA",
+  "@totalPaid": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "recordPayment": "Enregistrer un paiement",
+  "recordPaymentTooltip": "Enregistrer un paiement à ce fournisseur",
+  "paymentAmountLabel": "Montant payé (FCFA)",
+  "paymentMethodLabel": "Moyen de paiement",
+  "methodCash": "Espèces",
+  "methodOrangeMoney": "Orange Money",
+  "methodMoovMoney": "Moov Money",
+  "paymentReasonLabel": "Motif (facultatif)",
+  "amountTooHigh": "Maximum : {max} FCFA",
+  "@amountTooHigh": {
+    "placeholders": {
+      "max": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "confirmPayment": "Valider le paiement",
+  "paymentsTitle": "Paiements",
+  "noPayments": "Aucun paiement pour l'instant.",
+  "creditorNotFound": "Créancier introuvable.",
+  "paymentExpenseText": "Paiement à {name}",
+  "@paymentExpenseText": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "paymentSummary": "{date} · {method} · {number}",
+  "@paymentSummary": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "method": {
+        "type": "String"
+      },
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "viewReceiptHint": "voir le reçu",
+  "receiptTitle": "Reçu de paiement",
+  "share": "Partager",
+  "shareReceiptTooltip": "Partager le reçu par WhatsApp, SMS…",
+  "close": "Fermer",
+  "receiptShareSubject": "Reçu {number}",
+  "@receiptShareSubject": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "receiptHeader": "NOODO — ACCUSÉ DE PAIEMENT",
+  "receiptNumberLine": "N° {number} | Date : {date}",
+  "@receiptNumberLine": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "receiptDateTime": "{date} à {time}",
+  "@receiptDateTime": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "receiptTime": "{hour}h{minute}",
+  "@receiptTime": {
+    "placeholders": {
+      "hour": {
+        "type": "String"
+      },
+      "minute": {
+        "type": "String"
+      }
+    }
+  },
+  "receiptCreditorLine": "Créancier / Fournisseur : {name}",
+  "@receiptCreditorLine": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "receiptPhoneLine": "Numéro : {phone}",
+  "@receiptPhoneLine": {
+    "placeholders": {
+      "phone": {
+        "type": "String"
+      }
+    }
+  },
+  "receiptAmountLine": "Montant payé : {amount} FCFA",
+  "@receiptAmountLine": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "receiptMethodLine": "Moyen : {method}",
+  "@receiptMethodLine": {
+    "placeholders": {
+      "method": {
+        "type": "String"
+      }
+    }
+  },
+  "receiptMobileMoney": "Mobile Money ({operator})",
+  "@receiptMobileMoney": {
+    "placeholders": {
+      "operator": {
+        "type": "String"
+      }
+    }
+  },
+  "receiptReasonLine": "Motif : {reason}",
+  "@receiptReasonLine": {
+    "placeholders": {
+      "reason": {
+        "type": "String"
+      }
+    }
+  },
+  "receiptRemainingLine": "Reste à devoir : {amount} FCFA",
+  "@receiptRemainingLine": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  }
 }

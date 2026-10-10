@@ -2,33 +2,79 @@ import 'package:drift/drift.dart';
 import 'package:flutter/foundation.dart';
 import 'package:noodo/core/database/app_database.dart';
 import 'package:noodo/core/utils/date_range.dart';
+import 'package:noodo/features/nodes/domain/tax_node.dart';
+import 'package:noodo/features/nodes/domain/tax_savings_calculator.dart';
 import 'package:noodo/features/transactions/data/local_unit_mapper.dart';
 import 'package:noodo/features/transactions/domain/transaction.dart';
 import 'package:noodo/features/transactions/domain/transaction_query.dart';
 import 'package:noodo/features/transactions/domain/transaction_repository.dart';
+import 'package:noodo/features/transactions/domain/transaction_type.dart';
 
 final class DriftTransactionRepository implements TransactionRepository {
-  const DriftTransactionRepository(this._db);
+  const DriftTransactionRepository(
+    this._db, {
+    this._taxCalculator = const TaxSavingsCalculator(),
+  });
 
   final AppDatabase _db;
+  final TaxSavingsCalculator _taxCalculator;
 
   @override
-  Future<void> add(Transaction transaction) =>
-      _db.into(_db.transactions).insert(_toCompanion(transaction));
+  Future<({int taxSavedFcfa})> add(Transaction transaction) =>
+      _db.transaction(() async {
+        final taxSaved = await _taxSavingsFor(transaction);
+        await _db
+            .into(_db.transactions)
+            .insert(_toCompanion(transaction, taxSaved));
+        await _adjustTaxBalance(taxSaved);
+        return (taxSavedFcfa: taxSaved);
+      });
 
   @override
-  Future<void> update(Transaction transaction) async {
-    final updated = await _db
-        .update(_db.transactions)
-        .replace(_toCompanion(transaction));
-    if (!updated) {
+  Future<void> update(Transaction transaction) => _db.transaction(() async {
+    final previous = await _findRow(transaction.id);
+    if (previous == null) {
       throw StateError('Transaction ${transaction.id} introuvable');
     }
-  }
+    final taxSaved = await _taxSavingsFor(transaction);
+    await _db
+        .update(_db.transactions)
+        .replace(_toCompanion(transaction, taxSaved));
+    await _adjustTaxBalance(taxSaved - previous.taxSavedFcfa);
+  });
 
   @override
-  Future<void> delete(String id) =>
-      (_db.delete(_db.transactions)..where((t) => t.id.equals(id))).go();
+  Future<void> delete(String id) => _db.transaction(() async {
+    final previous = await _findRow(id);
+    if (previous == null) return;
+    await (_db.delete(_db.transactions)..where((t) => t.id.equals(id))).go();
+    await _adjustTaxBalance(-previous.taxSavedFcfa);
+  });
+
+  Future<TransactionRow?> _findRow(String id) => (_db.select(
+    _db.transactions,
+  )..where((t) => t.id.equals(id))).getSingleOrNull();
+
+  Future<int> _taxSavingsFor(Transaction transaction) async {
+    if (transaction.type != TransactionType.sale) return 0;
+    final taxNode = await (_db.select(
+      _db.taxNodes,
+    )..limit(1)).getSingleOrNull();
+    return _taxCalculator.savingsFor(
+      saleAmountFcfa: transaction.amountFcfa,
+      rateBasisPoints:
+          taxNode?.rateBasisPoints ?? TaxNode.defaultRateBasisPoints,
+    );
+  }
+
+  Future<void> _adjustTaxBalance(int delta) async {
+    if (delta == 0) return;
+    await _db.customUpdate(
+      'UPDATE tax_nodes SET saved_balance_fcfa = MAX(0, saved_balance_fcfa + ?)',
+      variables: [Variable.withInt(delta)],
+      updates: {_db.taxNodes},
+    );
+  }
 
   @override
   Future<Transaction?> findById(String id) async {
@@ -122,7 +168,7 @@ final class DriftTransactionRepository implements TransactionRepository {
     );
   }
 
-  TransactionsCompanion _toCompanion(Transaction transaction) =>
+  TransactionsCompanion _toCompanion(Transaction transaction, int taxSaved) =>
       TransactionsCompanion(
         id: Value(transaction.id),
         type: Value(transaction.type),
@@ -133,5 +179,6 @@ final class DriftTransactionRepository implements TransactionRepository {
         category: Value(transaction.category),
         rawText: Value(transaction.rawText),
         date: Value(transaction.date),
+        taxSavedFcfa: Value(taxSaved),
       );
 }

@@ -5,6 +5,7 @@ import 'package:noodo/core/router/app_routes.dart';
 import 'package:noodo/features/transactions/data/drift_transaction_repository.dart';
 import 'package:noodo/features/transactions/domain/transaction_category.dart';
 import 'package:noodo/features/transactions/presentation/screens/history_screen.dart';
+import 'package:noodo/features/transactions/presentation/widgets/history_filters.dart';
 
 import '../../../helpers/fixtures.dart';
 import '../../../helpers/pump_app.dart';
@@ -57,12 +58,15 @@ void main() {
       db: db,
       now: now,
       initialLocation: AppRoutes.history,
-      logicalSize: tallPhoneSize,
     );
 
     expect(find.text('mercredi 14 octobre 2026'), findsOneWidget);
-    expect(find.text('mardi 13 octobre 2026'), findsOneWidget);
     expect(find.text(frenchL10n.dayProfit(12500)), findsOneWidget);
+    await scrollWithin<HistoryScreen>(
+      tester,
+      find.text('mardi 13 octobre 2026'),
+    );
+    await scrollWithin<HistoryScreen>(tester, _inHistory(find.text('riz')));
     expect(find.text(frenchL10n.dayProfit(8000)), findsOneWidget);
     final order = ['taxi', 'tomates', 'riz']
         .map((label) => tester.getTopLeft(_inHistory(find.text(label))).dy)
@@ -79,9 +83,12 @@ void main() {
       db: db,
       now: now,
       initialLocation: AppRoutes.history,
-      logicalSize: tallPhoneSize,
     );
 
+    await scrollWithin<HistoryFilters>(
+      tester,
+      find.text(frenchL10n.filterExpenses),
+    );
     await tester.tap(find.text(frenchL10n.filterExpenses));
     await tester.pumpAndSettle();
     expect(_inHistory(find.text('taxi')), findsOneWidget);
@@ -90,7 +97,12 @@ void main() {
 
     await tester.tap(find.text(frenchL10n.filterSales));
     await tester.pumpAndSettle();
-    await tester.tap(find.text(frenchL10n.categoryAll));
+    await scrollWithin<HistoryFilters>(
+      tester,
+      find.text(frenchL10n.filters),
+      delta: -200,
+    );
+    await tester.tap(find.text(frenchL10n.filters));
     await tester.pumpAndSettle();
     await tester.tap(find.text(frenchL10n.categoryCereals).last);
     await tester.pumpAndSettle();
@@ -108,7 +120,6 @@ void main() {
       db: db,
       now: now,
       initialLocation: AppRoutes.history,
-      logicalSize: tallPhoneSize,
     );
 
     await tester.drag(_inHistory(find.text('tomates')), const Offset(-600, 0));
@@ -142,9 +153,9 @@ void main() {
       db: db,
       now: now,
       initialLocation: AppRoutes.history,
-      logicalSize: tallPhoneSize,
     );
 
+    await scrollWithin<HistoryScreen>(tester, _inHistory(find.text('riz')));
     await tester.drag(_inHistory(find.text('riz')), const Offset(-600, 0));
     await tester.pumpAndSettle();
     await tester.tap(find.text(frenchL10n.cancel));
@@ -165,7 +176,6 @@ void main() {
       db: db,
       now: now,
       initialLocation: AppRoutes.history,
-      logicalSize: tallPhoneSize,
     );
 
     await tester.tap(_inHistory(find.text('tomates')));
@@ -218,14 +228,18 @@ void main() {
       db: db,
       now: now,
       initialLocation: AppRoutes.history,
-      logicalSize: tallPhoneSize,
     );
 
     expect(_inHistory(find.text('vente v69')), findsOneWidget);
     await tester.scrollUntilVisible(
       _inHistory(find.text('vente v0')),
       500,
-      scrollable: _inHistory(find.byType(Scrollable)).last,
+      scrollable: find
+          .descendant(
+            of: find.byType(ListView),
+            matching: find.byType(Scrollable),
+          )
+          .last,
       maxScrolls: 100,
     );
     await tester.pumpAndSettle();

@@ -490,4 +490,252 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get historyError => 'Unable to load the history.';
+
+  @override
+  String get filters => 'Filters';
+
+  @override
+  String get filtersTooltip => 'Filter by category';
+
+  @override
+  String get clearCategoryFilter => 'Remove the category filter';
+
+  @override
+  String transactionSavedWithTax(int amount) {
+    final intl.NumberFormat amountNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String amountString = amountNumberFormat.format(amount);
+
+    return 'Transaction saved · $amountString FCFA set aside for your taxes';
+  }
+
+  @override
+  String get taxNodeTitle => 'Tax node';
+
+  @override
+  String taxSaved(int amount) {
+    final intl.NumberFormat amountNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String amountString = amountNumberFormat.format(amount);
+
+    return 'Saved: $amountString FCFA';
+  }
+
+  @override
+  String taxRate(String rate) {
+    return 'Rate: $rate%';
+  }
+
+  @override
+  String taxNextDue(String date) {
+    return 'Next due date: $date';
+  }
+
+  @override
+  String get taxNoDue => 'No due date set';
+
+  @override
+  String get creditorsTitle => 'My creditors';
+
+  @override
+  String get noCreditors => 'No creditors yet.';
+
+  @override
+  String get addCreditor => 'Add a creditor';
+
+  @override
+  String get addCreditorTooltip => 'Add a supplier you owe money to';
+
+  @override
+  String get overdue => 'Overdue';
+
+  @override
+  String dueOn(String date) {
+    return 'Due: $date';
+  }
+
+  @override
+  String get noDueDate => 'No due date';
+
+  @override
+  String balanceDue(int amount) {
+    final intl.NumberFormat amountNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String amountString = amountNumberFormat.format(amount);
+
+    return 'Left to pay: $amountString FCFA';
+  }
+
+  @override
+  String get creditorNameLabel => 'Supplier name';
+
+  @override
+  String get creditorPhoneLabel => 'Phone (optional)';
+
+  @override
+  String get amountDueLabel => 'Amount owed (FCFA)';
+
+  @override
+  String get dueDateLabel => 'Due date (optional)';
+
+  @override
+  String get chooseDueDate => 'Choose a due date';
+
+  @override
+  String get clearDueDate => 'Remove the due date';
+
+  @override
+  String get requiredField => 'Required';
+
+  @override
+  String get invalidAmount => 'Invalid amount';
+
+  @override
+  String get creditorAdded => 'Creditor added';
+
+  @override
+  String totalPaid(int amount) {
+    final intl.NumberFormat amountNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String amountString = amountNumberFormat.format(amount);
+
+    return 'Already paid: $amountString FCFA';
+  }
+
+  @override
+  String get recordPayment => 'Record a payment';
+
+  @override
+  String get recordPaymentTooltip => 'Record a payment to this supplier';
+
+  @override
+  String get paymentAmountLabel => 'Amount paid (FCFA)';
+
+  @override
+  String get paymentMethodLabel => 'Payment method';
+
+  @override
+  String get methodCash => 'Cash';
+
+  @override
+  String get methodOrangeMoney => 'Orange Money';
+
+  @override
+  String get methodMoovMoney => 'Moov Money';
+
+  @override
+  String get paymentReasonLabel => 'Reason (optional)';
+
+  @override
+  String amountTooHigh(int max) {
+    final intl.NumberFormat maxNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
+    final String maxString = maxNumberFormat.format(max);
+
+    return 'Maximum: $maxString FCFA';
+  }
+
+  @override
+  String get confirmPayment => 'Confirm payment';
+
+  @override
+  String get paymentsTitle => 'Payments';
+
+  @override
+  String get noPayments => 'No payments yet.';
+
+  @override
+  String get creditorNotFound => 'Creditor not found.';
+
+  @override
+  String paymentExpenseText(String name) {
+    return 'Payment to $name';
+  }
+
+  @override
+  String paymentSummary(String date, String method, String number) {
+    return '$date · $method · $number';
+  }
+
+  @override
+  String get viewReceiptHint => 'view the receipt';
+
+  @override
+  String get receiptTitle => 'Payment receipt';
+
+  @override
+  String get share => 'Share';
+
+  @override
+  String get shareReceiptTooltip => 'Share the receipt via WhatsApp, SMS…';
+
+  @override
+  String get close => 'Close';
+
+  @override
+  String receiptShareSubject(String number) {
+    return 'Receipt $number';
+  }
+
+  @override
+  String get receiptHeader => 'NOODO — PAYMENT RECEIPT';
+
+  @override
+  String receiptNumberLine(String number, String date) {
+    return 'No. $number | Date: $date';
+  }
+
+  @override
+  String receiptDateTime(String date, String time) {
+    return '$date at $time';
+  }
+
+  @override
+  String receiptTime(String hour, String minute) {
+    return '$hour:$minute';
+  }
+
+  @override
+  String receiptCreditorLine(String name) {
+    return 'Creditor / Supplier: $name';
+  }
+
+  @override
+  String receiptPhoneLine(String phone) {
+    return 'Phone: $phone';
+  }
+
+  @override
+  String receiptAmountLine(int amount) {
+    final intl.NumberFormat amountNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String amountString = amountNumberFormat.format(amount);
+
+    return 'Amount paid: $amountString FCFA';
+  }
+
+  @override
+  String receiptMethodLine(String method) {
+    return 'Method: $method';
+  }
+
+  @override
+  String receiptMobileMoney(String operator) {
+    return 'Mobile Money ($operator)';
+  }
+
+  @override
+  String receiptReasonLine(String reason) {
+    return 'Reason: $reason';
+  }
+
+  @override
+  String receiptRemainingLine(int amount) {
+    final intl.NumberFormat amountNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String amountString = amountNumberFormat.format(amount);
+
+    return 'Still owed: $amountString FCFA';
+  }
 }

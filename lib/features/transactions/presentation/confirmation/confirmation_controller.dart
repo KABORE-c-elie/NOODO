@@ -12,6 +12,13 @@ import 'package:uuid/uuid.dart';
 
 part 'confirmation_controller.g.dart';
 
+final class SaveOutcome {
+  const SaveOutcome({required this.isUpdate, required this.taxSavedFcfa});
+
+  final bool isUpdate;
+  final int taxSavedFcfa;
+}
+
 @riverpod
 class ConfirmationController extends _$ConfirmationController {
   static const _parser = TransactionParser();
@@ -79,11 +86,11 @@ class ConfirmationController extends _$ConfirmationController {
     return unit;
   }
 
-  Future<bool> save() async {
+  Future<SaveOutcome?> save() async {
     final draft = state;
     final type = draft.type;
     final amount = draft.amountFcfa;
-    if (!draft.canSave || type == null || amount == null) return false;
+    if (!draft.canSave || type == null || amount == null) return null;
     final repository = ref.read(transactionRepositoryProvider);
     final transaction = Transaction(
       id: draft.editingId ?? _uuid.v4(),
@@ -98,9 +105,9 @@ class ConfirmationController extends _$ConfirmationController {
     );
     if (draft.isEditing) {
       await repository.update(transaction);
-    } else {
-      await repository.add(transaction);
+      return const SaveOutcome(isUpdate: true, taxSavedFcfa: 0);
     }
-    return true;
+    final result = await repository.add(transaction);
+    return SaveOutcome(isUpdate: false, taxSavedFcfa: result.taxSavedFcfa);
   }
 }

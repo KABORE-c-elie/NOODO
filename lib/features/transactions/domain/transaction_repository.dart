@@ -3,7 +3,7 @@ import 'package:noodo/features/transactions/domain/transaction.dart';
 import 'package:noodo/features/transactions/domain/transaction_query.dart';
 
 abstract interface class TransactionRepository {
-  Future<void> add(Transaction transaction);
+  Future<({int taxSavedFcfa})> add(Transaction transaction);
 
   Future<void> update(Transaction transaction);
 

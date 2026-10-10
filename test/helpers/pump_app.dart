@@ -8,15 +8,15 @@ import 'package:noodo/core/l10n/app_locale_provider.dart';
 import 'package:noodo/core/l10n/generated/app_localizations.dart';
 import 'package:noodo/core/router/app_router.dart';
 import 'package:noodo/core/utils/clock_provider.dart';
+import 'package:noodo/features/nodes/data/node_providers.dart';
 import 'package:noodo/features/transactions/data/speech_providers.dart';
 
+import 'fake_receipt_sharer.dart';
 import 'fake_speech_service.dart';
 
 const testLocale = Locale('fr');
 
 const phoneSize = Size(360, 800);
-
-const tallPhoneSize = Size(360, 1400);
 
 final frenchL10n = lookupAppLocalizations(testLocale);
 
@@ -26,10 +26,10 @@ Future<ProviderContainer> pumpNoodoApp(
   required DateTime now,
   String? initialLocation,
   FakeSpeechService? speech,
-  Size logicalSize = phoneSize,
+  FakeReceiptSharer? sharer,
 }) async {
   tester.view
-    ..physicalSize = logicalSize * 3
+    ..physicalSize = phoneSize * 3
     ..devicePixelRatio = 3;
   tester.platformDispatcher.localesTestValue = const [testLocale];
   addTearDown(tester.view.reset);
@@ -41,6 +41,7 @@ Future<ProviderContainer> pumpNoodoApp(
         clockProvider.overrideWithValue(() => now),
         appLocaleProvider.overrideWithValue(testLocale),
         speechServiceProvider.overrideWithValue(speech ?? FakeSpeechService()),
+        receiptSharerProvider.overrideWithValue(sharer ?? FakeReceiptSharer()),
       ],
       child: const NoodoApp(),
     ),
@@ -75,3 +76,13 @@ Finder buttonWithText(String text) => find.ancestor(
 
 Finder inScreen<T extends Widget>(Finder finder) =>
     find.descendant(of: find.byType(T), matching: finder);
+
+Future<void> scrollWithin<T extends Widget>(
+  WidgetTester tester,
+  Finder finder, {
+  double delta = 200,
+}) => tester.scrollUntilVisible(
+  finder,
+  delta,
+  scrollable: inScreen<T>(find.byType(Scrollable)).first,
+);

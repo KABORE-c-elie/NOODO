@@ -97,9 +97,12 @@ class _DayHeader extends ConsumerWidget {
       child: Container(
         color: theme.colorScheme.surfaceContainerHighest,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        child: Row(
+        child: Wrap(
+          alignment: WrapAlignment.spaceBetween,
+          spacing: 12,
+          runSpacing: 4,
           children: [
-            Expanded(child: Text(label, style: theme.textTheme.titleSmall)),
+            Text(label, style: theme.textTheme.titleSmall),
             if (net != null)
               Text(
                 l10n.dayProfit(net),

@@ -54,13 +54,16 @@ class _ConfirmationScreenState extends ConsumerState<ConfirmationScreen> {
   Future<void> _save() async {
     final messenger = ScaffoldMessenger.of(context);
     final l10n = AppLocalizations.of(context);
-    final message = ref.read(confirmationControllerProvider).isEditing
-        ? l10n.transactionUpdated
-        : l10n.transactionSaved;
-    final saved = await ref
+    final outcome = await ref
         .read(confirmationControllerProvider.notifier)
         .save();
-    if (!saved || !mounted) return;
+    if (outcome == null || !mounted) return;
+    final message = switch (outcome) {
+      SaveOutcome(isUpdate: true) => l10n.transactionUpdated,
+      SaveOutcome(taxSavedFcfa: final tax) when tax > 0 =>
+        l10n.transactionSavedWithTax(tax),
+      _ => l10n.transactionSaved,
+    };
     messenger.showSnackBar(SnackBar(content: Text(message)));
     if (context.canPop()) {
       context.pop();

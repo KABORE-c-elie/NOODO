@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:noodo/core/database/app_database.dart';
 import 'package:noodo/core/router/app_routes.dart';
+import 'package:noodo/features/profits/presentation/screens/profits_screen.dart';
 import 'package:noodo/features/transactions/data/drift_transaction_repository.dart';
 import 'package:noodo/features/transactions/domain/transaction_category.dart';
 
@@ -52,7 +53,6 @@ void main() {
       db: db,
       now: now,
       initialLocation: AppRoutes.profits,
-      logicalSize: tallPhoneSize,
     );
 
     expect(find.text(frenchL10n.weekEarned(13000)), findsOneWidget);
@@ -63,6 +63,12 @@ void main() {
     expect(
       find.text(frenchL10n.periodRange('12 octobre', '18 octobre 2026')),
       findsOneWidget,
+    );
+    await scrollWithin<ProfitsScreen>(
+      tester,
+      find.bySemanticsLabel(
+        frenchL10n.lossSemantics(frenchL10n.categoryTransport, 2000),
+      ),
     );
     expect(
       find.bySemanticsLabel(
@@ -103,7 +109,6 @@ void main() {
       db: db,
       now: now,
       initialLocation: AppRoutes.profits,
-      logicalSize: tallPhoneSize,
     );
 
     await tester.tap(find.text(frenchL10n.periodDay));
@@ -130,7 +135,12 @@ void main() {
       find.text(frenchL10n.pastEarned('mardi 13 octobre 2026', 0)),
       findsOneWidget,
     );
+    await scrollWithin<ProfitsScreen>(
+      tester,
+      find.text(frenchL10n.noDataForPeriod),
+    );
     expect(find.text(frenchL10n.noDataForPeriod), findsOneWidget);
+    await scrollWithin<ProfitsScreen>(tester, next, delta: -200);
 
     await tester.tap(next);
     await tester.pumpAndSettle();
@@ -146,7 +156,6 @@ void main() {
       db: db,
       now: now,
       initialLocation: AppRoutes.profits,
-      logicalSize: tallPhoneSize,
     );
 
     await tester.tap(find.text(frenchL10n.periodMonth));

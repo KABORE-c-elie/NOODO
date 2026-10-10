@@ -490,4 +490,253 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get historyError => 'Impossible de charger l\'historique.';
+
+  @override
+  String get filters => 'Filtres';
+
+  @override
+  String get filtersTooltip => 'Filtrer par catégorie';
+
+  @override
+  String get clearCategoryFilter => 'Retirer le filtre de catégorie';
+
+  @override
+  String transactionSavedWithTax(int amount) {
+    final intl.NumberFormat amountNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String amountString = amountNumberFormat.format(amount);
+
+    return 'Transaction enregistrée · $amountString FCFA mis de côté pour tes impôts';
+  }
+
+  @override
+  String get taxNodeTitle => 'Nœud Impôts';
+
+  @override
+  String taxSaved(int amount) {
+    final intl.NumberFormat amountNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String amountString = amountNumberFormat.format(amount);
+
+    return 'Épargné : $amountString FCFA';
+  }
+
+  @override
+  String taxRate(String rate) {
+    return 'Taux : $rate %';
+  }
+
+  @override
+  String taxNextDue(String date) {
+    return 'Prochaine échéance : $date';
+  }
+
+  @override
+  String get taxNoDue => 'Aucune échéance renseignée';
+
+  @override
+  String get creditorsTitle => 'Mes créanciers';
+
+  @override
+  String get noCreditors => 'Aucun créancier pour l\'instant.';
+
+  @override
+  String get addCreditor => 'Ajouter un créancier';
+
+  @override
+  String get addCreditorTooltip =>
+      'Ajouter un fournisseur à qui tu dois de l\'argent';
+
+  @override
+  String get overdue => 'En retard';
+
+  @override
+  String dueOn(String date) {
+    return 'Échéance : $date';
+  }
+
+  @override
+  String get noDueDate => 'Sans échéance';
+
+  @override
+  String balanceDue(int amount) {
+    final intl.NumberFormat amountNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String amountString = amountNumberFormat.format(amount);
+
+    return 'Reste à payer : $amountString FCFA';
+  }
+
+  @override
+  String get creditorNameLabel => 'Nom du fournisseur';
+
+  @override
+  String get creditorPhoneLabel => 'Téléphone (facultatif)';
+
+  @override
+  String get amountDueLabel => 'Montant dû (FCFA)';
+
+  @override
+  String get dueDateLabel => 'Échéance (facultatif)';
+
+  @override
+  String get chooseDueDate => 'Choisir une échéance';
+
+  @override
+  String get clearDueDate => 'Retirer l\'échéance';
+
+  @override
+  String get requiredField => 'Obligatoire';
+
+  @override
+  String get invalidAmount => 'Montant invalide';
+
+  @override
+  String get creditorAdded => 'Créancier ajouté';
+
+  @override
+  String totalPaid(int amount) {
+    final intl.NumberFormat amountNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String amountString = amountNumberFormat.format(amount);
+
+    return 'Déjà payé : $amountString FCFA';
+  }
+
+  @override
+  String get recordPayment => 'Enregistrer un paiement';
+
+  @override
+  String get recordPaymentTooltip => 'Enregistrer un paiement à ce fournisseur';
+
+  @override
+  String get paymentAmountLabel => 'Montant payé (FCFA)';
+
+  @override
+  String get paymentMethodLabel => 'Moyen de paiement';
+
+  @override
+  String get methodCash => 'Espèces';
+
+  @override
+  String get methodOrangeMoney => 'Orange Money';
+
+  @override
+  String get methodMoovMoney => 'Moov Money';
+
+  @override
+  String get paymentReasonLabel => 'Motif (facultatif)';
+
+  @override
+  String amountTooHigh(int max) {
+    final intl.NumberFormat maxNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
+    final String maxString = maxNumberFormat.format(max);
+
+    return 'Maximum : $maxString FCFA';
+  }
+
+  @override
+  String get confirmPayment => 'Valider le paiement';
+
+  @override
+  String get paymentsTitle => 'Paiements';
+
+  @override
+  String get noPayments => 'Aucun paiement pour l\'instant.';
+
+  @override
+  String get creditorNotFound => 'Créancier introuvable.';
+
+  @override
+  String paymentExpenseText(String name) {
+    return 'Paiement à $name';
+  }
+
+  @override
+  String paymentSummary(String date, String method, String number) {
+    return '$date · $method · $number';
+  }
+
+  @override
+  String get viewReceiptHint => 'voir le reçu';
+
+  @override
+  String get receiptTitle => 'Reçu de paiement';
+
+  @override
+  String get share => 'Partager';
+
+  @override
+  String get shareReceiptTooltip => 'Partager le reçu par WhatsApp, SMS…';
+
+  @override
+  String get close => 'Fermer';
+
+  @override
+  String receiptShareSubject(String number) {
+    return 'Reçu $number';
+  }
+
+  @override
+  String get receiptHeader => 'NOODO — ACCUSÉ DE PAIEMENT';
+
+  @override
+  String receiptNumberLine(String number, String date) {
+    return 'N° $number | Date : $date';
+  }
+
+  @override
+  String receiptDateTime(String date, String time) {
+    return '$date à $time';
+  }
+
+  @override
+  String receiptTime(String hour, String minute) {
+    return '${hour}h$minute';
+  }
+
+  @override
+  String receiptCreditorLine(String name) {
+    return 'Créancier / Fournisseur : $name';
+  }
+
+  @override
+  String receiptPhoneLine(String phone) {
+    return 'Numéro : $phone';
+  }
+
+  @override
+  String receiptAmountLine(int amount) {
+    final intl.NumberFormat amountNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String amountString = amountNumberFormat.format(amount);
+
+    return 'Montant payé : $amountString FCFA';
+  }
+
+  @override
+  String receiptMethodLine(String method) {
+    return 'Moyen : $method';
+  }
+
+  @override
+  String receiptMobileMoney(String operator) {
+    return 'Mobile Money ($operator)';
+  }
+
+  @override
+  String receiptReasonLine(String reason) {
+    return 'Motif : $reason';
+  }
+
+  @override
+  String receiptRemainingLine(int amount) {
+    final intl.NumberFormat amountNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String amountString = amountNumberFormat.format(amount);
+
+    return 'Reste à devoir : $amountString FCFA';
+  }
 }

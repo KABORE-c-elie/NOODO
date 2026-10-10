@@ -42,7 +42,7 @@ final class ConfirmationControllerProvider
 }
 
 String _$confirmationControllerHash() =>
-    r'2f575f3439133e06d20d1915d1580640769b81e7';
+    r'25e16036ed5b7b301afc88567452e7d9ea0dd7f1';
 
 abstract class _$ConfirmationController extends $Notifier<TransactionDraft> {
   TransactionDraft build();

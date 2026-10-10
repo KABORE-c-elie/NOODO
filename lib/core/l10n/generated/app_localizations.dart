@@ -733,6 +733,360 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Impossible de charger l\'historique.'**
   String get historyError;
+
+  /// No description provided for @filters.
+  ///
+  /// In fr, this message translates to:
+  /// **'Filtres'**
+  String get filters;
+
+  /// No description provided for @filtersTooltip.
+  ///
+  /// In fr, this message translates to:
+  /// **'Filtrer par catégorie'**
+  String get filtersTooltip;
+
+  /// No description provided for @clearCategoryFilter.
+  ///
+  /// In fr, this message translates to:
+  /// **'Retirer le filtre de catégorie'**
+  String get clearCategoryFilter;
+
+  /// No description provided for @transactionSavedWithTax.
+  ///
+  /// In fr, this message translates to:
+  /// **'Transaction enregistrée · {amount} FCFA mis de côté pour tes impôts'**
+  String transactionSavedWithTax(int amount);
+
+  /// No description provided for @taxNodeTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nœud Impôts'**
+  String get taxNodeTitle;
+
+  /// No description provided for @taxSaved.
+  ///
+  /// In fr, this message translates to:
+  /// **'Épargné : {amount} FCFA'**
+  String taxSaved(int amount);
+
+  /// No description provided for @taxRate.
+  ///
+  /// In fr, this message translates to:
+  /// **'Taux : {rate} %'**
+  String taxRate(String rate);
+
+  /// No description provided for @taxNextDue.
+  ///
+  /// In fr, this message translates to:
+  /// **'Prochaine échéance : {date}'**
+  String taxNextDue(String date);
+
+  /// No description provided for @taxNoDue.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune échéance renseignée'**
+  String get taxNoDue;
+
+  /// No description provided for @creditorsTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mes créanciers'**
+  String get creditorsTitle;
+
+  /// No description provided for @noCreditors.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucun créancier pour l\'instant.'**
+  String get noCreditors;
+
+  /// No description provided for @addCreditor.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter un créancier'**
+  String get addCreditor;
+
+  /// No description provided for @addCreditorTooltip.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter un fournisseur à qui tu dois de l\'argent'**
+  String get addCreditorTooltip;
+
+  /// No description provided for @overdue.
+  ///
+  /// In fr, this message translates to:
+  /// **'En retard'**
+  String get overdue;
+
+  /// No description provided for @dueOn.
+  ///
+  /// In fr, this message translates to:
+  /// **'Échéance : {date}'**
+  String dueOn(String date);
+
+  /// No description provided for @noDueDate.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sans échéance'**
+  String get noDueDate;
+
+  /// No description provided for @balanceDue.
+  ///
+  /// In fr, this message translates to:
+  /// **'Reste à payer : {amount} FCFA'**
+  String balanceDue(int amount);
+
+  /// No description provided for @creditorNameLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nom du fournisseur'**
+  String get creditorNameLabel;
+
+  /// No description provided for @creditorPhoneLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Téléphone (facultatif)'**
+  String get creditorPhoneLabel;
+
+  /// No description provided for @amountDueLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Montant dû (FCFA)'**
+  String get amountDueLabel;
+
+  /// No description provided for @dueDateLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Échéance (facultatif)'**
+  String get dueDateLabel;
+
+  /// No description provided for @chooseDueDate.
+  ///
+  /// In fr, this message translates to:
+  /// **'Choisir une échéance'**
+  String get chooseDueDate;
+
+  /// No description provided for @clearDueDate.
+  ///
+  /// In fr, this message translates to:
+  /// **'Retirer l\'échéance'**
+  String get clearDueDate;
+
+  /// No description provided for @requiredField.
+  ///
+  /// In fr, this message translates to:
+  /// **'Obligatoire'**
+  String get requiredField;
+
+  /// No description provided for @invalidAmount.
+  ///
+  /// In fr, this message translates to:
+  /// **'Montant invalide'**
+  String get invalidAmount;
+
+  /// No description provided for @creditorAdded.
+  ///
+  /// In fr, this message translates to:
+  /// **'Créancier ajouté'**
+  String get creditorAdded;
+
+  /// No description provided for @totalPaid.
+  ///
+  /// In fr, this message translates to:
+  /// **'Déjà payé : {amount} FCFA'**
+  String totalPaid(int amount);
+
+  /// No description provided for @recordPayment.
+  ///
+  /// In fr, this message translates to:
+  /// **'Enregistrer un paiement'**
+  String get recordPayment;
+
+  /// No description provided for @recordPaymentTooltip.
+  ///
+  /// In fr, this message translates to:
+  /// **'Enregistrer un paiement à ce fournisseur'**
+  String get recordPaymentTooltip;
+
+  /// No description provided for @paymentAmountLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Montant payé (FCFA)'**
+  String get paymentAmountLabel;
+
+  /// No description provided for @paymentMethodLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Moyen de paiement'**
+  String get paymentMethodLabel;
+
+  /// No description provided for @methodCash.
+  ///
+  /// In fr, this message translates to:
+  /// **'Espèces'**
+  String get methodCash;
+
+  /// No description provided for @methodOrangeMoney.
+  ///
+  /// In fr, this message translates to:
+  /// **'Orange Money'**
+  String get methodOrangeMoney;
+
+  /// No description provided for @methodMoovMoney.
+  ///
+  /// In fr, this message translates to:
+  /// **'Moov Money'**
+  String get methodMoovMoney;
+
+  /// No description provided for @paymentReasonLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Motif (facultatif)'**
+  String get paymentReasonLabel;
+
+  /// No description provided for @amountTooHigh.
+  ///
+  /// In fr, this message translates to:
+  /// **'Maximum : {max} FCFA'**
+  String amountTooHigh(int max);
+
+  /// No description provided for @confirmPayment.
+  ///
+  /// In fr, this message translates to:
+  /// **'Valider le paiement'**
+  String get confirmPayment;
+
+  /// No description provided for @paymentsTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Paiements'**
+  String get paymentsTitle;
+
+  /// No description provided for @noPayments.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucun paiement pour l\'instant.'**
+  String get noPayments;
+
+  /// No description provided for @creditorNotFound.
+  ///
+  /// In fr, this message translates to:
+  /// **'Créancier introuvable.'**
+  String get creditorNotFound;
+
+  /// No description provided for @paymentExpenseText.
+  ///
+  /// In fr, this message translates to:
+  /// **'Paiement à {name}'**
+  String paymentExpenseText(String name);
+
+  /// No description provided for @paymentSummary.
+  ///
+  /// In fr, this message translates to:
+  /// **'{date} · {method} · {number}'**
+  String paymentSummary(String date, String method, String number);
+
+  /// No description provided for @viewReceiptHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'voir le reçu'**
+  String get viewReceiptHint;
+
+  /// No description provided for @receiptTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Reçu de paiement'**
+  String get receiptTitle;
+
+  /// No description provided for @share.
+  ///
+  /// In fr, this message translates to:
+  /// **'Partager'**
+  String get share;
+
+  /// No description provided for @shareReceiptTooltip.
+  ///
+  /// In fr, this message translates to:
+  /// **'Partager le reçu par WhatsApp, SMS…'**
+  String get shareReceiptTooltip;
+
+  /// No description provided for @close.
+  ///
+  /// In fr, this message translates to:
+  /// **'Fermer'**
+  String get close;
+
+  /// No description provided for @receiptShareSubject.
+  ///
+  /// In fr, this message translates to:
+  /// **'Reçu {number}'**
+  String receiptShareSubject(String number);
+
+  /// No description provided for @receiptHeader.
+  ///
+  /// In fr, this message translates to:
+  /// **'NOODO — ACCUSÉ DE PAIEMENT'**
+  String get receiptHeader;
+
+  /// No description provided for @receiptNumberLine.
+  ///
+  /// In fr, this message translates to:
+  /// **'N° {number} | Date : {date}'**
+  String receiptNumberLine(String number, String date);
+
+  /// No description provided for @receiptDateTime.
+  ///
+  /// In fr, this message translates to:
+  /// **'{date} à {time}'**
+  String receiptDateTime(String date, String time);
+
+  /// No description provided for @receiptTime.
+  ///
+  /// In fr, this message translates to:
+  /// **'{hour}h{minute}'**
+  String receiptTime(String hour, String minute);
+
+  /// No description provided for @receiptCreditorLine.
+  ///
+  /// In fr, this message translates to:
+  /// **'Créancier / Fournisseur : {name}'**
+  String receiptCreditorLine(String name);
+
+  /// No description provided for @receiptPhoneLine.
+  ///
+  /// In fr, this message translates to:
+  /// **'Numéro : {phone}'**
+  String receiptPhoneLine(String phone);
+
+  /// No description provided for @receiptAmountLine.
+  ///
+  /// In fr, this message translates to:
+  /// **'Montant payé : {amount} FCFA'**
+  String receiptAmountLine(int amount);
+
+  /// No description provided for @receiptMethodLine.
+  ///
+  /// In fr, this message translates to:
+  /// **'Moyen : {method}'**
+  String receiptMethodLine(String method);
+
+  /// No description provided for @receiptMobileMoney.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mobile Money ({operator})'**
+  String receiptMobileMoney(String operator);
+
+  /// No description provided for @receiptReasonLine.
+  ///
+  /// In fr, this message translates to:
+  /// **'Motif : {reason}'**
+  String receiptReasonLine(String reason);
+
+  /// No description provided for @receiptRemainingLine.
+  ///
+  /// In fr, this message translates to:
+  /// **'Reste à devoir : {amount} FCFA'**
+  String receiptRemainingLine(int amount);
 }
 
 class _AppLocalizationsDelegate
