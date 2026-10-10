@@ -155,5 +155,215 @@
         "format": "decimalPattern"
       }
     }
-  }
+  },
+  "periodLabel": "Période",
+  "periodAll": "Tout",
+  "periodDay": "Jour",
+  "periodWeek": "Semaine",
+  "periodMonth": "Mois",
+  "typeAll": "Tout",
+  "filterSales": "Ventes",
+  "filterExpenses": "Dépenses",
+  "categoryAll": "Toutes",
+  "historyEmpty": "Aucune transaction pour ces filtres.",
+  "dayProfit": "Bénéfice : {amount} FCFA",
+  "@dayProfit": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "deleteConfirmTitle": "Supprimer cette transaction ?",
+  "deleteConfirmBody": "« {label} » sera supprimée.",
+  "@deleteConfirmBody": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "cancel": "Annuler",
+  "delete": "Supprimer",
+  "undo": "Annuler",
+  "transactionDeleted": "Transaction supprimée",
+  "deleteTransactionAction": "Supprimer la transaction",
+  "editTransactionHint": "modifier",
+  "editTransactionTitle": "Modifier la transaction",
+  "transactionUpdated": "Transaction modifiée",
+  "loadingMore": "Chargement…",
+  "periodPrevious": "Période précédente",
+  "periodNext": "Période suivante",
+  "periodRange": "du {start} au {end}",
+  "@periodRange": {
+    "placeholders": {
+      "start": {
+        "type": "String"
+      },
+      "end": {
+        "type": "String"
+      }
+    }
+  },
+  "weekEarned": "Cette semaine tu as gagné {amount} FCFA",
+  "@weekEarned": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "weekLost": "Cette semaine tu as perdu {amount} FCFA",
+  "@weekLost": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "monthEarned": "Ce mois-ci tu as gagné {amount} FCFA",
+  "@monthEarned": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "monthLost": "Ce mois-ci tu as perdu {amount} FCFA",
+  "@monthLost": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "pastEarned": "{period} : tu as gagné {amount} FCFA",
+  "@pastEarned": {
+    "placeholders": {
+      "period": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "pastLost": "{period} : tu as perdu {amount} FCFA",
+  "@pastLost": {
+    "placeholders": {
+      "period": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "previousMore": "C'est {amount} FCFA de plus que la période précédente",
+  "@previousMore": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "previousLess": "C'est {amount} FCFA de moins que la période précédente",
+  "@previousLess": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "previousMorePercent": "C'est {amount} FCFA de plus que la période précédente (+{percent} %)",
+  "@previousMorePercent": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      },
+      "percent": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "previousLessPercent": "C'est {amount} FCFA de moins que la période précédente (−{percent} %)",
+  "@previousLessPercent": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      },
+      "percent": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "previousSame": "Autant que la période précédente",
+  "dailyChartTitle": "Bénéfice par jour",
+  "categoriesTitle": "Par catégorie",
+  "noDataForPeriod": "Aucune transaction sur cette période.",
+  "profitSemantics": "{label} : {amount} FCFA de bénéfice",
+  "@profitSemantics": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "lossSemantics": "{label} : {amount} FCFA de perte",
+  "@lossSemantics": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "chartSummary": "Bénéfice par jour, {period} : total {total} FCFA. Meilleur jour : {bestDay}, {bestAmount} FCFA.",
+  "@chartSummary": {
+    "placeholders": {
+      "period": {
+        "type": "String"
+      },
+      "total": {
+        "type": "int",
+        "format": "decimalPattern"
+      },
+      "bestDay": {
+        "type": "String"
+      },
+      "bestAmount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "chartSummaryEmpty": "Bénéfice par jour, {period} : aucune transaction.",
+  "@chartSummaryEmpty": {
+    "placeholders": {
+      "period": {
+        "type": "String"
+      }
+    }
+  },
+  "historyError": "Impossible de charger l'historique."
 }

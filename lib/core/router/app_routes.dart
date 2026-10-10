@@ -9,6 +9,7 @@ abstract final class AppRoutes {
   static const settings = '/settings';
 
   static const transcriptParameter = 'text';
+  static const transactionIdParameter = 'id';
   static const creditorIdParameter = 'creditorId';
 
   static String confirmationPath([String? transcript]) => Uri(
@@ -16,6 +17,11 @@ abstract final class AppRoutes {
     queryParameters: transcript == null || transcript.isEmpty
         ? null
         : {transcriptParameter: transcript},
+  ).toString();
+
+  static String editTransactionPath(String transactionId) => Uri(
+    path: confirmation,
+    queryParameters: {transactionIdParameter: transactionId},
   ).toString();
 
   static String creditorPath(String creditorId) =>

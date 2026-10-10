@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$TransactionDraft {
 
- String get rawText; TransactionType? get type; int? get amountFcfa; double? get quantity; LocalUnit? get unit; String? get unknownUnitText; String? get product; TransactionCategory get category; double get confidence; int get revision;
+ String get rawText; TransactionType? get type; int? get amountFcfa; double? get quantity; LocalUnit? get unit; String? get unknownUnitText; String? get product; TransactionCategory get category; double get confidence; int get revision; String? get editingId; DateTime? get originalDate;
 /// Create a copy of TransactionDraft
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -27,20 +27,20 @@ $TransactionDraftCopyWith<TransactionDraft> get copyWith => _$TransactionDraftCo
 @override
 bool operator ==(Object other) {
   final _this = this as TransactionDraft;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TransactionDraft&&(identical(other.rawText, _this.rawText) || other.rawText == _this.rawText)&&(identical(other.type, _this.type) || other.type == _this.type)&&(identical(other.amountFcfa, _this.amountFcfa) || other.amountFcfa == _this.amountFcfa)&&(identical(other.quantity, _this.quantity) || other.quantity == _this.quantity)&&(identical(other.unit, _this.unit) || other.unit == _this.unit)&&(identical(other.unknownUnitText, _this.unknownUnitText) || other.unknownUnitText == _this.unknownUnitText)&&(identical(other.product, _this.product) || other.product == _this.product)&&(identical(other.category, _this.category) || other.category == _this.category)&&(identical(other.confidence, _this.confidence) || other.confidence == _this.confidence)&&(identical(other.revision, _this.revision) || other.revision == _this.revision));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TransactionDraft&&(identical(other.rawText, _this.rawText) || other.rawText == _this.rawText)&&(identical(other.type, _this.type) || other.type == _this.type)&&(identical(other.amountFcfa, _this.amountFcfa) || other.amountFcfa == _this.amountFcfa)&&(identical(other.quantity, _this.quantity) || other.quantity == _this.quantity)&&(identical(other.unit, _this.unit) || other.unit == _this.unit)&&(identical(other.unknownUnitText, _this.unknownUnitText) || other.unknownUnitText == _this.unknownUnitText)&&(identical(other.product, _this.product) || other.product == _this.product)&&(identical(other.category, _this.category) || other.category == _this.category)&&(identical(other.confidence, _this.confidence) || other.confidence == _this.confidence)&&(identical(other.revision, _this.revision) || other.revision == _this.revision)&&(identical(other.editingId, _this.editingId) || other.editingId == _this.editingId)&&(identical(other.originalDate, _this.originalDate) || other.originalDate == _this.originalDate));
 }
 
 
 @override
 int get hashCode {
   final _this = this as TransactionDraft;
-  return Object.hash(runtimeType,_this.rawText,_this.type,_this.amountFcfa,_this.quantity,_this.unit,_this.unknownUnitText,_this.product,_this.category,_this.confidence,_this.revision);
+  return Object.hash(runtimeType,_this.rawText,_this.type,_this.amountFcfa,_this.quantity,_this.unit,_this.unknownUnitText,_this.product,_this.category,_this.confidence,_this.revision,_this.editingId,_this.originalDate);
 }
 
 @override
 String toString() {
   final _this = this as TransactionDraft;
-  return 'TransactionDraft(rawText: ${_this.rawText}, type: ${_this.type}, amountFcfa: ${_this.amountFcfa}, quantity: ${_this.quantity}, unit: ${_this.unit}, unknownUnitText: ${_this.unknownUnitText}, product: ${_this.product}, category: ${_this.category}, confidence: ${_this.confidence}, revision: ${_this.revision})';
+  return 'TransactionDraft(rawText: ${_this.rawText}, type: ${_this.type}, amountFcfa: ${_this.amountFcfa}, quantity: ${_this.quantity}, unit: ${_this.unit}, unknownUnitText: ${_this.unknownUnitText}, product: ${_this.product}, category: ${_this.category}, confidence: ${_this.confidence}, revision: ${_this.revision}, editingId: ${_this.editingId}, originalDate: ${_this.originalDate})';
 }
 
 
@@ -51,7 +51,7 @@ abstract mixin class $TransactionDraftCopyWith<$Res>  {
   factory $TransactionDraftCopyWith(TransactionDraft value, $Res Function(TransactionDraft) _then) = _$TransactionDraftCopyWithImpl;
 @useResult
 $Res call({
- String rawText, TransactionType? type, int? amountFcfa, double? quantity, LocalUnit? unit, String? unknownUnitText, String? product, TransactionCategory category, double confidence, int revision
+ String rawText, TransactionType? type, int? amountFcfa, double? quantity, LocalUnit? unit, String? unknownUnitText, String? product, TransactionCategory category, double confidence, int revision, String? editingId, DateTime? originalDate
 });
 
 
@@ -68,7 +68,7 @@ class _$TransactionDraftCopyWithImpl<$Res>
 
 /// Create a copy of TransactionDraft
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? rawText = null,Object? type = freezed,Object? amountFcfa = freezed,Object? quantity = freezed,Object? unit = freezed,Object? unknownUnitText = freezed,Object? product = freezed,Object? category = null,Object? confidence = null,Object? revision = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? rawText = null,Object? type = freezed,Object? amountFcfa = freezed,Object? quantity = freezed,Object? unit = freezed,Object? unknownUnitText = freezed,Object? product = freezed,Object? category = null,Object? confidence = null,Object? revision = null,Object? editingId = freezed,Object? originalDate = freezed,}) {
   return _then(TransactionDraft(
 rawText: null == rawText ? _self.rawText : rawText // ignore: cast_nullable_to_non_nullable
 as String,type: freezed == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
@@ -80,7 +80,9 @@ as String?,product: freezed == product ? _self.product : product // ignore: cast
 as String?,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
 as TransactionCategory,confidence: null == confidence ? _self.confidence : confidence // ignore: cast_nullable_to_non_nullable
 as double,revision: null == revision ? _self.revision : revision // ignore: cast_nullable_to_non_nullable
-as int,
+as int,editingId: freezed == editingId ? _self.editingId : editingId // ignore: cast_nullable_to_non_nullable
+as String?,originalDate: freezed == originalDate ? _self.originalDate : originalDate // ignore: cast_nullable_to_non_nullable
+as DateTime?,
   ));
 }
 /// Create a copy of TransactionDraft
@@ -177,10 +179,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String rawText,  TransactionType? type,  int? amountFcfa,  double? quantity,  LocalUnit? unit,  String? unknownUnitText,  String? product,  TransactionCategory category,  double confidence,  int revision)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String rawText,  TransactionType? type,  int? amountFcfa,  double? quantity,  LocalUnit? unit,  String? unknownUnitText,  String? product,  TransactionCategory category,  double confidence,  int revision,  String? editingId,  DateTime? originalDate)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _TransactionDraft() when $default != null:
-return $default(_that.rawText,_that.type,_that.amountFcfa,_that.quantity,_that.unit,_that.unknownUnitText,_that.product,_that.category,_that.confidence,_that.revision);case _:
+return $default(_that.rawText,_that.type,_that.amountFcfa,_that.quantity,_that.unit,_that.unknownUnitText,_that.product,_that.category,_that.confidence,_that.revision,_that.editingId,_that.originalDate);case _:
   return orElse();
 
 }
@@ -198,10 +200,10 @@ return $default(_that.rawText,_that.type,_that.amountFcfa,_that.quantity,_that.u
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String rawText,  TransactionType? type,  int? amountFcfa,  double? quantity,  LocalUnit? unit,  String? unknownUnitText,  String? product,  TransactionCategory category,  double confidence,  int revision)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String rawText,  TransactionType? type,  int? amountFcfa,  double? quantity,  LocalUnit? unit,  String? unknownUnitText,  String? product,  TransactionCategory category,  double confidence,  int revision,  String? editingId,  DateTime? originalDate)  $default,) {final _that = this;
 switch (_that) {
 case _TransactionDraft():
-return $default(_that.rawText,_that.type,_that.amountFcfa,_that.quantity,_that.unit,_that.unknownUnitText,_that.product,_that.category,_that.confidence,_that.revision);case _:
+return $default(_that.rawText,_that.type,_that.amountFcfa,_that.quantity,_that.unit,_that.unknownUnitText,_that.product,_that.category,_that.confidence,_that.revision,_that.editingId,_that.originalDate);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -218,10 +220,10 @@ return $default(_that.rawText,_that.type,_that.amountFcfa,_that.quantity,_that.u
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String rawText,  TransactionType? type,  int? amountFcfa,  double? quantity,  LocalUnit? unit,  String? unknownUnitText,  String? product,  TransactionCategory category,  double confidence,  int revision)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String rawText,  TransactionType? type,  int? amountFcfa,  double? quantity,  LocalUnit? unit,  String? unknownUnitText,  String? product,  TransactionCategory category,  double confidence,  int revision,  String? editingId,  DateTime? originalDate)?  $default,) {final _that = this;
 switch (_that) {
 case _TransactionDraft() when $default != null:
-return $default(_that.rawText,_that.type,_that.amountFcfa,_that.quantity,_that.unit,_that.unknownUnitText,_that.product,_that.category,_that.confidence,_that.revision);case _:
+return $default(_that.rawText,_that.type,_that.amountFcfa,_that.quantity,_that.unit,_that.unknownUnitText,_that.product,_that.category,_that.confidence,_that.revision,_that.editingId,_that.originalDate);case _:
   return null;
 
 }
@@ -233,7 +235,7 @@ return $default(_that.rawText,_that.type,_that.amountFcfa,_that.quantity,_that.u
 
 
 class _TransactionDraft extends TransactionDraft {
-  const _TransactionDraft({this.rawText = '', this.type, this.amountFcfa, this.quantity, this.unit, this.unknownUnitText, this.product, this.category = TransactionCategory.other, this.confidence = 1.0, this.revision = 0}): super._();
+  const _TransactionDraft({this.rawText = '', this.type, this.amountFcfa, this.quantity, this.unit, this.unknownUnitText, this.product, this.category = TransactionCategory.other, this.confidence = 1.0, this.revision = 0, this.editingId, this.originalDate}): super._();
   
 
 @override@JsonKey() final  String rawText;
@@ -246,6 +248,8 @@ class _TransactionDraft extends TransactionDraft {
 @override@JsonKey() final  TransactionCategory category;
 @override@JsonKey() final  double confidence;
 @override@JsonKey() final  int revision;
+@override final  String? editingId;
+@override final  DateTime? originalDate;
 
 /// Create a copy of TransactionDraft
 /// with the given fields replaced by the non-null parameter values.
@@ -257,18 +261,18 @@ _$TransactionDraftCopyWith<_TransactionDraft> get copyWith => __$TransactionDraf
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _TransactionDraft&&(identical(other.rawText, rawText) || other.rawText == rawText)&&(identical(other.type, type) || other.type == type)&&(identical(other.amountFcfa, amountFcfa) || other.amountFcfa == amountFcfa)&&(identical(other.quantity, quantity) || other.quantity == quantity)&&(identical(other.unit, unit) || other.unit == unit)&&(identical(other.unknownUnitText, unknownUnitText) || other.unknownUnitText == unknownUnitText)&&(identical(other.product, product) || other.product == product)&&(identical(other.category, category) || other.category == category)&&(identical(other.confidence, confidence) || other.confidence == confidence)&&(identical(other.revision, revision) || other.revision == revision));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _TransactionDraft&&(identical(other.rawText, rawText) || other.rawText == rawText)&&(identical(other.type, type) || other.type == type)&&(identical(other.amountFcfa, amountFcfa) || other.amountFcfa == amountFcfa)&&(identical(other.quantity, quantity) || other.quantity == quantity)&&(identical(other.unit, unit) || other.unit == unit)&&(identical(other.unknownUnitText, unknownUnitText) || other.unknownUnitText == unknownUnitText)&&(identical(other.product, product) || other.product == product)&&(identical(other.category, category) || other.category == category)&&(identical(other.confidence, confidence) || other.confidence == confidence)&&(identical(other.revision, revision) || other.revision == revision)&&(identical(other.editingId, editingId) || other.editingId == editingId)&&(identical(other.originalDate, originalDate) || other.originalDate == originalDate));
 }
 
 
 @override
 int get hashCode {
-    return Object.hash(runtimeType,rawText,type,amountFcfa,quantity,unit,unknownUnitText,product,category,confidence,revision);
+    return Object.hash(runtimeType,rawText,type,amountFcfa,quantity,unit,unknownUnitText,product,category,confidence,revision,editingId,originalDate);
 }
 
 @override
 String toString() {
-    return 'TransactionDraft(rawText: $rawText, type: $type, amountFcfa: $amountFcfa, quantity: $quantity, unit: $unit, unknownUnitText: $unknownUnitText, product: $product, category: $category, confidence: $confidence, revision: $revision)';
+    return 'TransactionDraft(rawText: $rawText, type: $type, amountFcfa: $amountFcfa, quantity: $quantity, unit: $unit, unknownUnitText: $unknownUnitText, product: $product, category: $category, confidence: $confidence, revision: $revision, editingId: $editingId, originalDate: $originalDate)';
 }
 
 
@@ -279,7 +283,7 @@ abstract mixin class _$TransactionDraftCopyWith<$Res> implements $TransactionDra
   factory _$TransactionDraftCopyWith(_TransactionDraft value, $Res Function(_TransactionDraft) _then) = __$TransactionDraftCopyWithImpl;
 @override @useResult
 $Res call({
- String rawText, TransactionType? type, int? amountFcfa, double? quantity, LocalUnit? unit, String? unknownUnitText, String? product, TransactionCategory category, double confidence, int revision
+ String rawText, TransactionType? type, int? amountFcfa, double? quantity, LocalUnit? unit, String? unknownUnitText, String? product, TransactionCategory category, double confidence, int revision, String? editingId, DateTime? originalDate
 });
 
 
@@ -296,7 +300,7 @@ class __$TransactionDraftCopyWithImpl<$Res>
 
 /// Create a copy of TransactionDraft
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? rawText = null,Object? type = freezed,Object? amountFcfa = freezed,Object? quantity = freezed,Object? unit = freezed,Object? unknownUnitText = freezed,Object? product = freezed,Object? category = null,Object? confidence = null,Object? revision = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? rawText = null,Object? type = freezed,Object? amountFcfa = freezed,Object? quantity = freezed,Object? unit = freezed,Object? unknownUnitText = freezed,Object? product = freezed,Object? category = null,Object? confidence = null,Object? revision = null,Object? editingId = freezed,Object? originalDate = freezed,}) {
   return _then(_TransactionDraft(
 rawText: null == rawText ? _self.rawText : rawText // ignore: cast_nullable_to_non_nullable
 as String,type: freezed == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
@@ -308,7 +312,9 @@ as String?,product: freezed == product ? _self.product : product // ignore: cast
 as String?,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
 as TransactionCategory,confidence: null == confidence ? _self.confidence : confidence // ignore: cast_nullable_to_non_nullable
 as double,revision: null == revision ? _self.revision : revision // ignore: cast_nullable_to_non_nullable
-as int,
+as int,editingId: freezed == editingId ? _self.editingId : editingId // ignore: cast_nullable_to_non_nullable
+as String?,originalDate: freezed == originalDate ? _self.originalDate : originalDate // ignore: cast_nullable_to_non_nullable
+as DateTime?,
   ));
 }
 

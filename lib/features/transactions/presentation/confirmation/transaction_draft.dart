@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:noodo/features/transactions/domain/local_unit.dart';
 import 'package:noodo/features/transactions/domain/parser/parse_result.dart';
+import 'package:noodo/features/transactions/domain/transaction.dart';
 import 'package:noodo/features/transactions/domain/transaction_category.dart';
 import 'package:noodo/features/transactions/domain/transaction_type.dart';
 
@@ -21,7 +22,25 @@ abstract class TransactionDraft with _$TransactionDraft {
     @Default(TransactionCategory.other) TransactionCategory category,
     @Default(1.0) double confidence,
     @Default(0) int revision,
+    String? editingId,
+    DateTime? originalDate,
   }) = _TransactionDraft;
+
+  factory TransactionDraft.fromTransaction(
+    Transaction transaction, {
+    required int revision,
+  }) => TransactionDraft(
+    rawText: transaction.rawText,
+    type: transaction.type,
+    amountFcfa: transaction.amountFcfa,
+    quantity: transaction.quantity,
+    unit: transaction.unit,
+    product: transaction.product,
+    category: transaction.category,
+    revision: revision,
+    editingId: transaction.id,
+    originalDate: transaction.date,
+  );
 
   factory TransactionDraft.fromParse(
     String rawText,
@@ -41,6 +60,8 @@ abstract class TransactionDraft with _$TransactionDraft {
   );
 
   bool get isAnalyzed => revision > 0;
+
+  bool get isEditing => editingId != null;
 
   bool get needsReview => isAnalyzed && confidence < lowConfidenceThreshold;
 

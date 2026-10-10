@@ -873,4 +873,274 @@ as int,
 
 }
 
+/// @nodoc
+mixin _$DailyProfit {
+
+ DateTime get day; int get salesFcfa; int get expensesFcfa;
+/// Create a copy of DailyProfit
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$DailyProfitCopyWith<DailyProfit> get copyWith => _$DailyProfitCopyWithImpl<DailyProfit>(this as DailyProfit, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  final _this = this as DailyProfit;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DailyProfit&&(identical(other.day, _this.day) || other.day == _this.day)&&(identical(other.salesFcfa, _this.salesFcfa) || other.salesFcfa == _this.salesFcfa)&&(identical(other.expensesFcfa, _this.expensesFcfa) || other.expensesFcfa == _this.expensesFcfa));
+}
+
+
+@override
+int get hashCode {
+  final _this = this as DailyProfit;
+  return Object.hash(runtimeType,_this.day,_this.salesFcfa,_this.expensesFcfa);
+}
+
+@override
+String toString() {
+  final _this = this as DailyProfit;
+  return 'DailyProfit(day: ${_this.day}, salesFcfa: ${_this.salesFcfa}, expensesFcfa: ${_this.expensesFcfa})';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $DailyProfitCopyWith<$Res>  {
+  factory $DailyProfitCopyWith(DailyProfit value, $Res Function(DailyProfit) _then) = _$DailyProfitCopyWithImpl;
+@useResult
+$Res call({
+ DateTime day, int salesFcfa, int expensesFcfa
+});
+
+
+
+
+}
+/// @nodoc
+class _$DailyProfitCopyWithImpl<$Res>
+    implements $DailyProfitCopyWith<$Res> {
+  _$DailyProfitCopyWithImpl(this._self, this._then);
+
+  final DailyProfit _self;
+  final $Res Function(DailyProfit) _then;
+
+/// Create a copy of DailyProfit
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? day = null,Object? salesFcfa = null,Object? expensesFcfa = null,}) {
+  return _then(DailyProfit(
+day: null == day ? _self.day : day // ignore: cast_nullable_to_non_nullable
+as DateTime,salesFcfa: null == salesFcfa ? _self.salesFcfa : salesFcfa // ignore: cast_nullable_to_non_nullable
+as int,expensesFcfa: null == expensesFcfa ? _self.expensesFcfa : expensesFcfa // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [DailyProfit].
+extension DailyProfitPatterns on DailyProfit {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _DailyProfit value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _DailyProfit() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _DailyProfit value)  $default,){
+final _that = this;
+switch (_that) {
+case _DailyProfit():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _DailyProfit value)?  $default,){
+final _that = this;
+switch (_that) {
+case _DailyProfit() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( DateTime day,  int salesFcfa,  int expensesFcfa)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _DailyProfit() when $default != null:
+return $default(_that.day,_that.salesFcfa,_that.expensesFcfa);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( DateTime day,  int salesFcfa,  int expensesFcfa)  $default,) {final _that = this;
+switch (_that) {
+case _DailyProfit():
+return $default(_that.day,_that.salesFcfa,_that.expensesFcfa);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( DateTime day,  int salesFcfa,  int expensesFcfa)?  $default,) {final _that = this;
+switch (_that) {
+case _DailyProfit() when $default != null:
+return $default(_that.day,_that.salesFcfa,_that.expensesFcfa);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+
+
+class _DailyProfit extends DailyProfit {
+  const _DailyProfit({required this.day, required this.salesFcfa, required this.expensesFcfa}): super._();
+  
+
+@override final  DateTime day;
+@override final  int salesFcfa;
+@override final  int expensesFcfa;
+
+/// Create a copy of DailyProfit
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$DailyProfitCopyWith<_DailyProfit> get copyWith => __$DailyProfitCopyWithImpl<_DailyProfit>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _DailyProfit&&(identical(other.day, day) || other.day == day)&&(identical(other.salesFcfa, salesFcfa) || other.salesFcfa == salesFcfa)&&(identical(other.expensesFcfa, expensesFcfa) || other.expensesFcfa == expensesFcfa));
+}
+
+
+@override
+int get hashCode {
+    return Object.hash(runtimeType,day,salesFcfa,expensesFcfa);
+}
+
+@override
+String toString() {
+    return 'DailyProfit(day: $day, salesFcfa: $salesFcfa, expensesFcfa: $expensesFcfa)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$DailyProfitCopyWith<$Res> implements $DailyProfitCopyWith<$Res> {
+  factory _$DailyProfitCopyWith(_DailyProfit value, $Res Function(_DailyProfit) _then) = __$DailyProfitCopyWithImpl;
+@override @useResult
+$Res call({
+ DateTime day, int salesFcfa, int expensesFcfa
+});
+
+
+
+
+}
+/// @nodoc
+class __$DailyProfitCopyWithImpl<$Res>
+    implements _$DailyProfitCopyWith<$Res> {
+  __$DailyProfitCopyWithImpl(this._self, this._then);
+
+  final _DailyProfit _self;
+  final $Res Function(_DailyProfit) _then;
+
+/// Create a copy of DailyProfit
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? day = null,Object? salesFcfa = null,Object? expensesFcfa = null,}) {
+  return _then(_DailyProfit(
+day: null == day ? _self.day : day // ignore: cast_nullable_to_non_nullable
+as DateTime,salesFcfa: null == salesFcfa ? _self.salesFcfa : salesFcfa // ignore: cast_nullable_to_non_nullable
+as int,expensesFcfa: null == expensesFcfa ? _self.expensesFcfa : expensesFcfa // ignore: cast_nullable_to_non_nullable
+as int,
+  ));
+}
+
+
+}
+
 // dart format on

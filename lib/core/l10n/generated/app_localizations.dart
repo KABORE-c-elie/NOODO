@@ -469,6 +469,270 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'{type} : {product}, {amount} FCFA'**
   String transactionSemantics(String type, String product, int amount);
+
+  /// No description provided for @periodLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Période'**
+  String get periodLabel;
+
+  /// No description provided for @periodAll.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tout'**
+  String get periodAll;
+
+  /// No description provided for @periodDay.
+  ///
+  /// In fr, this message translates to:
+  /// **'Jour'**
+  String get periodDay;
+
+  /// No description provided for @periodWeek.
+  ///
+  /// In fr, this message translates to:
+  /// **'Semaine'**
+  String get periodWeek;
+
+  /// No description provided for @periodMonth.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mois'**
+  String get periodMonth;
+
+  /// No description provided for @typeAll.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tout'**
+  String get typeAll;
+
+  /// No description provided for @filterSales.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ventes'**
+  String get filterSales;
+
+  /// No description provided for @filterExpenses.
+  ///
+  /// In fr, this message translates to:
+  /// **'Dépenses'**
+  String get filterExpenses;
+
+  /// No description provided for @categoryAll.
+  ///
+  /// In fr, this message translates to:
+  /// **'Toutes'**
+  String get categoryAll;
+
+  /// No description provided for @historyEmpty.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune transaction pour ces filtres.'**
+  String get historyEmpty;
+
+  /// No description provided for @dayProfit.
+  ///
+  /// In fr, this message translates to:
+  /// **'Bénéfice : {amount} FCFA'**
+  String dayProfit(int amount);
+
+  /// No description provided for @deleteConfirmTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Supprimer cette transaction ?'**
+  String get deleteConfirmTitle;
+
+  /// No description provided for @deleteConfirmBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'« {label} » sera supprimée.'**
+  String deleteConfirmBody(String label);
+
+  /// No description provided for @cancel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Annuler'**
+  String get cancel;
+
+  /// No description provided for @delete.
+  ///
+  /// In fr, this message translates to:
+  /// **'Supprimer'**
+  String get delete;
+
+  /// No description provided for @undo.
+  ///
+  /// In fr, this message translates to:
+  /// **'Annuler'**
+  String get undo;
+
+  /// No description provided for @transactionDeleted.
+  ///
+  /// In fr, this message translates to:
+  /// **'Transaction supprimée'**
+  String get transactionDeleted;
+
+  /// No description provided for @deleteTransactionAction.
+  ///
+  /// In fr, this message translates to:
+  /// **'Supprimer la transaction'**
+  String get deleteTransactionAction;
+
+  /// No description provided for @editTransactionHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'modifier'**
+  String get editTransactionHint;
+
+  /// No description provided for @editTransactionTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Modifier la transaction'**
+  String get editTransactionTitle;
+
+  /// No description provided for @transactionUpdated.
+  ///
+  /// In fr, this message translates to:
+  /// **'Transaction modifiée'**
+  String get transactionUpdated;
+
+  /// No description provided for @loadingMore.
+  ///
+  /// In fr, this message translates to:
+  /// **'Chargement…'**
+  String get loadingMore;
+
+  /// No description provided for @periodPrevious.
+  ///
+  /// In fr, this message translates to:
+  /// **'Période précédente'**
+  String get periodPrevious;
+
+  /// No description provided for @periodNext.
+  ///
+  /// In fr, this message translates to:
+  /// **'Période suivante'**
+  String get periodNext;
+
+  /// No description provided for @periodRange.
+  ///
+  /// In fr, this message translates to:
+  /// **'du {start} au {end}'**
+  String periodRange(String start, String end);
+
+  /// No description provided for @weekEarned.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cette semaine tu as gagné {amount} FCFA'**
+  String weekEarned(int amount);
+
+  /// No description provided for @weekLost.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cette semaine tu as perdu {amount} FCFA'**
+  String weekLost(int amount);
+
+  /// No description provided for @monthEarned.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ce mois-ci tu as gagné {amount} FCFA'**
+  String monthEarned(int amount);
+
+  /// No description provided for @monthLost.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ce mois-ci tu as perdu {amount} FCFA'**
+  String monthLost(int amount);
+
+  /// No description provided for @pastEarned.
+  ///
+  /// In fr, this message translates to:
+  /// **'{period} : tu as gagné {amount} FCFA'**
+  String pastEarned(String period, int amount);
+
+  /// No description provided for @pastLost.
+  ///
+  /// In fr, this message translates to:
+  /// **'{period} : tu as perdu {amount} FCFA'**
+  String pastLost(String period, int amount);
+
+  /// No description provided for @previousMore.
+  ///
+  /// In fr, this message translates to:
+  /// **'C\'est {amount} FCFA de plus que la période précédente'**
+  String previousMore(int amount);
+
+  /// No description provided for @previousLess.
+  ///
+  /// In fr, this message translates to:
+  /// **'C\'est {amount} FCFA de moins que la période précédente'**
+  String previousLess(int amount);
+
+  /// No description provided for @previousMorePercent.
+  ///
+  /// In fr, this message translates to:
+  /// **'C\'est {amount} FCFA de plus que la période précédente (+{percent} %)'**
+  String previousMorePercent(int amount, int percent);
+
+  /// No description provided for @previousLessPercent.
+  ///
+  /// In fr, this message translates to:
+  /// **'C\'est {amount} FCFA de moins que la période précédente (−{percent} %)'**
+  String previousLessPercent(int amount, int percent);
+
+  /// No description provided for @previousSame.
+  ///
+  /// In fr, this message translates to:
+  /// **'Autant que la période précédente'**
+  String get previousSame;
+
+  /// No description provided for @dailyChartTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Bénéfice par jour'**
+  String get dailyChartTitle;
+
+  /// No description provided for @categoriesTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Par catégorie'**
+  String get categoriesTitle;
+
+  /// No description provided for @noDataForPeriod.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune transaction sur cette période.'**
+  String get noDataForPeriod;
+
+  /// No description provided for @profitSemantics.
+  ///
+  /// In fr, this message translates to:
+  /// **'{label} : {amount} FCFA de bénéfice'**
+  String profitSemantics(String label, int amount);
+
+  /// No description provided for @lossSemantics.
+  ///
+  /// In fr, this message translates to:
+  /// **'{label} : {amount} FCFA de perte'**
+  String lossSemantics(String label, int amount);
+
+  /// No description provided for @chartSummary.
+  ///
+  /// In fr, this message translates to:
+  /// **'Bénéfice par jour, {period} : total {total} FCFA. Meilleur jour : {bestDay}, {bestAmount} FCFA.'**
+  String chartSummary(String period, int total, String bestDay, int bestAmount);
+
+  /// No description provided for @chartSummaryEmpty.
+  ///
+  /// In fr, this message translates to:
+  /// **'Bénéfice par jour, {period} : aucune transaction.'**
+  String chartSummaryEmpty(String period);
+
+  /// No description provided for @historyError.
+  ///
+  /// In fr, this message translates to:
+  /// **'Impossible de charger l\'historique.'**
+  String get historyError;
 }
 
 class _AppLocalizationsDelegate

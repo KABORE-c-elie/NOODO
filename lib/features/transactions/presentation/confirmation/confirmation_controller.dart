@@ -29,7 +29,19 @@ class ConfirmationController extends _$ConfirmationController {
       text,
       _parser.parse(text, units),
       revision: state.revision + 1,
+    ).copyWith(editingId: state.editingId, originalDate: state.originalDate);
+  }
+
+  Future<bool> loadForEdit(String id) async {
+    final transaction = await ref
+        .read(transactionRepositoryProvider)
+        .findById(id);
+    if (transaction == null || !ref.mounted) return false;
+    state = TransactionDraft.fromTransaction(
+      transaction,
+      revision: state.revision + 1,
     );
+    return true;
   }
 
   void setType(TransactionType type) => state = state.copyWith(type: type);
@@ -72,21 +84,23 @@ class ConfirmationController extends _$ConfirmationController {
     final type = draft.type;
     final amount = draft.amountFcfa;
     if (!draft.canSave || type == null || amount == null) return false;
-    await ref
-        .read(transactionRepositoryProvider)
-        .add(
-          Transaction(
-            id: _uuid.v4(),
-            type: type,
-            amountFcfa: amount,
-            quantity: draft.quantity,
-            unit: draft.unit,
-            product: draft.product,
-            category: draft.category,
-            rawText: draft.rawText,
-            date: ref.read(clockProvider)(),
-          ),
-        );
+    final repository = ref.read(transactionRepositoryProvider);
+    final transaction = Transaction(
+      id: draft.editingId ?? _uuid.v4(),
+      type: type,
+      amountFcfa: amount,
+      quantity: draft.quantity,
+      unit: draft.unit,
+      product: draft.product,
+      category: draft.category,
+      rawText: draft.rawText,
+      date: draft.originalDate ?? ref.read(clockProvider)(),
+    );
+    if (draft.isEditing) {
+      await repository.update(transaction);
+    } else {
+      await repository.add(transaction);
+    }
     return true;
   }
 }

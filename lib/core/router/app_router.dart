@@ -70,6 +70,8 @@ GoRouter appRouter(Ref ref) {
         builder: (context, state) => ConfirmationScreen(
           initialTranscript:
               state.uri.queryParameters[AppRoutes.transcriptParameter],
+          transactionId:
+              state.uri.queryParameters[AppRoutes.transactionIdParameter],
         ),
       ),
       GoRoute(

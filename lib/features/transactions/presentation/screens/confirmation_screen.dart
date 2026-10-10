@@ -7,9 +7,14 @@ import 'package:noodo/features/transactions/presentation/confirmation/confirmati
 import 'package:noodo/features/transactions/presentation/widgets/confirmation_fields.dart';
 
 class ConfirmationScreen extends ConsumerStatefulWidget {
-  const ConfirmationScreen({super.key, this.initialTranscript});
+  const ConfirmationScreen({
+    super.key,
+    this.initialTranscript,
+    this.transactionId,
+  });
 
   final String? initialTranscript;
+  final String? transactionId;
 
   @override
   ConsumerState<ConfirmationScreen> createState() => _ConfirmationScreenState();
@@ -22,7 +27,10 @@ class _ConfirmationScreenState extends ConsumerState<ConfirmationScreen> {
   void initState() {
     super.initState();
     _transcript = TextEditingController(text: widget.initialTranscript);
-    if (_transcript.text.trim().isNotEmpty) {
+    final transactionId = widget.transactionId;
+    if (transactionId != null) {
+      Future.microtask(() => _loadForEdit(transactionId));
+    } else if (_transcript.text.trim().isNotEmpty) {
       Future.microtask(_analyze);
     }
   }
@@ -37,9 +45,18 @@ class _ConfirmationScreenState extends ConsumerState<ConfirmationScreen> {
       .read(confirmationControllerProvider.notifier)
       .analyze(_transcript.text);
 
+  Future<void> _loadForEdit(String transactionId) async {
+    final notifier = ref.read(confirmationControllerProvider.notifier);
+    if (!await notifier.loadForEdit(transactionId) || !mounted) return;
+    _transcript.text = ref.read(confirmationControllerProvider).rawText;
+  }
+
   Future<void> _save() async {
     final messenger = ScaffoldMessenger.of(context);
-    final message = AppLocalizations.of(context).transactionSaved;
+    final l10n = AppLocalizations.of(context);
+    final message = ref.read(confirmationControllerProvider).isEditing
+        ? l10n.transactionUpdated
+        : l10n.transactionSaved;
     final saved = await ref
         .read(confirmationControllerProvider.notifier)
         .save();
@@ -58,8 +75,15 @@ class _ConfirmationScreenState extends ConsumerState<ConfirmationScreen> {
     final isAnalyzed = ref.watch(
       confirmationControllerProvider.select((draft) => draft.isAnalyzed),
     );
+    final isEditing = ref.watch(
+      confirmationControllerProvider.select((draft) => draft.isEditing),
+    );
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.confirmationTitle)),
+      appBar: AppBar(
+        title: Text(
+          isEditing ? l10n.editTransactionTitle : l10n.confirmationTitle,
+        ),
+      ),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [

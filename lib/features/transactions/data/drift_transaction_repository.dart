@@ -4,6 +4,7 @@ import 'package:noodo/core/database/app_database.dart';
 import 'package:noodo/core/utils/date_range.dart';
 import 'package:noodo/features/transactions/data/local_unit_mapper.dart';
 import 'package:noodo/features/transactions/domain/transaction.dart';
+import 'package:noodo/features/transactions/domain/transaction_query.dart';
 import 'package:noodo/features/transactions/domain/transaction_repository.dart';
 
 final class DriftTransactionRepository implements TransactionRepository {
@@ -30,6 +31,44 @@ final class DriftTransactionRepository implements TransactionRepository {
       (_db.delete(_db.transactions)..where((t) => t.id.equals(id))).go();
 
   @override
+  Future<Transaction?> findById(String id) async {
+    final row =
+        await (_selectNewestFirst()..where(_db.transactions.id.equals(id)))
+            .getSingleOrNull();
+    return row == null ? null : _toDomain(row);
+  }
+
+  @override
+  Future<List<Transaction>> listPage({
+    TransactionQuery query = const TransactionQuery(),
+    TransactionCursor? after,
+    required int limit,
+  }) {
+    final t = _db.transactions;
+    final range = query.range;
+    final type = query.type;
+    final category = query.category;
+    final conditions = [
+      if (range != null) ...[
+        t.date.isBiggerOrEqualValue(range.start),
+        t.date.isSmallerThanValue(range.end),
+      ],
+      if (type != null) t.type.equalsValue(type),
+      if (category != null) t.category.equalsValue(category),
+      if (after != null)
+        t.date.isSmallerThanValue(after.date) |
+            (t.date.equals(after.date) & t.id.isSmallerThanValue(after.id)),
+    ];
+    final select = _selectNewestFirst()..limit(limit);
+    if (conditions.isNotEmpty) select.where(Expression.and(conditions));
+    return select.get().then(_toDomainList);
+  }
+
+  @override
+  Stream<void> watchChanges() =>
+      _db.tableUpdates(TableUpdateQuery.onTable(_db.transactions)).map((_) {});
+
+  @override
   Future<List<Transaction>> listInRange(DateRange range) =>
       _selectInRange(range).get().then(_toDomainList);
 
@@ -53,7 +92,7 @@ final class DriftTransactionRepository implements TransactionRepository {
     final t = _db.transactions;
     return _db.select(t).join([
       leftOuterJoin(_db.localUnits, _db.localUnits.id.equalsExp(t.unitId)),
-    ])..orderBy([OrderingTerm.desc(t.date)]);
+    ])..orderBy([OrderingTerm.desc(t.date), OrderingTerm.desc(t.id)]);
   }
 
   JoinedSelectStatement<HasResultSet, dynamic> _selectInRange(DateRange range) {

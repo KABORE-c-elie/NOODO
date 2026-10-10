@@ -254,4 +254,240 @@ class AppLocalizationsFr extends AppLocalizations {
 
     return '$type : $product, $amountString FCFA';
   }
+
+  @override
+  String get periodLabel => 'Période';
+
+  @override
+  String get periodAll => 'Tout';
+
+  @override
+  String get periodDay => 'Jour';
+
+  @override
+  String get periodWeek => 'Semaine';
+
+  @override
+  String get periodMonth => 'Mois';
+
+  @override
+  String get typeAll => 'Tout';
+
+  @override
+  String get filterSales => 'Ventes';
+
+  @override
+  String get filterExpenses => 'Dépenses';
+
+  @override
+  String get categoryAll => 'Toutes';
+
+  @override
+  String get historyEmpty => 'Aucune transaction pour ces filtres.';
+
+  @override
+  String dayProfit(int amount) {
+    final intl.NumberFormat amountNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String amountString = amountNumberFormat.format(amount);
+
+    return 'Bénéfice : $amountString FCFA';
+  }
+
+  @override
+  String get deleteConfirmTitle => 'Supprimer cette transaction ?';
+
+  @override
+  String deleteConfirmBody(String label) {
+    return '« $label » sera supprimée.';
+  }
+
+  @override
+  String get cancel => 'Annuler';
+
+  @override
+  String get delete => 'Supprimer';
+
+  @override
+  String get undo => 'Annuler';
+
+  @override
+  String get transactionDeleted => 'Transaction supprimée';
+
+  @override
+  String get deleteTransactionAction => 'Supprimer la transaction';
+
+  @override
+  String get editTransactionHint => 'modifier';
+
+  @override
+  String get editTransactionTitle => 'Modifier la transaction';
+
+  @override
+  String get transactionUpdated => 'Transaction modifiée';
+
+  @override
+  String get loadingMore => 'Chargement…';
+
+  @override
+  String get periodPrevious => 'Période précédente';
+
+  @override
+  String get periodNext => 'Période suivante';
+
+  @override
+  String periodRange(String start, String end) {
+    return 'du $start au $end';
+  }
+
+  @override
+  String weekEarned(int amount) {
+    final intl.NumberFormat amountNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String amountString = amountNumberFormat.format(amount);
+
+    return 'Cette semaine tu as gagné $amountString FCFA';
+  }
+
+  @override
+  String weekLost(int amount) {
+    final intl.NumberFormat amountNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String amountString = amountNumberFormat.format(amount);
+
+    return 'Cette semaine tu as perdu $amountString FCFA';
+  }
+
+  @override
+  String monthEarned(int amount) {
+    final intl.NumberFormat amountNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String amountString = amountNumberFormat.format(amount);
+
+    return 'Ce mois-ci tu as gagné $amountString FCFA';
+  }
+
+  @override
+  String monthLost(int amount) {
+    final intl.NumberFormat amountNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String amountString = amountNumberFormat.format(amount);
+
+    return 'Ce mois-ci tu as perdu $amountString FCFA';
+  }
+
+  @override
+  String pastEarned(String period, int amount) {
+    final intl.NumberFormat amountNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String amountString = amountNumberFormat.format(amount);
+
+    return '$period : tu as gagné $amountString FCFA';
+  }
+
+  @override
+  String pastLost(String period, int amount) {
+    final intl.NumberFormat amountNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String amountString = amountNumberFormat.format(amount);
+
+    return '$period : tu as perdu $amountString FCFA';
+  }
+
+  @override
+  String previousMore(int amount) {
+    final intl.NumberFormat amountNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String amountString = amountNumberFormat.format(amount);
+
+    return 'C\'est $amountString FCFA de plus que la période précédente';
+  }
+
+  @override
+  String previousLess(int amount) {
+    final intl.NumberFormat amountNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String amountString = amountNumberFormat.format(amount);
+
+    return 'C\'est $amountString FCFA de moins que la période précédente';
+  }
+
+  @override
+  String previousMorePercent(int amount, int percent) {
+    final intl.NumberFormat amountNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String amountString = amountNumberFormat.format(amount);
+    final intl.NumberFormat percentNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String percentString = percentNumberFormat.format(percent);
+
+    return 'C\'est $amountString FCFA de plus que la période précédente (+$percentString %)';
+  }
+
+  @override
+  String previousLessPercent(int amount, int percent) {
+    final intl.NumberFormat amountNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String amountString = amountNumberFormat.format(amount);
+    final intl.NumberFormat percentNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String percentString = percentNumberFormat.format(percent);
+
+    return 'C\'est $amountString FCFA de moins que la période précédente (−$percentString %)';
+  }
+
+  @override
+  String get previousSame => 'Autant que la période précédente';
+
+  @override
+  String get dailyChartTitle => 'Bénéfice par jour';
+
+  @override
+  String get categoriesTitle => 'Par catégorie';
+
+  @override
+  String get noDataForPeriod => 'Aucune transaction sur cette période.';
+
+  @override
+  String profitSemantics(String label, int amount) {
+    final intl.NumberFormat amountNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String amountString = amountNumberFormat.format(amount);
+
+    return '$label : $amountString FCFA de bénéfice';
+  }
+
+  @override
+  String lossSemantics(String label, int amount) {
+    final intl.NumberFormat amountNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String amountString = amountNumberFormat.format(amount);
+
+    return '$label : $amountString FCFA de perte';
+  }
+
+  @override
+  String chartSummary(
+    String period,
+    int total,
+    String bestDay,
+    int bestAmount,
+  ) {
+    final intl.NumberFormat totalNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String totalString = totalNumberFormat.format(total);
+    final intl.NumberFormat bestAmountNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String bestAmountString = bestAmountNumberFormat.format(bestAmount);
+
+    return 'Bénéfice par jour, $period : total $totalString FCFA. Meilleur jour : $bestDay, $bestAmountString FCFA.';
+  }
+
+  @override
+  String chartSummaryEmpty(String period) {
+    return 'Bénéfice par jour, $period : aucune transaction.';
+  }
+
+  @override
+  String get historyError => 'Impossible de charger l\'historique.';
 }

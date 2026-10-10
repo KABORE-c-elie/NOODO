@@ -14,6 +14,10 @@ import 'fake_speech_service.dart';
 
 const testLocale = Locale('fr');
 
+const phoneSize = Size(360, 800);
+
+const tallPhoneSize = Size(360, 1400);
+
 final frenchL10n = lookupAppLocalizations(testLocale);
 
 Future<ProviderContainer> pumpNoodoApp(
@@ -22,9 +26,10 @@ Future<ProviderContainer> pumpNoodoApp(
   required DateTime now,
   String? initialLocation,
   FakeSpeechService? speech,
+  Size logicalSize = phoneSize,
 }) async {
   tester.view
-    ..physicalSize = const Size(1080, 2400)
+    ..physicalSize = logicalSize * 3
     ..devicePixelRatio = 3;
   tester.platformDispatcher.localesTestValue = const [testLocale];
   addTearDown(tester.view.reset);
@@ -67,3 +72,6 @@ Finder buttonWithText(String text) => find.ancestor(
   of: find.text(text),
   matching: find.byWidgetPredicate((widget) => widget is ButtonStyleButton),
 );
+
+Finder inScreen<T extends Widget>(Finder finder) =>
+    find.descendant(of: find.byType(T), matching: finder);
