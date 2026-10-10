@@ -1,0 +1,26 @@
+{
+  "@@locale": "fr",
+  "appTitle": "NOODO",
+  "@appTitle": {
+    "description": "Nom de l'application"
+  },
+  "homeTitle": "Accueil",
+  "confirmationTitle": "Confirmation",
+  "historyTitle": "Historique",
+  "profitsTitle": "Mes bénéfices",
+  "nodesTitle": "Mes nœuds",
+  "creditorTitle": "Fiche créancier",
+  "receiptsTitle": "Photothèque",
+  "settingsTitle": "Paramètres",
+  "transactionTypeSale": "Vente",
+  "transactionTypeExpense": "Dépense",
+  "amountFcfa": "{amount} FCFA",
+  "@amountFcfa": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "@@locale": "en",
+  "appTitle": "NOODO",
+  "homeTitle": "Home",
+  "confirmationTitle": "Confirmation",
+  "historyTitle": "History",
+  "profitsTitle": "My profits",
+  "nodesTitle": "My nodes",
+  "creditorTitle": "Creditor details",
+  "receiptsTitle": "Receipts",
+  "settingsTitle": "Settings",
+  "transactionTypeSale": "Sale",
+  "transactionTypeExpense": "Expense",
+  "amountFcfa": "{amount} FCFA"
+}
