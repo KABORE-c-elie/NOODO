@@ -3,8 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:noodo/core/l10n/generated/app_localizations.dart';
 import 'package:noodo/core/router/app_routes.dart';
 import 'package:noodo/features/profits/presentation/widgets/today_summary_card.dart';
-import 'package:noodo/features/transactions/presentation/widgets/recent_transactions_list.dart';
-import 'package:noodo/features/transactions/presentation/widgets/record_button.dart';
+import 'package:noodo/features/transactions/presentation/widgets/recent_transactions_sliver.dart';
+import 'package:noodo/features/transactions/presentation/widgets/voice_recorder.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -28,22 +28,25 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const TodaySummaryCard(),
-            const SizedBox(height: 24),
-            const Center(child: RecordButton()),
-            const SizedBox(height: 24),
-            Text(
-              l10n.recentTransactions,
-              style: Theme.of(context).textTheme.titleMedium,
+      body: CustomScrollView(
+        slivers: [
+          SliverPadding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+            sliver: SliverList.list(
+              children: [
+                const TodaySummaryCard(),
+                const SizedBox(height: 24),
+                const VoiceRecorder(),
+                const SizedBox(height: 24),
+                Text(
+                  l10n.recentTransactions,
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+              ],
             ),
-            const Expanded(child: RecentTransactionsList()),
-          ],
-        ),
+          ),
+          const RecentTransactionsSliver(),
+        ],
       ),
     );
   }

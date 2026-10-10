@@ -4,23 +4,38 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:noodo/app.dart';
 import 'package:noodo/core/database/app_database.dart';
 import 'package:noodo/core/database/database_provider.dart';
+import 'package:noodo/core/l10n/app_locale_provider.dart';
 import 'package:noodo/core/l10n/generated/app_localizations.dart';
 import 'package:noodo/core/router/app_router.dart';
 import 'package:noodo/core/utils/clock_provider.dart';
+import 'package:noodo/features/transactions/data/speech_providers.dart';
 
-final frenchL10n = lookupAppLocalizations(const Locale('fr'));
+import 'fake_speech_service.dart';
+
+const testLocale = Locale('fr');
+
+final frenchL10n = lookupAppLocalizations(testLocale);
 
 Future<ProviderContainer> pumpNoodoApp(
   WidgetTester tester, {
   required AppDatabase db,
   required DateTime now,
   String? initialLocation,
+  FakeSpeechService? speech,
 }) async {
+  tester.view
+    ..physicalSize = const Size(1080, 2400)
+    ..devicePixelRatio = 3;
+  tester.platformDispatcher.localesTestValue = const [testLocale];
+  addTearDown(tester.view.reset);
+  addTearDown(tester.platformDispatcher.clearLocalesTestValue);
   await tester.pumpWidget(
     ProviderScope(
       overrides: [
         appDatabaseProvider.overrideWithValue(db),
         clockProvider.overrideWithValue(() => now),
+        appLocaleProvider.overrideWithValue(testLocale),
+        speechServiceProvider.overrideWithValue(speech ?? FakeSpeechService()),
       ],
       child: const NoodoApp(),
     ),

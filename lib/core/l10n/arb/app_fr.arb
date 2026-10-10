@@ -133,5 +133,27 @@
   },
   "save": "Enregistrer",
   "saveTooltip": "Enregistrer la transaction",
-  "transactionSaved": "Transaction enregistrée"
+  "transactionSaved": "Transaction enregistrée",
+  "stopListening": "Arrêter l'écoute",
+  "listening": "Je t'écoute…",
+  "manualEntry": "Écrire à la main",
+  "manualEntryTooltip": "Saisir la transaction au clavier",
+  "speechPermissionDenied": "Je n'ai pas accès au micro. Autorise-le dans les réglages du téléphone, ou écris ta transaction.",
+  "speechUnavailable": "La reconnaissance vocale n'est pas disponible pour le moment (pas de réseau ou langue non téléchargée). Tu peux écrire ta transaction.",
+  "speechNoSpeech": "Je n'ai rien entendu. Appuie sur le micro pour réessayer, ou écris ta transaction.",
+  "transactionSemantics": "{type} : {product}, {amount} FCFA",
+  "@transactionSemantics": {
+    "placeholders": {
+      "type": {
+        "type": "String"
+      },
+      "product": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  }
 }

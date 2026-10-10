@@ -221,4 +221,37 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get transactionSaved => 'Transaction enregistrée';
+
+  @override
+  String get stopListening => 'Arrêter l\'écoute';
+
+  @override
+  String get listening => 'Je t\'écoute…';
+
+  @override
+  String get manualEntry => 'Écrire à la main';
+
+  @override
+  String get manualEntryTooltip => 'Saisir la transaction au clavier';
+
+  @override
+  String get speechPermissionDenied =>
+      'Je n\'ai pas accès au micro. Autorise-le dans les réglages du téléphone, ou écris ta transaction.';
+
+  @override
+  String get speechUnavailable =>
+      'La reconnaissance vocale n\'est pas disponible pour le moment (pas de réseau ou langue non téléchargée). Tu peux écrire ta transaction.';
+
+  @override
+  String get speechNoSpeech =>
+      'Je n\'ai rien entendu. Appuie sur le micro pour réessayer, ou écris ta transaction.';
+
+  @override
+  String transactionSemantics(String type, String product, int amount) {
+    final intl.NumberFormat amountNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String amountString = amountNumberFormat.format(amount);
+
+    return '$type : $product, $amountString FCFA';
+  }
 }

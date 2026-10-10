@@ -5,9 +5,10 @@ import 'package:noodo/core/l10n/generated/app_localizations.dart';
 import 'package:noodo/features/transactions/domain/transaction.dart';
 import 'package:noodo/features/transactions/domain/transaction_type.dart';
 import 'package:noodo/features/transactions/presentation/providers/recent_transactions_provider.dart';
+import 'package:noodo/features/transactions/presentation/transaction_labels.dart';
 
-class RecentTransactionsList extends ConsumerWidget {
-  const RecentTransactionsList({super.key});
+class RecentTransactionsSliver extends ConsumerWidget {
+  const RecentTransactionsSliver({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -15,19 +16,22 @@ class RecentTransactionsList extends ConsumerWidget {
     final transactions = ref.watch(recentTransactionsProvider);
     return transactions.when(
       data: (items) => items.isEmpty
-          ? Center(
+          ? SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.all(24),
                 child: Text(l10n.noTransactions, textAlign: TextAlign.center),
               ),
             )
-          : ListView.builder(
+          : SliverList.builder(
               itemCount: items.length,
               itemBuilder: (context, index) =>
                   _TransactionTile(transaction: items[index]),
             ),
-      loading: () => const Center(child: CircularProgressIndicator()),
-      error: (_, _) => Center(child: Text(l10n.summaryError)),
+      loading: () => const SliverToBoxAdapter(
+        child: Center(child: CircularProgressIndicator()),
+      ),
+      error: (_, _) =>
+          SliverToBoxAdapter(child: Center(child: Text(l10n.summaryError))),
     );
   }
 }
@@ -44,20 +48,30 @@ class _TransactionTile extends StatelessWidget {
     final isSale = transaction.type == TransactionType.sale;
     final time = DateFormat.Hm(Localizations.localeOf(context).toLanguageTag())
         .format(transaction.date);
-    return ListTile(
-      leading: Icon(
-        isSale ? Icons.south_west : Icons.north_east,
-        color: isSale ? colors.primary : colors.error,
+    final label = transaction.product ?? transaction.rawText;
+    return Semantics(
+      container: true,
+      excludeSemantics: true,
+      label: l10n.transactionSemantics(
+        transaction.type.label(l10n),
+        label,
+        transaction.amountFcfa,
       ),
-      title: Text(transaction.product ?? transaction.rawText),
-      subtitle: Text(time),
-      trailing: Text(
-        isSale
-            ? l10n.saleAmount(transaction.amountFcfa)
-            : l10n.expenseAmount(transaction.amountFcfa),
-        style: TextStyle(
+      child: ListTile(
+        leading: Icon(
+          isSale ? Icons.south_west : Icons.north_east,
           color: isSale ? colors.primary : colors.error,
-          fontWeight: FontWeight.bold,
+        ),
+        title: Text(label),
+        subtitle: Text(time),
+        trailing: Text(
+          isSale
+              ? l10n.saleAmount(transaction.amountFcfa)
+              : l10n.expenseAmount(transaction.amountFcfa),
+          style: TextStyle(
+            color: isSale ? colors.primary : colors.error,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );

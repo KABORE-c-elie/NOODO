@@ -127,7 +127,7 @@ void main() {
     tester,
   ) async {
     await pumpNoodoApp(tester, db: db, now: now);
-    await tester.tap(find.byTooltip(frenchL10n.recordTransaction));
+    await tester.tap(find.byTooltip(frenchL10n.manualEntryTooltip));
     await tester.pumpAndSettle();
 
     await tester.enterText(

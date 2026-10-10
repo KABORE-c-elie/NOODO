@@ -43,6 +43,16 @@ void main() {
     expect(find.text('tomates'), findsOneWidget);
     expect(find.text(frenchL10n.saleAmount(15000)), findsOneWidget);
     expect(find.text(frenchL10n.expenseAmount(2500)), findsOneWidget);
+    expect(
+      find.bySemanticsLabel(
+        frenchL10n.transactionSemantics(
+          frenchL10n.transactionTypeSale,
+          'tomates',
+          15000,
+        ),
+      ),
+      findsOneWidget,
+    );
     expect(find.byTooltip(frenchL10n.recordTransaction), findsOneWidget);
     expect(find.byType(NavigationBar), findsOneWidget);
 

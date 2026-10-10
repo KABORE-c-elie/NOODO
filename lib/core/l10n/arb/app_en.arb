@@ -53,5 +53,13 @@
   "unitAdded": "Unit \"{unit}\" added",
   "save": "Save",
   "saveTooltip": "Save the transaction",
-  "transactionSaved": "Transaction saved"
+  "transactionSaved": "Transaction saved",
+  "stopListening": "Stop listening",
+  "listening": "I'm listening…",
+  "manualEntry": "Type it instead",
+  "manualEntryTooltip": "Enter the transaction with the keyboard",
+  "speechPermissionDenied": "I can't access the microphone. Allow it in your phone settings, or type your transaction.",
+  "speechUnavailable": "Speech recognition isn't available right now (no network or language not downloaded). You can type your transaction.",
+  "speechNoSpeech": "I didn't hear anything. Tap the microphone to try again, or type your transaction.",
+  "transactionSemantics": "{type}: {product}, {amount} FCFA"
 }

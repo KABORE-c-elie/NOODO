@@ -421,6 +421,54 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Transaction enregistrée'**
   String get transactionSaved;
+
+  /// No description provided for @stopListening.
+  ///
+  /// In fr, this message translates to:
+  /// **'Arrêter l\'écoute'**
+  String get stopListening;
+
+  /// No description provided for @listening.
+  ///
+  /// In fr, this message translates to:
+  /// **'Je t\'écoute…'**
+  String get listening;
+
+  /// No description provided for @manualEntry.
+  ///
+  /// In fr, this message translates to:
+  /// **'Écrire à la main'**
+  String get manualEntry;
+
+  /// No description provided for @manualEntryTooltip.
+  ///
+  /// In fr, this message translates to:
+  /// **'Saisir la transaction au clavier'**
+  String get manualEntryTooltip;
+
+  /// No description provided for @speechPermissionDenied.
+  ///
+  /// In fr, this message translates to:
+  /// **'Je n\'ai pas accès au micro. Autorise-le dans les réglages du téléphone, ou écris ta transaction.'**
+  String get speechPermissionDenied;
+
+  /// No description provided for @speechUnavailable.
+  ///
+  /// In fr, this message translates to:
+  /// **'La reconnaissance vocale n\'est pas disponible pour le moment (pas de réseau ou langue non téléchargée). Tu peux écrire ta transaction.'**
+  String get speechUnavailable;
+
+  /// No description provided for @speechNoSpeech.
+  ///
+  /// In fr, this message translates to:
+  /// **'Je n\'ai rien entendu. Appuie sur le micro pour réessayer, ou écris ta transaction.'**
+  String get speechNoSpeech;
+
+  /// No description provided for @transactionSemantics.
+  ///
+  /// In fr, this message translates to:
+  /// **'{type} : {product}, {amount} FCFA'**
+  String transactionSemantics(String type, String product, int amount);
 }
 
 class _AppLocalizationsDelegate
