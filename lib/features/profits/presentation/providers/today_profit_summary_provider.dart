@@ -1,4 +1,4 @@
-import 'package:noodo/core/utils/clock_provider.dart';
+import 'package:noodo/core/utils/current_day_provider.dart';
 import 'package:noodo/core/utils/date_range.dart';
 import 'package:noodo/features/profits/domain/profit_calculator.dart';
 import 'package:noodo/features/profits/domain/profit_models.dart';
@@ -9,7 +9,7 @@ part 'today_profit_summary_provider.g.dart';
 
 @riverpod
 Stream<ProfitSummary> todayProfitSummary(Ref ref) {
-  final today = ref.watch(clockProvider)();
+  final today = ref.watch(currentDayProvider);
   final range = DateRange.of(PeriodUnit.day, today);
   const calculator = ProfitCalculator();
   return ref

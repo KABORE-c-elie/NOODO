@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$TaxNode {
 
- String get id; int get rateBasisPoints; int get savedBalanceFcfa;
+ String get id; int get rateBasisPoints; int get savedBalanceFcfa; DateTime? get nextDueDate;
 /// Create a copy of TaxNode
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -27,20 +27,20 @@ $TaxNodeCopyWith<TaxNode> get copyWith => _$TaxNodeCopyWithImpl<TaxNode>(this as
 @override
 bool operator ==(Object other) {
   final _this = this as TaxNode;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TaxNode&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.rateBasisPoints, _this.rateBasisPoints) || other.rateBasisPoints == _this.rateBasisPoints)&&(identical(other.savedBalanceFcfa, _this.savedBalanceFcfa) || other.savedBalanceFcfa == _this.savedBalanceFcfa));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TaxNode&&(identical(other.id, _this.id) || other.id == _this.id)&&(identical(other.rateBasisPoints, _this.rateBasisPoints) || other.rateBasisPoints == _this.rateBasisPoints)&&(identical(other.savedBalanceFcfa, _this.savedBalanceFcfa) || other.savedBalanceFcfa == _this.savedBalanceFcfa)&&(identical(other.nextDueDate, _this.nextDueDate) || other.nextDueDate == _this.nextDueDate));
 }
 
 
 @override
 int get hashCode {
   final _this = this as TaxNode;
-  return Object.hash(runtimeType,_this.id,_this.rateBasisPoints,_this.savedBalanceFcfa);
+  return Object.hash(runtimeType,_this.id,_this.rateBasisPoints,_this.savedBalanceFcfa,_this.nextDueDate);
 }
 
 @override
 String toString() {
   final _this = this as TaxNode;
-  return 'TaxNode(id: ${_this.id}, rateBasisPoints: ${_this.rateBasisPoints}, savedBalanceFcfa: ${_this.savedBalanceFcfa})';
+  return 'TaxNode(id: ${_this.id}, rateBasisPoints: ${_this.rateBasisPoints}, savedBalanceFcfa: ${_this.savedBalanceFcfa}, nextDueDate: ${_this.nextDueDate})';
 }
 
 
@@ -51,7 +51,7 @@ abstract mixin class $TaxNodeCopyWith<$Res>  {
   factory $TaxNodeCopyWith(TaxNode value, $Res Function(TaxNode) _then) = _$TaxNodeCopyWithImpl;
 @useResult
 $Res call({
- String id, int rateBasisPoints, int savedBalanceFcfa
+ String id, int rateBasisPoints, int savedBalanceFcfa, DateTime? nextDueDate
 });
 
 
@@ -68,12 +68,13 @@ class _$TaxNodeCopyWithImpl<$Res>
 
 /// Create a copy of TaxNode
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? rateBasisPoints = null,Object? savedBalanceFcfa = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? rateBasisPoints = null,Object? savedBalanceFcfa = null,Object? nextDueDate = freezed,}) {
   return _then(TaxNode(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,rateBasisPoints: null == rateBasisPoints ? _self.rateBasisPoints : rateBasisPoints // ignore: cast_nullable_to_non_nullable
 as int,savedBalanceFcfa: null == savedBalanceFcfa ? _self.savedBalanceFcfa : savedBalanceFcfa // ignore: cast_nullable_to_non_nullable
-as int,
+as int,nextDueDate: freezed == nextDueDate ? _self.nextDueDate : nextDueDate // ignore: cast_nullable_to_non_nullable
+as DateTime?,
   ));
 }
 
@@ -158,10 +159,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  int rateBasisPoints,  int savedBalanceFcfa)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  int rateBasisPoints,  int savedBalanceFcfa,  DateTime? nextDueDate)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _TaxNode() when $default != null:
-return $default(_that.id,_that.rateBasisPoints,_that.savedBalanceFcfa);case _:
+return $default(_that.id,_that.rateBasisPoints,_that.savedBalanceFcfa,_that.nextDueDate);case _:
   return orElse();
 
 }
@@ -179,10 +180,10 @@ return $default(_that.id,_that.rateBasisPoints,_that.savedBalanceFcfa);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  int rateBasisPoints,  int savedBalanceFcfa)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  int rateBasisPoints,  int savedBalanceFcfa,  DateTime? nextDueDate)  $default,) {final _that = this;
 switch (_that) {
 case _TaxNode():
-return $default(_that.id,_that.rateBasisPoints,_that.savedBalanceFcfa);case _:
+return $default(_that.id,_that.rateBasisPoints,_that.savedBalanceFcfa,_that.nextDueDate);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -199,10 +200,10 @@ return $default(_that.id,_that.rateBasisPoints,_that.savedBalanceFcfa);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  int rateBasisPoints,  int savedBalanceFcfa)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  int rateBasisPoints,  int savedBalanceFcfa,  DateTime? nextDueDate)?  $default,) {final _that = this;
 switch (_that) {
 case _TaxNode() when $default != null:
-return $default(_that.id,_that.rateBasisPoints,_that.savedBalanceFcfa);case _:
+return $default(_that.id,_that.rateBasisPoints,_that.savedBalanceFcfa,_that.nextDueDate);case _:
   return null;
 
 }
@@ -214,12 +215,13 @@ return $default(_that.id,_that.rateBasisPoints,_that.savedBalanceFcfa);case _:
 
 
 class _TaxNode extends TaxNode {
-  const _TaxNode({required this.id, required this.rateBasisPoints, required this.savedBalanceFcfa}): super._();
+  const _TaxNode({required this.id, required this.rateBasisPoints, required this.savedBalanceFcfa, this.nextDueDate}): super._();
   
 
 @override final  String id;
 @override final  int rateBasisPoints;
 @override final  int savedBalanceFcfa;
+@override final  DateTime? nextDueDate;
 
 /// Create a copy of TaxNode
 /// with the given fields replaced by the non-null parameter values.
@@ -231,18 +233,18 @@ _$TaxNodeCopyWith<_TaxNode> get copyWith => __$TaxNodeCopyWithImpl<_TaxNode>(thi
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _TaxNode&&(identical(other.id, id) || other.id == id)&&(identical(other.rateBasisPoints, rateBasisPoints) || other.rateBasisPoints == rateBasisPoints)&&(identical(other.savedBalanceFcfa, savedBalanceFcfa) || other.savedBalanceFcfa == savedBalanceFcfa));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _TaxNode&&(identical(other.id, id) || other.id == id)&&(identical(other.rateBasisPoints, rateBasisPoints) || other.rateBasisPoints == rateBasisPoints)&&(identical(other.savedBalanceFcfa, savedBalanceFcfa) || other.savedBalanceFcfa == savedBalanceFcfa)&&(identical(other.nextDueDate, nextDueDate) || other.nextDueDate == nextDueDate));
 }
 
 
 @override
 int get hashCode {
-    return Object.hash(runtimeType,id,rateBasisPoints,savedBalanceFcfa);
+    return Object.hash(runtimeType,id,rateBasisPoints,savedBalanceFcfa,nextDueDate);
 }
 
 @override
 String toString() {
-    return 'TaxNode(id: $id, rateBasisPoints: $rateBasisPoints, savedBalanceFcfa: $savedBalanceFcfa)';
+    return 'TaxNode(id: $id, rateBasisPoints: $rateBasisPoints, savedBalanceFcfa: $savedBalanceFcfa, nextDueDate: $nextDueDate)';
 }
 
 
@@ -253,7 +255,7 @@ abstract mixin class _$TaxNodeCopyWith<$Res> implements $TaxNodeCopyWith<$Res> {
   factory _$TaxNodeCopyWith(_TaxNode value, $Res Function(_TaxNode) _then) = __$TaxNodeCopyWithImpl;
 @override @useResult
 $Res call({
- String id, int rateBasisPoints, int savedBalanceFcfa
+ String id, int rateBasisPoints, int savedBalanceFcfa, DateTime? nextDueDate
 });
 
 
@@ -270,12 +272,13 @@ class __$TaxNodeCopyWithImpl<$Res>
 
 /// Create a copy of TaxNode
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? rateBasisPoints = null,Object? savedBalanceFcfa = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? rateBasisPoints = null,Object? savedBalanceFcfa = null,Object? nextDueDate = freezed,}) {
   return _then(_TaxNode(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,rateBasisPoints: null == rateBasisPoints ? _self.rateBasisPoints : rateBasisPoints // ignore: cast_nullable_to_non_nullable
 as int,savedBalanceFcfa: null == savedBalanceFcfa ? _self.savedBalanceFcfa : savedBalanceFcfa // ignore: cast_nullable_to_non_nullable
-as int,
+as int,nextDueDate: freezed == nextDueDate ? _self.nextDueDate : nextDueDate // ignore: cast_nullable_to_non_nullable
+as DateTime?,
   ));
 }
 

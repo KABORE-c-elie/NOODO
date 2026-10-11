@@ -66,5 +66,11 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>NOODO utilise le micro pour que tu puisses dicter tes ventes et tes dépenses au lieu de les écrire.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>NOODO transforme ta voix en texte, grâce à la reconnaissance vocale du téléphone, pour enregistrer tes ventes et tes dépenses.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>NOODO utilise l'appareil photo pour photographier tes reçus et tes factures.</string>
 </dict>
 </plist>

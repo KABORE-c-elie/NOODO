@@ -181,4 +181,31 @@ void main() {
       expect(calculator.byCategory([], dayRange), isEmpty);
     });
   });
+
+  group('bénéfice par jour', () {
+    test('un point par jour de la période, jours vides à zéro', () {
+      final week = DateRange.of(PeriodUnit.week, today);
+
+      final days = calculator.daily([
+        sale('lundi', 3000, DateTime(2026, 10, 12, 9)),
+        expense('lundi-d', 1000, DateTime(2026, 10, 12, 18)),
+        sale('mercredi', 5000, today),
+        sale('hors-periode', 9000, DateTime(2026, 10, 19)),
+      ], week);
+
+      expect(days, hasLength(7));
+      expect(days.first.day, DateTime(2026, 10, 12));
+      expect(days.map((d) => d.netFcfa), [2000, 0, 5000, 0, 0, 0, 0]);
+    });
+
+    test('mois complet', () {
+      final days = calculator.daily(
+        [],
+        DateRange.of(PeriodUnit.month, DateTime(2026, 2, 10)),
+      );
+
+      expect(days, hasLength(28));
+      expect(days.every((d) => d.netFcfa == 0), isTrue);
+    });
+  });
 }

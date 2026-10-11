@@ -54,7 +54,7 @@ const _fractionWords = {'demi', 'demie', 'moitie'};
 
 final _groupedThousands = RegExp(r'(?<![\d.,])\d{1,3}(?:[ .  ]\d{3})+(?!\d)');
 final _groupSeparator = RegExp(r'[ .  ]');
-final _lexeme = RegExp(r'\d+(?:[.,]\d+)?|[\p{L}\p{M}]+', unicode: true);
+final _lexeme = RegExp(r'\d+(?:[.,]\d+)?|[\p{L}\p{M}]+|[,;.!?]', unicode: true);
 
 List<ParserToken> tokenize(String text) {
   final normalized = text.toLowerCase().replaceAllMapped(

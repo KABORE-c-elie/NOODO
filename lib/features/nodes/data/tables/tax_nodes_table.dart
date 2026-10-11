@@ -5,6 +5,7 @@ class TaxNodes extends Table {
   TextColumn get id => text()();
   IntColumn get rateBasisPoints => integer()();
   IntColumn get savedBalanceFcfa => integer().withDefault(const Constant(0))();
+  DateTimeColumn get nextDueDate => dateTime().nullable()();
 
   @override
   Set<Column<Object>> get primaryKey => {id};

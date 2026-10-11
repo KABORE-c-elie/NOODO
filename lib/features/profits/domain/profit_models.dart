@@ -45,3 +45,16 @@ abstract class CategoryProfit with _$CategoryProfit {
 
   int get netFcfa => salesFcfa - expensesFcfa;
 }
+
+@freezed
+abstract class DailyProfit with _$DailyProfit {
+  const DailyProfit._();
+
+  const factory DailyProfit({
+    required DateTime day,
+    required int salesFcfa,
+    required int expensesFcfa,
+  }) = _DailyProfit;
+
+  int get netFcfa => salesFcfa - expensesFcfa;
+}

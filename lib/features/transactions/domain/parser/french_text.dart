@@ -43,3 +43,11 @@ Set<String> singularForms(String folded) => {
 
 bool sameFrenchWord(String word, String reference) =>
     singularForms(foldFrench(word)).contains(foldFrench(reference));
+
+String singularize(String word) {
+  final trimmed = word.trim();
+  final isPlural = trimmed.endsWith('s') || trimmed.endsWith('x');
+  return trimmed.length > 3 && isPlural
+      ? trimmed.substring(0, trimmed.length - 1)
+      : trimmed;
+}

@@ -70,6 +70,35 @@ final class ProfitCalculator {
     );
   }
 
+  List<DailyProfit> daily(Iterable<Transaction> transactions, DateRange range) {
+    final sales = <DateTime, int>{};
+    final expenses = <DateTime, int>{};
+    for (final transaction in _within(transactions, range)) {
+      final date = transaction.date;
+      final totals = switch (transaction.type) {
+        TransactionType.sale => sales,
+        TransactionType.expense => expenses,
+      };
+      totals.update(
+        DateTime(date.year, date.month, date.day),
+        (total) => total + transaction.amountFcfa,
+        ifAbsent: () => transaction.amountFcfa,
+      );
+    }
+    return [
+      for (
+        var day = range.start;
+        day.isBefore(range.end);
+        day = DateTime(day.year, day.month, day.day + 1)
+      )
+        DailyProfit(
+          day: day,
+          salesFcfa: sales[day] ?? 0,
+          expensesFcfa: expenses[day] ?? 0,
+        ),
+    ];
+  }
+
   Iterable<Transaction> _within(
     Iterable<Transaction> transactions,
     DateRange range,

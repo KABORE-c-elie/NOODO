@@ -13,6 +13,7 @@ abstract class TaxNode with _$TaxNode {
     required String id,
     required int rateBasisPoints,
     required int savedBalanceFcfa,
+    DateTime? nextDueDate,
   }) = _TaxNode;
 
   factory TaxNode.initial() => const TaxNode(

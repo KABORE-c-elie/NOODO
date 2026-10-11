@@ -47,4 +47,4 @@ final class TodayProfitSummaryProvider
 }
 
 String _$todayProfitSummaryHash() =>
-    r'e3722e494c10db01fbb5c732d2adc0e0f91d323a';
+    r'3c29c00ce867b2f879d8567e0b7b94db4b88d7e7';

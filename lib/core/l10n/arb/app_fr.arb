@@ -22,5 +22,788 @@
         "format": "decimalPattern"
       }
     }
+  },
+  "navHome": "Accueil",
+  "navHistory": "Historique",
+  "navProfits": "Bénéfices",
+  "navNodes": "Nœuds",
+  "openReceipts": "Ouvrir la photothèque",
+  "openSettings": "Ouvrir les paramètres",
+  "todayEarned": "Aujourd'hui tu as gagné {amount} FCFA",
+  "@todayEarned": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "todayLost": "Aujourd'hui tu as perdu {amount} FCFA",
+  "@todayLost": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "comparedMore": "C'est {amount} FCFA de plus qu'hier",
+  "@comparedMore": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "comparedLess": "C'est {amount} FCFA de moins qu'hier",
+  "@comparedLess": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "comparedSame": "Autant qu'hier",
+  "summaryError": "Impossible de calculer le résumé du jour",
+  "recentTransactions": "Dernières transactions",
+  "noTransactions": "Aucune transaction pour l'instant. Appuie sur le micro pour commencer.",
+  "recordTransaction": "Dicter une transaction",
+  "saleAmount": "+{amount} FCFA",
+  "@saleAmount": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "expenseAmount": "−{amount} FCFA",
+  "@expenseAmount": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "transcriptLabel": "Ce que tu as dit",
+  "transcriptHint": "Ex. : J'ai vendu 2 tas de tomates à 1 000 francs",
+  "analyze": "Analyser",
+  "analyzeTooltip": "Analyser la phrase",
+  "typeLabel": "Type",
+  "amountLabel": "Montant (FCFA)",
+  "quantityLabel": "Quantité",
+  "unitLabel": "Unité",
+  "noUnit": "Aucune",
+  "productLabel": "Produit",
+  "categoryLabel": "Catégorie",
+  "categoryVegetables": "Légumes",
+  "categoryCereals": "Céréales",
+  "categoryTransport": "Transport",
+  "categorySupplies": "Fournitures",
+  "categoryOther": "Autre",
+  "lowConfidenceWarning": "Je n'ai peut-être pas bien compris. Vérifie les champs signalés.",
+  "fieldToCheck": "À vérifier",
+  "unknownUnit": "Unité inconnue : « {unit} »",
+  "@unknownUnit": {
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "addThisUnit": "Ajouter cette unité",
+  "addUnitTooltip": "Ajouter « {unit} » à tes unités",
+  "@addUnitTooltip": {
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "unitAdded": "Unité « {unit} » ajoutée",
+  "@unitAdded": {
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "save": "Enregistrer",
+  "saveTooltip": "Enregistrer la transaction",
+  "transactionSaved": "Transaction enregistrée",
+  "stopListening": "Arrêter l'écoute",
+  "listening": "Je t'écoute…",
+  "manualEntry": "Écrire à la main",
+  "manualEntryTooltip": "Saisir la transaction au clavier",
+  "speechPermissionDenied": "Je n'ai pas accès au micro. Autorise-le dans les réglages du téléphone, ou écris ta transaction.",
+  "speechUnavailable": "La reconnaissance vocale n'est pas disponible pour le moment (pas de réseau ou langue non téléchargée). Tu peux écrire ta transaction.",
+  "speechNoSpeech": "Je n'ai rien entendu. Appuie sur le micro pour réessayer, ou écris ta transaction.",
+  "transactionSemantics": "{type} : {product}, {amount} FCFA",
+  "@transactionSemantics": {
+    "placeholders": {
+      "type": {
+        "type": "String"
+      },
+      "product": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "periodLabel": "Période",
+  "periodAll": "Tout",
+  "periodDay": "Jour",
+  "periodWeek": "Semaine",
+  "periodMonth": "Mois",
+  "typeAll": "Tout",
+  "filterSales": "Ventes",
+  "filterExpenses": "Dépenses",
+  "categoryAll": "Toutes",
+  "historyEmpty": "Aucune transaction pour ces filtres.",
+  "dayProfit": "Bénéfice : {amount} FCFA",
+  "@dayProfit": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "deleteConfirmTitle": "Supprimer cette transaction ?",
+  "deleteConfirmBody": "« {label} » sera supprimée.",
+  "@deleteConfirmBody": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "cancel": "Annuler",
+  "delete": "Supprimer",
+  "undo": "Annuler",
+  "transactionDeleted": "Transaction supprimée",
+  "deleteTransactionAction": "Supprimer la transaction",
+  "editTransactionHint": "modifier",
+  "editTransactionTitle": "Modifier la transaction",
+  "transactionUpdated": "Transaction modifiée",
+  "loadingMore": "Chargement…",
+  "periodPrevious": "Période précédente",
+  "periodNext": "Période suivante",
+  "periodRange": "du {start} au {end}",
+  "@periodRange": {
+    "placeholders": {
+      "start": {
+        "type": "String"
+      },
+      "end": {
+        "type": "String"
+      }
+    }
+  },
+  "weekEarned": "Cette semaine tu as gagné {amount} FCFA",
+  "@weekEarned": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "weekLost": "Cette semaine tu as perdu {amount} FCFA",
+  "@weekLost": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "monthEarned": "Ce mois-ci tu as gagné {amount} FCFA",
+  "@monthEarned": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "monthLost": "Ce mois-ci tu as perdu {amount} FCFA",
+  "@monthLost": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "pastEarned": "{period} : tu as gagné {amount} FCFA",
+  "@pastEarned": {
+    "placeholders": {
+      "period": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "pastLost": "{period} : tu as perdu {amount} FCFA",
+  "@pastLost": {
+    "placeholders": {
+      "period": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "previousMore": "C'est {amount} FCFA de plus que la période précédente",
+  "@previousMore": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "previousLess": "C'est {amount} FCFA de moins que la période précédente",
+  "@previousLess": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "previousMorePercent": "C'est {amount} FCFA de plus que la période précédente (+{percent} %)",
+  "@previousMorePercent": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      },
+      "percent": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "previousLessPercent": "C'est {amount} FCFA de moins que la période précédente (−{percent} %)",
+  "@previousLessPercent": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      },
+      "percent": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "previousSame": "Autant que la période précédente",
+  "dailyChartTitle": "Bénéfice par jour",
+  "categoriesTitle": "Par catégorie",
+  "noDataForPeriod": "Aucune transaction sur cette période.",
+  "profitSemantics": "{label} : {amount} FCFA de bénéfice",
+  "@profitSemantics": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "lossSemantics": "{label} : {amount} FCFA de perte",
+  "@lossSemantics": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "chartSummary": "Bénéfice par jour, {period} : total {total} FCFA. Meilleur jour : {bestDay}, {bestAmount} FCFA.",
+  "@chartSummary": {
+    "placeholders": {
+      "period": {
+        "type": "String"
+      },
+      "total": {
+        "type": "int",
+        "format": "decimalPattern"
+      },
+      "bestDay": {
+        "type": "String"
+      },
+      "bestAmount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "chartSummaryEmpty": "Bénéfice par jour, {period} : aucune transaction.",
+  "@chartSummaryEmpty": {
+    "placeholders": {
+      "period": {
+        "type": "String"
+      }
+    }
+  },
+  "historyError": "Impossible de charger l'historique.",
+  "filters": "Filtres",
+  "filtersTooltip": "Filtrer par catégorie",
+  "clearCategoryFilter": "Retirer le filtre de catégorie",
+  "transactionSavedWithTax": "Transaction enregistrée · {amount} FCFA mis de côté pour tes impôts",
+  "@transactionSavedWithTax": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "taxNodeTitle": "Nœud Impôts",
+  "taxSaved": "Épargné : {amount} FCFA",
+  "@taxSaved": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "taxRate": "Taux : {rate} %",
+  "@taxRate": {
+    "placeholders": {
+      "rate": {
+        "type": "String"
+      }
+    }
+  },
+  "taxNextDue": "Prochaine échéance : {date}",
+  "@taxNextDue": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "taxNoDue": "Aucune échéance renseignée",
+  "creditorsTitle": "Mes créanciers",
+  "noCreditors": "Aucun créancier pour l'instant.",
+  "addCreditor": "Ajouter un créancier",
+  "addCreditorTooltip": "Ajouter un fournisseur à qui tu dois de l'argent",
+  "overdue": "En retard",
+  "dueOn": "Échéance : {date}",
+  "@dueOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "noDueDate": "Sans échéance",
+  "balanceDue": "Reste à payer : {amount} FCFA",
+  "@balanceDue": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "creditorNameLabel": "Nom du fournisseur",
+  "creditorPhoneLabel": "Téléphone (facultatif)",
+  "amountDueLabel": "Montant dû (FCFA)",
+  "dueDateLabel": "Échéance (facultatif)",
+  "chooseDueDate": "Choisir une échéance",
+  "clearDueDate": "Retirer l'échéance",
+  "requiredField": "Obligatoire",
+  "invalidAmount": "Montant invalide",
+  "creditorAdded": "Créancier ajouté",
+  "totalPaid": "Déjà payé : {amount} FCFA",
+  "@totalPaid": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "recordPayment": "Enregistrer un paiement",
+  "recordPaymentTooltip": "Enregistrer un paiement à ce fournisseur",
+  "paymentAmountLabel": "Montant payé (FCFA)",
+  "paymentMethodLabel": "Moyen de paiement",
+  "methodCash": "Espèces",
+  "methodOrangeMoney": "Orange Money",
+  "methodMoovMoney": "Moov Money",
+  "paymentReasonLabel": "Motif (facultatif)",
+  "amountTooHigh": "Maximum : {max} FCFA",
+  "@amountTooHigh": {
+    "placeholders": {
+      "max": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "confirmPayment": "Valider le paiement",
+  "paymentsTitle": "Paiements",
+  "noPayments": "Aucun paiement pour l'instant.",
+  "creditorNotFound": "Créancier introuvable.",
+  "paymentExpenseText": "Paiement à {name}",
+  "@paymentExpenseText": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "paymentSummary": "{date} · {method} · {number}",
+  "@paymentSummary": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "method": {
+        "type": "String"
+      },
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "viewReceiptHint": "voir le reçu",
+  "receiptTitle": "Reçu de paiement",
+  "share": "Partager",
+  "shareReceiptTooltip": "Partager le reçu par WhatsApp, SMS…",
+  "close": "Fermer",
+  "receiptShareSubject": "Reçu {number}",
+  "@receiptShareSubject": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "receiptHeader": "NOODO — ACCUSÉ DE PAIEMENT",
+  "receiptNumberLine": "N° {number} | Date : {date}",
+  "@receiptNumberLine": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "receiptDateTime": "{date} à {time}",
+  "@receiptDateTime": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "receiptTime": "{hour}h{minute}",
+  "@receiptTime": {
+    "placeholders": {
+      "hour": {
+        "type": "String"
+      },
+      "minute": {
+        "type": "String"
+      }
+    }
+  },
+  "receiptCreditorLine": "Créancier / Fournisseur : {name}",
+  "@receiptCreditorLine": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "receiptPhoneLine": "Numéro : {phone}",
+  "@receiptPhoneLine": {
+    "placeholders": {
+      "phone": {
+        "type": "String"
+      }
+    }
+  },
+  "receiptAmountLine": "Montant payé : {amount} FCFA",
+  "@receiptAmountLine": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "receiptMethodLine": "Moyen : {method}",
+  "@receiptMethodLine": {
+    "placeholders": {
+      "method": {
+        "type": "String"
+      }
+    }
+  },
+  "receiptMobileMoney": "Mobile Money ({operator})",
+  "@receiptMobileMoney": {
+    "placeholders": {
+      "operator": {
+        "type": "String"
+      }
+    }
+  },
+  "receiptReasonLine": "Motif : {reason}",
+  "@receiptReasonLine": {
+    "placeholders": {
+      "reason": {
+        "type": "String"
+      }
+    }
+  },
+  "receiptRemainingLine": "Reste à devoir : {amount} FCFA",
+  "@receiptRemainingLine": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "openCreditorHint": "ouvrir la fiche du créancier",
+  "notificationsDenied": "Sans autorisation des notifications, NOODO ne pourra pas te rappeler tes échéances. Tu peux l'activer dans les réglages du téléphone.",
+  "taxReminderTitle": "Échéance des impôts",
+  "taxReminderBody": "Plus que {days} jours avant l'échéance du {date}. Ton Nœud Impôts est prêt.",
+  "@taxReminderBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "creditorReminderTitle": "Demain : paiement à {name}",
+  "@creditorReminderTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "creditorReminderBody": "Il reste {amount} FCFA à payer.",
+  "@creditorReminderBody": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "unusualExpenseMessage": "« {label} » : {amount} FCFA, bien plus que d'habitude en {category} ({average} FCFA en moyenne).",
+  "@unusualExpenseMessage": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      },
+      "category": {
+        "type": "String"
+      },
+      "average": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "unusualExpenseAdvice": "Vérifie le prix et garde le reçu en photo.",
+  "lowProfitMessage": "Hier ton bénéfice était de {amount} FCFA, bien en dessous de ta moyenne de {average} FCFA.",
+  "@lowProfitMessage": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      },
+      "average": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "lowProfitAdvice": "Regarde si un prix d'achat a augmenté ou si une vente a été oubliée.",
+  "dismissAlert": "Fermer l'alerte",
+  "takePhoto": "Prendre une photo",
+  "takePhotoTooltip": "Photographier un reçu ou une facture",
+  "allCreditors": "Tous les créanciers",
+  "filterByCreditor": "Filtrer par créancier",
+  "allDates": "Toutes les dates",
+  "filterByDate": "Filtrer par date",
+  "clearFilter": "Retirer le filtre",
+  "noPhotos": "Aucune photo pour l'instant.",
+  "photoSemantics": "Photo de reçu : {creditor}, {date}",
+  "@photoSemantics": {
+    "placeholders": {
+      "creditor": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "photoNoCreditor": "sans créancier",
+  "attachPhotoTitle": "Ranger la photo",
+  "noCreditorsForPhoto": "Aucun créancier enregistré : la photo sera rangée sans créancier.",
+  "photoCreditorLabel": "Créancier",
+  "photoLinkLabel": "Lier à (facultatif)",
+  "photoNoLink": "Rien",
+  "photoPaymentLink": "Paiement {number} · {amount} FCFA",
+  "@photoPaymentLink": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "photoTransactionLink": "{label} · {amount} FCFA",
+  "@photoTransactionLink": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "savePhotoTooltip": "Enregistrer la photo",
+  "deletePhotoTitle": "Supprimer cette photo ?",
+  "deletePhotoBody": "La photo sera effacée du téléphone.",
+  "deletePhotoTooltip": "Supprimer la photo",
+  "photosTitle": "Photos",
+  "takePhotoForCreditorTooltip": "Photographier un reçu de ce créancier",
+  "languageSection": "Langue",
+  "taxSection": "Impôts",
+  "alertsSection": "Alertes",
+  "languageFrench": "Français",
+  "languageEnglish": "English",
+  "taxRateExplanation": "Part de chaque vente mise de côté dans ton Nœud Impôts.",
+  "chooseTaxDueDate": "Choisir la prochaine échéance fiscale",
+  "sensitivityLow": "Faible",
+  "sensitivityNormal": "Normale",
+  "sensitivityHigh": "Forte",
+  "sensitivityLowHelp": "Seulement les écarts très importants.",
+  "sensitivityNormalHelp": "Les écarts nets par rapport à tes habitudes.",
+  "sensitivityHighHelp": "Même les petits écarts : plus d'alertes.",
+  "developerSection": "Développement",
+  "generateDemoData": "Générer 2 000 transactions de démonstration",
+  "demoDataGenerated": "{count} transactions de démonstration ajoutées",
+  "@demoDataGenerated": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "scheduleTestReminder": "Programmer un rappel de test dans 2 minutes",
+  "testReminderScheduled": "Rappel de test programmé dans 2 minutes",
+  "testReminderTitle": "Rappel de test NOODO",
+  "testReminderBody": "Si tu lis ce message, les rappels fonctionnent.",
+  "saveAll": "Tout enregistrer",
+  "saveAllTooltip": "Enregistrer toutes les transactions",
+  "transactionNumber": "Transaction {index} sur {count}",
+  "@transactionNumber": {
+    "placeholders": {
+      "index": {
+        "type": "int"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "removeTransaction": "Retirer cette transaction",
+  "priceBasisTotal": "Prix total",
+  "priceBasisUnit": "Prix unitaire",
+  "priceCalculation": "{quantity} × {unitPrice} = {total} FCFA",
+  "@priceCalculation": {
+    "placeholders": {
+      "quantity": {
+        "type": "String"
+      },
+      "unitPrice": {
+        "type": "int",
+        "format": "decimalPattern"
+      },
+      "total": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "transactionsSaved": "{count} transactions enregistrées",
+  "@transactionsSaved": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "transactionsSavedWithTax": "{count} transactions enregistrées · {amount} FCFA mis de côté pour tes impôts",
+  "@transactionsSavedWithTax": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "appearanceSection": "Apparence",
+  "themeSystem": "Système",
+  "themeLight": "Clair",
+  "themeDark": "Sombre",
+  "signedAmountFcfa": "{amount} FCFA",
+  "@signedAmountFcfa": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
   }
 }

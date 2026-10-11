@@ -16,6 +16,7 @@ class Transactions extends Table {
   )();
   TextColumn get rawText => text()();
   DateTimeColumn get date => dateTime()();
+  IntColumn get taxSavedFcfa => integer().withDefault(const Constant(0))();
 
   @override
   Set<Column<Object>> get primaryKey => {id};

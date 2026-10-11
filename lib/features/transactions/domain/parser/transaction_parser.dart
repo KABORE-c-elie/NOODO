@@ -53,6 +53,14 @@ const _currencies = {'f', 'fr', 'frs', 'franc', 'francs', 'fcfa', 'cfa'};
 
 const _linkers = {'de', 'd', 'du', 'des'};
 
+const _separators = {',', ';', '.', '!', '?', 'et', 'puis', 'ensuite', 'apres'};
+
+const _punctuation = {',', ';', '.', '!', '?'};
+
+const _perUnitWords = {'chacun', 'chacune', 'chaque', 'unite', 'piece'};
+
+const _perUnitArticles = {'le', 'la', 'l', 'par'};
+
 const _stopWords = {
   'a',
   'au',
@@ -111,12 +119,21 @@ const _minimumReinterpretedAmount = 50;
 const _maxProductWords = 3;
 
 final class _Detail {
-  const _Detail({this.quantity, this.unit, this.unknownUnitText, this.product});
+  const _Detail({
+    this.quantity,
+    this.unit,
+    this.unknownUnitText,
+    this.product,
+    required this.end,
+  });
 
   final double? quantity;
   final LocalUnit? unit;
   final String? unknownUnitText;
   final String? product;
+  final int end;
+
+  _Detail withoutQuantity() => _Detail(product: product, end: end);
 }
 
 final class TransactionParser {
@@ -124,18 +141,88 @@ final class TransactionParser {
 
   final CategoryLexicon lexicon;
 
-  ParseResult parse(String text, List<LocalUnit> units) {
-    final tokens = tokenize(text);
-    final type = _detectType(tokens);
+  ParseResult parse(String text, List<LocalUnit> units) =>
+      _analyze(tokenize(text), units);
 
+  List<ParseResult> parseAll(String text, List<LocalUnit> units) {
+    final tokens = tokenize(text);
+    final groups = _group(_split(tokens), units);
+    if (groups.length <= 1) return [_analyze(tokens, units)];
+    final results = <ParseResult>[];
+    TransactionType? previousType;
+    for (final group in groups) {
+      final result = _analyze(group, units, inheritedType: previousType);
+      results.add(result);
+      previousType = result.type ?? previousType;
+    }
+    return results;
+  }
+
+  List<List<ParserToken>> _split(List<ParserToken> tokens) {
+    final pieces = <List<ParserToken>>[[]];
+    for (final token in tokens) {
+      if (!token.isNumber && _separators.contains(token.folded)) {
+        if (pieces.last.isNotEmpty) pieces.add([]);
+      } else {
+        pieces.last.add(token);
+      }
+    }
+    return [
+      for (final piece in pieces)
+        if (piece.isNotEmpty) piece,
+    ];
+  }
+
+  List<List<ParserToken>> _group(
+    List<List<ParserToken>> pieces,
+    List<LocalUnit> units,
+  ) {
+    bool hasAmount(List<ParserToken> piece) =>
+        _analyze(piece, units).amountFcfa != null;
+
+    final withSubject = <List<ParserToken>>[];
+    for (final piece in pieces) {
+      if (withSubject.isNotEmpty && !_hasVerb(piece) && !hasAmount(piece)) {
+        withSubject.last = [...withSubject.last, ...piece];
+      } else {
+        withSubject.add(piece);
+      }
+    }
+
+    final groups = <List<ParserToken>>[];
+    for (final piece in withSubject) {
+      if (groups.isNotEmpty && !hasAmount(groups.last) && !_hasVerb(piece)) {
+        groups.last = [...groups.last, ...piece];
+      } else {
+        groups.add(piece);
+      }
+    }
+    return groups;
+  }
+
+  bool _hasVerb(List<ParserToken> tokens) => tokens.any(
+    (token) =>
+        _saleVerbs.contains(token.folded) ||
+        _expenseVerbs.contains(token.folded),
+  );
+
+  ParseResult _analyze(
+    List<ParserToken> tokens,
+    List<LocalUnit> units, {
+    TransactionType? inheritedType,
+  }) {
     int? explicitAmount;
+    int? explicitIndex;
     _Detail? detail;
-    final looseNumbers = <double>[];
+    final looseNumbers = <(int, double)>[];
     for (var i = 0; i < tokens.length; i++) {
       final token = tokens[i];
       if (!token.isNumber) continue;
       if (_isCurrency(tokens, i + 1)) {
-        explicitAmount ??= _asAmount(token.number!);
+        if (explicitAmount == null) {
+          explicitAmount = _asAmount(token.number!);
+          explicitIndex = i;
+        }
         continue;
       }
       final match = _matchDetail(tokens, i, units);
@@ -144,29 +231,51 @@ final class TransactionParser {
         continue;
       }
       if (!token.isFraction && !token.isSpelledOne) {
-        looseNumbers.add(token.number!);
+        looseNumbers.add((i, token.number!));
       }
     }
 
-    var amount = explicitAmount;
-    final isAmountExplicit = amount != null;
-    amount ??= _largestLooseAmount(looseNumbers);
-    if (amount == null && detail != null && _isBareAmount(detail)) {
-      amount = detail.quantity!.toInt();
-      detail = _Detail(product: detail.product);
+    var stated = explicitAmount;
+    var statedIndex = explicitIndex;
+    final isAmountExplicit = stated != null;
+    if (stated == null) {
+      final loose = _largestLooseAmount(looseNumbers);
+      stated = loose?.$2;
+      statedIndex = loose?.$1;
     }
+    if (stated == null && detail != null && _isBareAmount(detail)) {
+      stated = detail.quantity!.toInt();
+      detail = detail.withoutQuantity();
+    }
+
+    final quantity = detail?.quantity;
+    final perUnit =
+        stated != null &&
+        statedIndex != null &&
+        quantity != null &&
+        _isPerUnit(tokens, statedIndex, detail!, isExplicit: isAmountExplicit);
+    final amount = stated == null
+        ? null
+        : perUnit
+        ? (stated * quantity).round()
+        : stated;
 
     final product = detail?.product ?? _firstLexiconWord(tokens);
     final category = _classify(product, tokens);
+    final type =
+        _detectType(tokens) ??
+        (_hasVerb(tokens) ? null : _inherit(inheritedType, category));
 
     return ParseResult(
       type: type,
       amountFcfa: amount,
-      quantity: detail?.quantity,
+      quantity: quantity,
       unit: detail?.unit,
       unknownUnitText: detail?.unknownUnitText,
       product: product,
       category: category,
+      statedPriceFcfa: stated,
+      priceBasis: perUnit ? PriceBasis.perUnit : PriceBasis.total,
       confidence: _confidence(
         type: type,
         amount: amount,
@@ -177,6 +286,45 @@ final class TransactionParser {
         product: product,
       ),
     );
+  }
+
+  TransactionType? _inherit(
+    TransactionType? inherited,
+    TransactionCategory category,
+  ) =>
+      inherited == TransactionType.sale &&
+          category == TransactionCategory.transport
+      ? null
+      : inherited;
+
+  bool _isPerUnit(
+    List<ParserToken> tokens,
+    int amountIndex,
+    _Detail detail, {
+    required bool isExplicit,
+  }) {
+    final linkerIndex = amountIndex - 1;
+    if (_isLinker(tokens, linkerIndex) &&
+        (linkerIndex == detail.end ||
+            (isExplicit && linkerIndex > detail.end))) {
+      return true;
+    }
+    var next = amountIndex + 1;
+    while (_isCurrency(tokens, next)) {
+      next++;
+    }
+    if (next >= tokens.length) return false;
+    final word = tokens[next].folded;
+    if (_perUnitWords.contains(word)) return true;
+    if (!_perUnitArticles.contains(word) || next + 1 >= tokens.length) {
+      return false;
+    }
+    final target = tokens[next + 1];
+    final unitName = detail.unit?.name ?? detail.unknownUnitText;
+    return _perUnitWords.contains(target.folded) ||
+        (unitName != null &&
+            (sameFrenchWord(target.raw, unitName) ||
+                sameFrenchWord(unitName, target.raw)));
   }
 
   TransactionType? _detectType(List<ParserToken> tokens) {
@@ -192,15 +340,19 @@ final class TransactionParser {
       index < tokens.length && _currencies.contains(tokens[index].folded);
 
   bool _isLinker(List<ParserToken> tokens, int index) =>
-      index < tokens.length && _linkers.contains(tokens[index].folded);
+      index >= 0 &&
+      index < tokens.length &&
+      _linkers.contains(tokens[index].folded);
 
   bool _isNoun(List<ParserToken> tokens, int index) {
     if (index >= tokens.length) return false;
     final token = tokens[index];
     return !token.isNumber &&
+        !_punctuation.contains(token.folded) &&
         !_stopWords.contains(token.folded) &&
         !_linkers.contains(token.folded) &&
         !_currencies.contains(token.folded) &&
+        !_perUnitWords.contains(token.folded) &&
         !_saleVerbs.contains(token.folded) &&
         !_expenseVerbs.contains(token.folded);
   }
@@ -208,13 +360,14 @@ final class TransactionParser {
   int? _asAmount(double value) =>
       value > 0 && value == value.roundToDouble() ? value.toInt() : null;
 
-  int? _largestLooseAmount(List<double> numbers) {
-    final amounts = numbers
-        .map(_asAmount)
-        .whereType<int>()
-        .where((value) => value >= _minimumLooseAmount);
-    if (amounts.isEmpty) return null;
-    return amounts.reduce((a, b) => a > b ? a : b);
+  (int, int)? _largestLooseAmount(List<(int, double)> numbers) {
+    (int, int)? largest;
+    for (final (index, value) in numbers) {
+      final amount = _asAmount(value);
+      if (amount == null || amount < _minimumLooseAmount) continue;
+      if (largest == null || amount > largest.$2) largest = (index, amount);
+    }
+    return largest;
   }
 
   bool _isBareAmount(_Detail detail) =>
@@ -243,6 +396,7 @@ final class TransactionParser {
         product: _isLinker(tokens, productStart)
             ? _readProduct(tokens, productStart + 1)
             : null,
+        end: productStart,
       );
     }
 
@@ -252,11 +406,13 @@ final class TransactionParser {
         quantity: quantityToken.number,
         unknownUnitText: tokens[next].raw,
         product: _readProduct(tokens, next + 2),
+        end: next + 1,
       );
     }
     return _Detail(
       quantity: quantityToken.number,
       product: _readProduct(tokens, next),
+      end: next + 1,
     );
   }
 
