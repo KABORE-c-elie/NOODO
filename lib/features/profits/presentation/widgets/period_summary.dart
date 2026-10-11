@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:noodo/core/theme/app_spacing.dart';
+import 'package:noodo/core/theme/app_colors.dart';
 import 'package:noodo/core/l10n/generated/app_localizations.dart';
 import 'package:noodo/core/utils/date_range.dart';
 import 'package:noodo/features/profits/presentation/period_format.dart';
@@ -32,7 +34,7 @@ class PeriodSummary extends ConsumerWidget {
     if (net == null || difference == null) {
       return const Card(
         child: Padding(
-          padding: EdgeInsets.all(20),
+          padding: EdgeInsets.all(AppSpacing.xl),
           child: LinearProgressIndicator(),
         ),
       );
@@ -58,25 +60,25 @@ class PeriodSummary extends ConsumerWidget {
         rounded == null
             ? l10n.previousMore(difference)
             : l10n.previousMorePercent(difference, rounded),
-        theme.colorScheme.primary,
+        AppColors.of(context).sale,
       ),
       < 0 => (
         rounded == null
             ? l10n.previousLess(-difference)
             : l10n.previousLessPercent(-difference, rounded),
-        theme.colorScheme.error,
+        AppColors.of(context).expense,
       ),
       _ => (l10n.previousSame, theme.colorScheme.onSurfaceVariant),
     };
 
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(AppSpacing.xl),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(sentence, style: theme.textTheme.headlineSmall),
-            const SizedBox(height: 8),
+            const SizedBox(height: AppSpacing.sm),
             Text(
               comparison,
               style: theme.textTheme.bodyLarge?.copyWith(color: color),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:noodo/core/theme/app_spacing.dart';
 import 'package:noodo/core/l10n/generated/app_localizations.dart';
 import 'package:noodo/features/nodes/domain/creditor_node.dart';
 import 'package:noodo/features/nodes/domain/creditor_payment.dart';
@@ -86,17 +87,14 @@ class _PaymentSheetState extends ConsumerState<_PaymentSheet> {
                 l10n.recordPayment,
                 style: Theme.of(context).textTheme.titleLarge,
               ),
-              const SizedBox(height: 4),
+              const SizedBox(height: AppSpacing.xs),
               Text(l10n.balanceDue(balance)),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSpacing.lg),
               TextFormField(
                 controller: _amount,
                 keyboardType: TextInputType.number,
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                decoration: InputDecoration(
-                  labelText: l10n.paymentAmountLabel,
-                  border: const OutlineInputBorder(),
-                ),
+                decoration: InputDecoration(labelText: l10n.paymentAmountLabel),
                 validator: (value) {
                   final amount = int.tryParse(value ?? '') ?? 0;
                   if (amount <= 0) return l10n.invalidAmount;
@@ -104,11 +102,11 @@ class _PaymentSheetState extends ConsumerState<_PaymentSheet> {
                   return null;
                 },
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSpacing.lg),
               Text(l10n.paymentMethodLabel),
-              const SizedBox(height: 8),
+              const SizedBox(height: AppSpacing.sm),
               Wrap(
-                spacing: 8,
+                spacing: AppSpacing.sm,
                 children: [
                   for (final method in PaymentMethod.values)
                     ChoiceChip(
@@ -119,16 +117,13 @@ class _PaymentSheetState extends ConsumerState<_PaymentSheet> {
                     ),
                 ],
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSpacing.lg),
               TextFormField(
                 controller: _reason,
                 textCapitalization: TextCapitalization.sentences,
-                decoration: InputDecoration(
-                  labelText: l10n.paymentReasonLabel,
-                  border: const OutlineInputBorder(),
-                ),
+                decoration: InputDecoration(labelText: l10n.paymentReasonLabel),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: AppSpacing.xl),
               Tooltip(
                 message: l10n.confirmPayment,
                 child: FilledButton(

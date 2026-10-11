@@ -1,12 +1,15 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:noodo/core/l10n/generated/app_localizations.dart';
+import 'package:noodo/core/theme/app_spacing.dart';
 import 'package:noodo/core/utils/current_day_provider.dart';
 import 'package:noodo/features/nodes/data/node_providers.dart';
 import 'package:noodo/features/nodes/presentation/reminder_sync.dart';
 import 'package:noodo/features/settings/data/settings_providers.dart';
 import 'package:noodo/features/settings/domain/app_settings.dart';
+import 'package:noodo/features/settings/presentation/widgets/developer_tools.dart';
 
 const _maxRatePercent = 10.0;
 const _rateStepPercent = 0.5;
@@ -20,17 +23,25 @@ class SettingsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text(l10n.settingsTitle)),
       body: ListView(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(AppSpacing.lg),
         children: [
           _SectionTitle(l10n.languageSection),
           const _LanguageSelector(),
-          const SizedBox(height: 24),
+          const SizedBox(height: AppSpacing.xl),
+          _SectionTitle(l10n.appearanceSection),
+          const _ThemeSelector(),
+          const SizedBox(height: AppSpacing.xl),
           _SectionTitle(l10n.taxSection),
           const _TaxRateSlider(),
           const _TaxDueDate(),
-          const SizedBox(height: 24),
+          const SizedBox(height: AppSpacing.xl),
           _SectionTitle(l10n.alertsSection),
           const _SensitivitySelector(),
+          if (kDebugMode) ...[
+            const SizedBox(height: AppSpacing.xl),
+            _SectionTitle(l10n.developerSection),
+            const DeveloperTools(),
+          ],
         ],
       ),
     );
@@ -46,7 +57,7 @@ class _SectionTitle extends StatelessWidget {
   Widget build(BuildContext context) => Semantics(
     header: true,
     child: Padding(
-      padding: const EdgeInsets.only(bottom: 8),
+      padding: const EdgeInsets.only(bottom: AppSpacing.sm),
       child: Text(text, style: Theme.of(context).textTheme.titleMedium),
     ),
   );
@@ -70,6 +81,35 @@ class _LanguageSelector extends ConsumerWidget {
           ('en', l10n.languageEnglish),
         ])
           ButtonSegment(value: code, label: Text(label), tooltip: label),
+      ],
+    );
+  }
+}
+
+class _ThemeSelector extends ConsumerWidget {
+  const _ThemeSelector();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final mode = ref.watch(appThemeModeProvider);
+    return SegmentedButton<AppThemeMode>(
+      showSelectedIcon: false,
+      selected: {mode},
+      onSelectionChanged: (selection) =>
+          ref.read(settingsRepositoryProvider).setThemeMode(selection.first),
+      segments: [
+        for (final (value, label, icon) in [
+          (AppThemeMode.system, l10n.themeSystem, Icons.brightness_auto),
+          (AppThemeMode.light, l10n.themeLight, Icons.light_mode_outlined),
+          (AppThemeMode.dark, l10n.themeDark, Icons.dark_mode_outlined),
+        ])
+          ButtonSegment(
+            value: value,
+            label: Text(label),
+            icon: Icon(icon),
+            tooltip: label,
+          ),
       ],
     );
   }
@@ -168,7 +208,7 @@ class _TaxDueDate extends ConsumerWidget {
       taxNodeProvider.select((node) => node.value?.nextDueDate),
     );
     return Padding(
-      padding: const EdgeInsets.only(top: 12),
+      padding: const EdgeInsets.only(top: AppSpacing.md),
       child: Row(
         children: [
           Expanded(
@@ -224,7 +264,7 @@ class _SensitivitySelector extends ConsumerWidget {
               ButtonSegment(value: value, label: Text(label), tooltip: label),
           ],
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: AppSpacing.sm),
         Text(switch (sensitivity) {
           AlertSensitivity.low => l10n.sensitivityLowHelp,
           AlertSensitivity.normal => l10n.sensitivityNormalHelp,

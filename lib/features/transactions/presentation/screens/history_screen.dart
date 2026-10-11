@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:noodo/core/utils/amount_format.dart';
+import 'package:noodo/core/theme/app_spacing.dart';
+import 'package:noodo/core/theme/app_colors.dart';
 import 'package:noodo/core/l10n/generated/app_localizations.dart';
 import 'package:noodo/core/router/app_routes.dart';
 import 'package:noodo/features/profits/presentation/providers/day_net_provider.dart';
@@ -38,7 +41,7 @@ class _HistoryList extends ConsumerWidget {
     return switch (history) {
       AsyncValue(:final value?) when value.items.isEmpty => Center(
         child: Padding(
-          padding: const EdgeInsets.all(24),
+          padding: const EdgeInsets.all(AppSpacing.xl),
           child: Text(l10n.historyEmpty, textAlign: TextAlign.center),
         ),
       ),
@@ -96,20 +99,28 @@ class _DayHeader extends ConsumerWidget {
       header: true,
       child: Container(
         color: theme.colorScheme.surfaceContainerHighest,
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.lg,
+          vertical: AppSpacing.sm,
+        ),
         child: Wrap(
           alignment: WrapAlignment.spaceBetween,
-          spacing: 12,
-          runSpacing: 4,
+          spacing: AppSpacing.md,
+          runSpacing: AppSpacing.xs,
           children: [
             Text(label, style: theme.textTheme.titleSmall),
             if (net != null)
               Text(
-                l10n.dayProfit(net),
+                l10n.dayProfit(
+                  formatAmount(
+                    net,
+                    Localizations.localeOf(context).toLanguageTag(),
+                  ),
+                ),
                 style: theme.textTheme.titleSmall?.copyWith(
-                  color: net < 0
-                      ? theme.colorScheme.error
-                      : theme.colorScheme.primary,
+                  color: AppColors.of(context)
+                      .forNet(net, theme.colorScheme.onSurfaceVariant),
+                  fontFeatures: const [FontFeature.tabularFigures()],
                 ),
               ),
           ],
@@ -185,7 +196,7 @@ class _DismissibleTransaction extends ConsumerWidget {
       background: Container(
         color: colors.errorContainer,
         alignment: Alignment.centerRight,
-        padding: const EdgeInsets.symmetric(horizontal: 24),
+        padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xl),
         child: Icon(Icons.delete_outline, color: colors.onErrorContainer),
       ),
       child: TransactionTile(
@@ -221,7 +232,7 @@ class _LoadMoreTriggerState extends ConsumerState<_LoadMoreTrigger> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(AppSpacing.lg),
       child: Center(
         child: CircularProgressIndicator(
           semanticsLabel: AppLocalizations.of(context).loadingMore,

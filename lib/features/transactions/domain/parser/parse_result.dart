@@ -7,6 +7,8 @@ part 'parse_result.freezed.dart';
 
 const lowConfidenceThreshold = 0.6;
 
+enum PriceBasis { total, perUnit }
+
 @freezed
 abstract class ParseResult with _$ParseResult {
   const factory ParseResult({
@@ -18,5 +20,7 @@ abstract class ParseResult with _$ParseResult {
     String? product,
     @Default(TransactionCategory.other) TransactionCategory category,
     required double confidence,
+    int? statedPriceFcfa,
+    @Default(PriceBasis.total) PriceBasis priceBasis,
   }) = _ParseResult;
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:noodo/core/theme/app_spacing.dart';
+import 'package:noodo/core/theme/app_colors.dart';
 import 'package:noodo/core/l10n/generated/app_localizations.dart';
 import 'package:noodo/features/nodes/data/node_providers.dart';
 
@@ -16,7 +18,7 @@ class TaxNodeCard extends ConsumerWidget {
     if (taxNode == null) {
       return const Card(
         child: Padding(
-          padding: EdgeInsets.all(20),
+          padding: EdgeInsets.all(AppSpacing.xl),
           child: LinearProgressIndicator(),
         ),
       );
@@ -25,9 +27,9 @@ class TaxNodeCard extends ConsumerWidget {
     final rate = NumberFormat.decimalPattern(locale)
         .format(taxNode.ratePercent);
     return Card(
-      color: theme.colorScheme.primaryContainer,
+      color: AppColors.of(context).savingsContainer,
       child: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(AppSpacing.xl),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -35,18 +37,18 @@ class TaxNodeCard extends ConsumerWidget {
               children: [
                 Icon(
                   Icons.savings_outlined,
-                  color: theme.colorScheme.onPrimaryContainer,
+                  color: AppColors.of(context).onSavingsContainer,
                 ),
-                const SizedBox(width: 8),
+                const SizedBox(width: AppSpacing.sm),
                 Text(l10n.taxNodeTitle, style: theme.textTheme.titleMedium),
               ],
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: AppSpacing.md),
             Text(
               l10n.taxSaved(taxNode.savedBalanceFcfa),
               style: theme.textTheme.headlineSmall,
             ),
-            const SizedBox(height: 4),
+            const SizedBox(height: AppSpacing.xs),
             Text(l10n.taxRate(rate)),
             Text(
               dueDate == null

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:noodo/core/theme/app_spacing.dart';
+import 'package:noodo/core/theme/app_colors.dart';
 import 'package:noodo/core/l10n/generated/app_localizations.dart';
 import 'package:noodo/core/utils/current_day_provider.dart';
 import 'package:noodo/features/profits/domain/anomaly.dart';
@@ -30,7 +32,7 @@ class _AnomalyCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    final colors = Theme.of(context).colorScheme;
+    final appColors = AppColors.of(context);
     final (message, advice) = switch (anomaly.type) {
       AnomalyType.unusualExpense => (
         l10n.unusualExpenseMessage(
@@ -47,43 +49,48 @@ class _AnomalyCard extends ConsumerWidget {
       ),
     };
     return Padding(
-      padding: const EdgeInsets.only(top: 12),
+      padding: const EdgeInsets.only(top: AppSpacing.md),
       child: Card(
-        color: colors.tertiaryContainer,
+        color: appColors.alertContainer,
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(16, 8, 4, 16),
+          padding: const EdgeInsets.fromLTRB(
+            AppSpacing.lg,
+            AppSpacing.sm,
+            AppSpacing.xs,
+            AppSpacing.lg,
+          ),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 8),
+                padding: const EdgeInsets.only(top: AppSpacing.sm),
                 child: Icon(
                   Icons.lightbulb_outline,
-                  color: colors.onTertiaryContainer,
+                  color: appColors.onAlertContainer,
                 ),
               ),
-              const SizedBox(width: 12),
+              const SizedBox(width: AppSpacing.md),
               Expanded(
                 child: Semantics(
                   container: true,
                   label: '$message $advice',
                   excludeSemantics: true,
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 8),
+                    padding: const EdgeInsets.only(top: AppSpacing.sm),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           message,
                           style: TextStyle(
-                            color: colors.onTertiaryContainer,
+                            color: appColors.onAlertContainer,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
-                        const SizedBox(height: 4),
+                        const SizedBox(height: AppSpacing.xs),
                         Text(
                           advice,
-                          style: TextStyle(color: colors.onTertiaryContainer),
+                          style: TextStyle(color: appColors.onAlertContainer),
                         ),
                       ],
                     ),

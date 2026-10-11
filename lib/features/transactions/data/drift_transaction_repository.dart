@@ -21,13 +21,21 @@ final class DriftTransactionRepository implements TransactionRepository {
 
   @override
   Future<({int taxSavedFcfa})> add(Transaction transaction) =>
+      addAll([transaction]);
+
+  @override
+  Future<({int taxSavedFcfa})> addAll(List<Transaction> transactions) =>
       _db.transaction(() async {
-        final taxSaved = await _taxSavingsFor(transaction);
-        await _db
-            .into(_db.transactions)
-            .insert(_toCompanion(transaction, taxSaved));
-        await _adjustTaxBalance(taxSaved);
-        return (taxSavedFcfa: taxSaved);
+        var total = 0;
+        for (final transaction in transactions) {
+          final taxSaved = await _taxSavingsFor(transaction);
+          await _db
+              .into(_db.transactions)
+              .insert(_toCompanion(transaction, taxSaved));
+          await _adjustTaxBalance(taxSaved);
+          total += taxSaved;
+        }
+        return (taxSavedFcfa: total);
       });
 
   @override

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:noodo/core/theme/app_spacing.dart';
 import 'package:noodo/core/l10n/generated/app_localizations.dart';
 import 'package:noodo/core/utils/date_range.dart';
 import 'package:noodo/features/profits/presentation/period_format.dart';
@@ -32,7 +33,7 @@ class PeriodSelector extends ConsumerWidget {
               ButtonSegment(value: unit, label: Text(text), tooltip: text),
           ],
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: AppSpacing.sm),
         Row(
           children: [
             IconButton(

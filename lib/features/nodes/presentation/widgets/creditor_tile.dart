@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:noodo/core/theme/app_spacing.dart';
 import 'package:noodo/core/l10n/generated/app_localizations.dart';
 import 'package:noodo/core/router/app_routes.dart';
 import 'package:noodo/core/utils/current_day_provider.dart';
@@ -55,10 +56,13 @@ class OverdueBadge extends StatelessWidget {
     return DecoratedBox(
       decoration: BoxDecoration(
         color: colors.errorContainer,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(AppRadius.md),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 10,
+          vertical: AppSpacing.xs,
+        ),
         child: Text(
           AppLocalizations.of(context).overdue,
           style: TextStyle(

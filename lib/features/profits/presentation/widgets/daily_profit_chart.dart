@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:noodo/core/theme/app_spacing.dart';
+import 'package:noodo/core/theme/app_colors.dart';
 import 'package:noodo/core/l10n/generated/app_localizations.dart';
 import 'package:noodo/features/profits/presentation/chart/profit_chart_data.dart';
 import 'package:noodo/features/profits/presentation/chart/profit_chart_painter.dart';
@@ -39,7 +41,9 @@ class DailyProfitChart extends ConsumerWidget {
             best.netFcfa,
           );
 
-    return Semantics(
+    final labelStyle = Theme.of(context).textTheme.labelSmall
+        ?.copyWith(color: colors.onSurfaceVariant);
+    final chart = Semantics(
       container: true,
       explicitChildNodes: true,
       label: summary,
@@ -52,8 +56,8 @@ class DailyProfitChart extends ConsumerWidget {
                 child: CustomPaint(
                   painter: ProfitChartPainter(
                     data: data,
-                    positiveColor: colors.primary,
-                    negativeColor: colors.error,
+                    positiveColor: AppColors.of(context).sale,
+                    negativeColor: AppColors.of(context).expense,
                     axisColor: colors.outlineVariant,
                   ),
                 ),
@@ -81,6 +85,30 @@ class DailyProfitChart extends ConsumerWidget {
           ],
         ),
       ),
+    );
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        chart,
+        const SizedBox(height: AppSpacing.xs),
+        ExcludeSemantics(
+          child: Row(
+            children: [
+              for (final bar in data.bars)
+                Expanded(
+                  child: Text(
+                    chartBarLabel(locale, period.unit, bar.day),
+                    textAlign: TextAlign.center,
+                    maxLines: 1,
+                    overflow: TextOverflow.visible,
+                    softWrap: false,
+                    style: labelStyle,
+                  ),
+                ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

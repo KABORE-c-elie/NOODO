@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:noodo/core/database/app_database.dart';
 import 'package:noodo/core/router/app_routes.dart';
+import 'package:noodo/core/utils/amount_format.dart';
 import 'package:noodo/features/transactions/data/drift_transaction_repository.dart';
 import 'package:noodo/features/transactions/domain/transaction_category.dart';
 import 'package:noodo/features/transactions/presentation/screens/history_screen.dart';
@@ -61,13 +62,19 @@ void main() {
     );
 
     expect(find.text('mercredi 14 octobre 2026'), findsOneWidget);
-    expect(find.text(frenchL10n.dayProfit(12500)), findsOneWidget);
+    expect(
+      find.text(frenchL10n.dayProfit(formatAmount(12500, 'fr'))),
+      findsOneWidget,
+    );
     await scrollWithin<HistoryScreen>(
       tester,
       find.text('mardi 13 octobre 2026'),
     );
     await scrollWithin<HistoryScreen>(tester, _inHistory(find.text('riz')));
-    expect(find.text(frenchL10n.dayProfit(8000)), findsOneWidget);
+    expect(
+      find.text(frenchL10n.dayProfit(formatAmount(8000, 'fr'))),
+      findsOneWidget,
+    );
     final order = ['taxi', 'tomates', 'riz']
         .map((label) => tester.getTopLeft(_inHistory(find.text(label))).dy)
         .toList();
@@ -130,14 +137,20 @@ void main() {
 
     expect(_inHistory(find.text('tomates')), findsNothing);
     expect(find.text(frenchL10n.transactionDeleted), findsOneWidget);
-    expect(find.text(frenchL10n.dayProfit(-2500)), findsOneWidget);
+    expect(
+      find.text(frenchL10n.dayProfit(formatAmount(-2500, 'fr'))),
+      findsOneWidget,
+    );
     expect(await tester.runAsync(() => repository.findById('tomates')), isNull);
 
     await tester.tap(find.text(frenchL10n.undo));
     await tester.pumpAndSettle();
 
     expect(_inHistory(find.text('tomates')), findsOneWidget);
-    expect(find.text(frenchL10n.dayProfit(12500)), findsOneWidget);
+    expect(
+      find.text(frenchL10n.dayProfit(formatAmount(12500, 'fr'))),
+      findsOneWidget,
+    );
     expect(
       await tester.runAsync(() => repository.findById('tomates')),
       isNotNull,
@@ -206,7 +219,10 @@ void main() {
 
     expect(find.text(frenchL10n.transactionUpdated), findsOneWidget);
     expect(find.text(frenchL10n.saleAmount(20000)), findsOneWidget);
-    expect(find.text(frenchL10n.dayProfit(17500)), findsOneWidget);
+    expect(
+      find.text(frenchL10n.dayProfit(formatAmount(17500, 'fr'))),
+      findsOneWidget,
+    );
     final updated = await tester.runAsync(() => repository.findById('tomates'));
     expect(updated!.amountFcfa, 20000);
     expect(updated.date, DateTime(2026, 10, 14, 9));

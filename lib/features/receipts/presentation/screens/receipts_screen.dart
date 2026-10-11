@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:noodo/core/widgets/edge_fade.dart';
+import 'package:noodo/core/theme/app_spacing.dart';
 import 'package:noodo/core/l10n/generated/app_localizations.dart';
 import 'package:noodo/core/router/app_routes.dart';
 import 'package:noodo/core/utils/current_day_provider.dart';
@@ -101,43 +103,48 @@ class _PhotoFilters extends ConsumerWidget {
 
     return SizedBox(
       height: 56,
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        children: [
-          InputChip(
-            avatar: const Icon(Icons.person_outline, size: 18),
-            label: Text(creditorName ?? l10n.allCreditors),
-            tooltip: l10n.filterByCreditor,
-            selected: creditorId != null,
-            showCheckmark: false,
-            onPressed: pickCreditor,
-            onDeleted: creditorId == null
-                ? null
-                : () => controller.setCreditor(null),
-            deleteButtonTooltipMessage: l10n.clearFilter,
+      child: EdgeFade(
+        child: ListView(
+          scrollDirection: Axis.horizontal,
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppSpacing.lg,
+            vertical: AppSpacing.sm,
           ),
-          const SizedBox(width: 8),
-          InputChip(
-            avatar: const Icon(Icons.date_range, size: 18),
-            label: Text(
-              range == null
-                  ? l10n.allDates
-                  : l10n.periodRange(
-                      dateFormat.format(range.start),
-                      dateFormat.format(
-                        range.end.subtract(const Duration(days: 1)),
-                      ),
-                    ),
+          children: [
+            InputChip(
+              avatar: const Icon(Icons.person_outline, size: 18),
+              label: Text(creditorName ?? l10n.allCreditors),
+              tooltip: l10n.filterByCreditor,
+              selected: creditorId != null,
+              showCheckmark: false,
+              onPressed: pickCreditor,
+              onDeleted: creditorId == null
+                  ? null
+                  : () => controller.setCreditor(null),
+              deleteButtonTooltipMessage: l10n.clearFilter,
             ),
-            tooltip: l10n.filterByDate,
-            selected: range != null,
-            showCheckmark: false,
-            onPressed: pickRange,
-            onDeleted: range == null ? null : () => controller.setRange(null),
-            deleteButtonTooltipMessage: l10n.clearFilter,
-          ),
-        ],
+            const SizedBox(width: AppSpacing.sm),
+            InputChip(
+              avatar: const Icon(Icons.date_range, size: 18),
+              label: Text(
+                range == null
+                    ? l10n.allDates
+                    : l10n.periodRange(
+                        dateFormat.format(range.start),
+                        dateFormat.format(
+                          range.end.subtract(const Duration(days: 1)),
+                        ),
+                      ),
+              ),
+              tooltip: l10n.filterByDate,
+              selected: range != null,
+              showCheckmark: false,
+              onPressed: pickRange,
+              onDeleted: range == null ? null : () => controller.setRange(null),
+              deleteButtonTooltipMessage: l10n.clearFilter,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -158,16 +165,16 @@ class _PhotoGrid extends ConsumerWidget {
     return switch (photos) {
       AsyncData(:final value) when value.isEmpty => Center(
         child: Padding(
-          padding: const EdgeInsets.all(24),
+          padding: const EdgeInsets.all(AppSpacing.xl),
           child: Text(l10n.noPhotos, textAlign: TextAlign.center),
         ),
       ),
       AsyncData(:final value) => GridView.builder(
-        padding: const EdgeInsets.fromLTRB(16, 0, 16, 96),
+        padding: const EdgeInsets.fromLTRB(AppSpacing.lg, 0, AppSpacing.lg, 96),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,
-          mainAxisSpacing: 6,
-          crossAxisSpacing: 6,
+          mainAxisSpacing: AppSpacing.sm,
+          crossAxisSpacing: AppSpacing.sm,
         ),
         itemCount: value.length,
         itemBuilder: (context, index) => ReceiptPhotoTile(

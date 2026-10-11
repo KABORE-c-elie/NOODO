@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:noodo/core/theme/app_spacing.dart';
 import 'package:noodo/core/l10n/generated/app_localizations.dart';
 import 'package:noodo/core/utils/current_day_provider.dart';
 import 'package:noodo/features/nodes/presentation/creditor_actions.dart';
@@ -97,41 +98,32 @@ class _AddCreditorSheetState extends ConsumerState<_AddCreditorSheet> {
                 l10n.addCreditor,
                 style: Theme.of(context).textTheme.titleLarge,
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSpacing.lg),
               TextFormField(
                 controller: _name,
                 textCapitalization: TextCapitalization.words,
-                decoration: InputDecoration(
-                  labelText: l10n.creditorNameLabel,
-                  border: const OutlineInputBorder(),
-                ),
+                decoration: InputDecoration(labelText: l10n.creditorNameLabel),
                 validator: (value) => value == null || value.trim().isEmpty
                     ? l10n.requiredField
                     : null,
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: AppSpacing.md),
               TextFormField(
                 controller: _phone,
                 keyboardType: TextInputType.phone,
-                decoration: InputDecoration(
-                  labelText: l10n.creditorPhoneLabel,
-                  border: const OutlineInputBorder(),
-                ),
+                decoration: InputDecoration(labelText: l10n.creditorPhoneLabel),
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: AppSpacing.md),
               TextFormField(
                 controller: _amount,
                 keyboardType: TextInputType.number,
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                decoration: InputDecoration(
-                  labelText: l10n.amountDueLabel,
-                  border: const OutlineInputBorder(),
-                ),
+                decoration: InputDecoration(labelText: l10n.amountDueLabel),
                 validator: (value) => (int.tryParse(value ?? '') ?? 0) > 0
                     ? null
                     : l10n.invalidAmount,
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: AppSpacing.md),
               Row(
                 children: [
                   Expanded(
@@ -158,7 +150,7 @@ class _AddCreditorSheetState extends ConsumerState<_AddCreditorSheet> {
                     ),
                 ],
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: AppSpacing.xl),
               Tooltip(
                 message: l10n.addCreditorTooltip,
                 child: FilledButton(

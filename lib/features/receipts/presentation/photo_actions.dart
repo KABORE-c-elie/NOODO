@@ -26,7 +26,7 @@ class PhotoFilterController extends _$PhotoFilterController {
   void setRange(DateRange? range) => state = state.copyWith(range: range);
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 PhotoActions photoActions(Ref ref) => PhotoActions(ref);
 
 final class PhotoActions {

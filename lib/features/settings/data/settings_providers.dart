@@ -26,3 +26,8 @@ Locale appLocale(Ref ref) => Locale(
 AlertSensitivity alertSensitivity(Ref ref) =>
     ref.watch(settingsProvider.select((s) => s.value?.alertSensitivity)) ??
     AlertSensitivity.normal;
+
+@Riverpod(keepAlive: true)
+AppThemeMode appThemeMode(Ref ref) =>
+    ref.watch(settingsProvider.select((s) => s.value?.themeMode)) ??
+    AppThemeMode.system;

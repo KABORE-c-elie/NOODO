@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:noodo/core/theme/app_spacing.dart';
 import 'package:noodo/core/l10n/generated/app_localizations.dart';
 import 'package:noodo/core/router/app_routes.dart';
 import 'package:noodo/features/transactions/domain/speech/speech_service.dart';
@@ -27,7 +28,7 @@ class VoiceRecorder extends ConsumerWidget {
     return const Column(
       children: [
         _MicButton(),
-        SizedBox(height: 12),
+        SizedBox(height: AppSpacing.md),
         _ListeningFeedback(),
         _ManualEntryButton(),
       ],
@@ -107,9 +108,9 @@ class _ListeningFeedback extends ConsumerWidget {
       liveRegion: true,
       child: Material(
         color: colors.errorContainer,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(AppRadius.md),
         child: Padding(
-          padding: const EdgeInsets.all(12),
+          padding: const EdgeInsets.all(AppSpacing.md),
           child: Text(switch (failure) {
             SpeechFailure.permissionDenied => l10n.speechPermissionDenied,
             SpeechFailure.unavailable => l10n.speechUnavailable,

@@ -5,6 +5,8 @@ import 'package:noodo/features/transactions/domain/transaction_query.dart';
 abstract interface class TransactionRepository {
   Future<({int taxSavedFcfa})> add(Transaction transaction);
 
+  Future<({int taxSavedFcfa})> addAll(List<Transaction> transactions);
+
   Future<void> update(Transaction transaction);
 
   Future<void> delete(String id);

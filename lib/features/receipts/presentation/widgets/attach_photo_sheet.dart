@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:noodo/core/theme/app_spacing.dart';
 import 'package:noodo/core/l10n/generated/app_localizations.dart';
 import 'package:noodo/features/nodes/data/node_providers.dart';
 import 'package:noodo/features/nodes/domain/creditor_node.dart';
@@ -145,7 +146,7 @@ class _AttachPhotoSheetState extends ConsumerState<_AttachPhotoSheet> {
                 l10n.attachPhotoTitle,
                 style: Theme.of(context).textTheme.titleLarge,
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: AppSpacing.lg),
               if (creditors.isEmpty)
                 Text(l10n.noCreditorsForPhoto)
               else
@@ -154,7 +155,6 @@ class _AttachPhotoSheetState extends ConsumerState<_AttachPhotoSheet> {
                   isExpanded: true,
                   decoration: InputDecoration(
                     labelText: l10n.photoCreditorLabel,
-                    border: const OutlineInputBorder(),
                   ),
                   validator: (value) =>
                       value == null ? l10n.requiredField : null,
@@ -170,15 +170,12 @@ class _AttachPhotoSheetState extends ConsumerState<_AttachPhotoSheet> {
                       ),
                   ],
                 ),
-              const SizedBox(height: 12),
+              const SizedBox(height: AppSpacing.md),
               DropdownButtonFormField<_Link>(
                 key: ValueKey(creditorId),
                 initialValue: selectedLink,
                 isExpanded: true,
-                decoration: InputDecoration(
-                  labelText: l10n.photoLinkLabel,
-                  border: const OutlineInputBorder(),
-                ),
+                decoration: InputDecoration(labelText: l10n.photoLinkLabel),
                 onChanged: (value) =>
                     setState(() => _link = value ?? const _NoLink()),
                 items: [
@@ -189,7 +186,7 @@ class _AttachPhotoSheetState extends ConsumerState<_AttachPhotoSheet> {
                     ),
                 ],
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: AppSpacing.xl),
               Tooltip(
                 message: l10n.savePhotoTooltip,
                 child: FilledButton(

@@ -20,4 +20,11 @@ class FakeReminderScheduler implements ReminderScheduler {
   Future<void> replaceAll(List<ScheduledReminder> reminders) async {
     scheduled.add(List.of(reminders));
   }
+
+  final scheduledOnce = <ScheduledReminder>[];
+
+  @override
+  Future<void> scheduleOne(ScheduledReminder reminder) async {
+    scheduledOnce.add(reminder);
+  }
 }

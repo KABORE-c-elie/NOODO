@@ -40,7 +40,7 @@ class AppDatabase extends _$AppDatabase {
   static const settingsRowId = 1;
 
   @override
-  int get schemaVersion => 3;
+  int get schemaVersion => 4;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -66,6 +66,9 @@ class AppDatabase extends _$AppDatabase {
         await m.createTable(appSettingsTable);
         await m.createTable(receiptPhotos);
         await m.createTable(dismissedAnomalies);
+      }
+      if (from == 3) {
+        await m.addColumn(appSettingsTable, appSettingsTable.themeMode);
       }
     },
     beforeOpen: (details) async {

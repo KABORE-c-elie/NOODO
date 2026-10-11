@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:noodo/core/theme/app_spacing.dart';
 import 'package:noodo/core/l10n/generated/app_localizations.dart';
 import 'package:noodo/features/receipts/data/photo_providers.dart';
 import 'package:noodo/features/receipts/domain/receipt_photo.dart';
@@ -40,7 +41,7 @@ class CreditorPhotos extends ConsumerWidget {
         ),
         if (photos.isEmpty)
           Padding(
-            padding: const EdgeInsets.only(bottom: 8),
+            padding: const EdgeInsets.only(bottom: AppSpacing.sm),
             child: Text(l10n.noPhotos),
           )
         else
@@ -49,7 +50,7 @@ class CreditorPhotos extends ConsumerWidget {
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               itemCount: photos.length,
-              separatorBuilder: (_, _) => const SizedBox(width: 8),
+              separatorBuilder: (_, _) => const SizedBox(width: AppSpacing.sm),
               itemBuilder: (context, index) => SizedBox.square(
                 dimension: _thumbnailSize,
                 child: ReceiptPhotoTile(

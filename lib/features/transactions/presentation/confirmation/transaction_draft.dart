@@ -12,7 +12,7 @@ abstract class TransactionDraft with _$TransactionDraft {
   const TransactionDraft._();
 
   const factory TransactionDraft({
-    @Default('') String rawText,
+    required int id,
     TransactionType? type,
     int? amountFcfa,
     double? quantity,
@@ -21,53 +21,86 @@ abstract class TransactionDraft with _$TransactionDraft {
     String? product,
     @Default(TransactionCategory.other) TransactionCategory category,
     @Default(1.0) double confidence,
-    @Default(0) int revision,
+    int? statedPriceFcfa,
+    @Default(PriceBasis.total) PriceBasis priceBasis,
     String? editingId,
     DateTime? originalDate,
   }) = _TransactionDraft;
 
   factory TransactionDraft.fromTransaction(
     Transaction transaction, {
-    required int revision,
+    required int id,
   }) => TransactionDraft(
-    rawText: transaction.rawText,
+    id: id,
     type: transaction.type,
     amountFcfa: transaction.amountFcfa,
     quantity: transaction.quantity,
     unit: transaction.unit,
     product: transaction.product,
     category: transaction.category,
-    revision: revision,
+    statedPriceFcfa: transaction.amountFcfa,
     editingId: transaction.id,
     originalDate: transaction.date,
   );
 
-  factory TransactionDraft.fromParse(
-    String rawText,
-    ParseResult result, {
-    required int revision,
-  }) => TransactionDraft(
-    rawText: rawText,
-    type: result.type,
-    amountFcfa: result.amountFcfa,
-    quantity: result.quantity,
-    unit: result.unit,
-    unknownUnitText: result.unknownUnitText,
-    product: result.product,
-    category: result.category,
-    confidence: result.confidence,
-    revision: revision,
-  );
-
-  bool get isAnalyzed => revision > 0;
+  factory TransactionDraft.fromParse(ParseResult result, {required int id}) =>
+      TransactionDraft(
+        id: id,
+        type: result.type,
+        amountFcfa: result.amountFcfa,
+        quantity: result.quantity,
+        unit: result.unit,
+        unknownUnitText: result.unknownUnitText,
+        product: result.product,
+        category: result.category,
+        confidence: result.confidence,
+        statedPriceFcfa: result.statedPriceFcfa,
+        priceBasis: result.priceBasis,
+      );
 
   bool get isEditing => editingId != null;
 
-  bool get needsReview => isAnalyzed && confidence < lowConfidenceThreshold;
+  bool get needsReview => confidence < lowConfidenceThreshold;
 
   bool get typeNeedsCheck => needsReview && type == null;
 
   bool get amountNeedsCheck => needsReview && amountFcfa == null;
 
   bool get canSave => type != null && (amountFcfa ?? 0) > 0;
+
+  bool get canChoosePriceBasis =>
+      quantity != null && quantity! > 0 && statedPriceFcfa != null;
+
+  int? amountFor(PriceBasis basis) {
+    final stated = statedPriceFcfa;
+    final count = quantity;
+    if (stated == null) return amountFcfa;
+    return basis == PriceBasis.perUnit && count != null
+        ? (stated * count).round()
+        : stated;
+  }
+}
+
+@freezed
+abstract class ConfirmationState with _$ConfirmationState {
+  const ConfirmationState._();
+
+  const factory ConfirmationState({
+    @Default('') String rawText,
+    @Default(<TransactionDraft>[]) List<TransactionDraft> items,
+    @Default(0) int revision,
+  }) = _ConfirmationState;
+
+  bool get isAnalyzed => revision > 0 && items.isNotEmpty;
+
+  bool get isEditing => items.length == 1 && items.single.isEditing;
+
+  bool get canSave => items.isNotEmpty && items.every((item) => item.canSave);
+
+  TransactionDraft? item(int id) {
+    for (final item in items) {
+      if (item.id == id) return item;
+    }
+    return null;
+  }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:noodo/core/theme/app_spacing.dart';
 import 'package:noodo/features/receipts/data/photo_providers.dart';
 
 class PhotoThumbnail extends ConsumerWidget {
@@ -26,7 +27,7 @@ class PhotoThumbnail extends ConsumerWidget {
       onTap: onTap,
       child: Material(
         color: colors.surfaceContainerHighest,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(AppRadius.sm),
         clipBehavior: Clip.antiAlias,
         child: InkWell(
           onTap: onTap,

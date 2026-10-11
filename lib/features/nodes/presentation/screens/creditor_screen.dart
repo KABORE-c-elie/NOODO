@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:noodo/core/theme/app_spacing.dart';
 import 'package:noodo/core/l10n/generated/app_localizations.dart';
 import 'package:noodo/core/utils/current_day_provider.dart';
 import 'package:noodo/features/nodes/data/node_providers.dart';
@@ -29,19 +30,24 @@ class CreditorScreen extends ConsumerWidget {
         AsyncData(value: final value?) => CustomScrollView(
           slivers: [
             SliverPadding(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(AppSpacing.lg),
               sliver: SliverToBoxAdapter(
                 child: _CreditorSummary(creditor: value),
               ),
             ),
             SliverPadding(
-              padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+              padding: const EdgeInsets.fromLTRB(
+                AppSpacing.lg,
+                0,
+                AppSpacing.lg,
+                AppSpacing.lg,
+              ),
               sliver: SliverToBoxAdapter(
                 child: CreditorPhotos(creditorId: creditorId),
               ),
             ),
             SliverPadding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
               sliver: SliverToBoxAdapter(
                 child: Text(
                   l10n.paymentsTitle,
@@ -81,7 +87,7 @@ class _CreditorSummary extends ConsumerWidget {
     final phone = creditor.phone;
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(AppSpacing.xl),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -89,7 +95,7 @@ class _CreditorSummary extends ConsumerWidget {
               l10n.balanceDue(creditor.balanceDueFcfa),
               style: theme.textTheme.headlineSmall,
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: AppSpacing.sm),
             Row(
               children: [
                 Expanded(
@@ -104,7 +110,7 @@ class _CreditorSummary extends ConsumerWidget {
             ),
             if (phone != null) Text(phone),
             Text(l10n.totalPaid(totalPaid.value ?? 0)),
-            const SizedBox(height: 16),
+            const SizedBox(height: AppSpacing.lg),
             Tooltip(
               message: l10n.recordPaymentTooltip,
               child: FilledButton.icon(
@@ -137,7 +143,7 @@ class _PaymentsSliver extends ConsumerWidget {
     return switch (payments) {
       AsyncData(:final value) when value.isEmpty => SliverToBoxAdapter(
         child: Padding(
-          padding: const EdgeInsets.all(24),
+          padding: const EdgeInsets.all(AppSpacing.xl),
           child: Text(l10n.noPayments, textAlign: TextAlign.center),
         ),
       ),

@@ -182,3 +182,44 @@ final class AlertSensitivityProvider
 }
 
 String _$alertSensitivityHash() => r'bf3a6aaa8bd2347f91f716f7dd1a9c7baf6da425';
+
+@ProviderFor(appThemeMode)
+final appThemeModeProvider = AppThemeModeProvider._();
+
+final class AppThemeModeProvider
+    extends $FunctionalProvider<AppThemeMode, AppThemeMode, AppThemeMode>
+    with $Provider<AppThemeMode> {
+  AppThemeModeProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'appThemeModeProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$appThemeModeHash();
+
+  @$internal
+  @override
+  $ProviderElement<AppThemeMode> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  AppThemeMode create(Ref ref) {
+    return appThemeMode(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(AppThemeMode value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<AppThemeMode>(value),
+    );
+  }
+}
+
+String _$appThemeModeHash() => r'277d9361024399273fe8cc8818607e5a693367f2';

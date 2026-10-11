@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:noodo/core/l10n/generated/app_localizations.dart';
 import 'package:noodo/core/router/app_routes.dart';
+import 'package:noodo/core/theme/app_spacing.dart';
 import 'package:noodo/features/transactions/presentation/confirmation/confirmation_controller.dart';
 import 'package:noodo/features/transactions/presentation/widgets/confirmation_fields.dart';
 
@@ -60,9 +61,12 @@ class _ConfirmationScreenState extends ConsumerState<ConfirmationScreen> {
     if (outcome == null || !mounted) return;
     final message = switch (outcome) {
       SaveOutcome(isUpdate: true) => l10n.transactionUpdated,
-      SaveOutcome(taxSavedFcfa: final tax) when tax > 0 =>
+      SaveOutcome(count: 1, taxSavedFcfa: final tax) when tax > 0 =>
         l10n.transactionSavedWithTax(tax),
-      _ => l10n.transactionSaved,
+      SaveOutcome(count: 1) => l10n.transactionSaved,
+      SaveOutcome(:final count, taxSavedFcfa: final tax) when tax > 0 =>
+        l10n.transactionsSavedWithTax(count, tax),
+      SaveOutcome(:final count) => l10n.transactionsSaved(count),
     };
     messenger.showSnackBar(SnackBar(content: Text(message)));
     if (context.canPop()) {
@@ -88,7 +92,7 @@ class _ConfirmationScreenState extends ConsumerState<ConfirmationScreen> {
         ),
       ),
       body: ListView(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(AppSpacing.lg),
         children: [
           TextField(
             controller: _transcript,
@@ -99,10 +103,9 @@ class _ConfirmationScreenState extends ConsumerState<ConfirmationScreen> {
             decoration: InputDecoration(
               labelText: l10n.transcriptLabel,
               hintText: l10n.transcriptHint,
-              border: const OutlineInputBorder(),
             ),
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: AppSpacing.md),
           Align(
             alignment: Alignment.centerRight,
             child: Tooltip(
@@ -115,10 +118,9 @@ class _ConfirmationScreenState extends ConsumerState<ConfirmationScreen> {
             ),
           ),
           if (isAnalyzed) ...[
-            const SizedBox(height: 16),
-            const LowConfidenceBanner(),
-            const DraftFields(),
-            const SizedBox(height: 24),
+            const SizedBox(height: AppSpacing.lg),
+            const TransactionCards(),
+            const SizedBox(height: AppSpacing.sm),
             SaveButton(onSave: _save),
           ],
         ],

@@ -26,6 +26,10 @@ final class DriftSettingsRepository implements SettingsRepository {
   Future<void> setAlertSensitivity(AlertSensitivity sensitivity) =>
       _write(AppSettingsTableCompanion(alertSensitivity: Value(sensitivity)));
 
+  @override
+  Future<void> setThemeMode(AppThemeMode mode) =>
+      _write(AppSettingsTableCompanion(themeMode: Value(mode)));
+
   SimpleSelectStatement<$AppSettingsTableTable, AppSettingsRow> _select() =>
       _db.select(_db.appSettingsTable)
         ..where((s) => s.id.equals(AppDatabase.settingsRowId));
@@ -39,5 +43,6 @@ final class DriftSettingsRepository implements SettingsRepository {
       : AppSettings(
           languageCode: row.languageCode,
           alertSensitivity: row.alertSensitivity,
+          themeMode: row.themeMode,
         );
 }

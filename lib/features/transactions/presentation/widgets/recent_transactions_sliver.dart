@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:noodo/core/theme/app_spacing.dart';
 import 'package:noodo/core/l10n/generated/app_localizations.dart';
 import 'package:noodo/features/transactions/presentation/providers/recent_transactions_provider.dart';
 import 'package:noodo/features/transactions/presentation/widgets/transaction_tile.dart';
@@ -15,7 +16,7 @@ class RecentTransactionsSliver extends ConsumerWidget {
       data: (items) => items.isEmpty
           ? SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.all(24),
+                padding: const EdgeInsets.all(AppSpacing.xl),
                 child: Text(l10n.noTransactions, textAlign: TextAlign.center),
               ),
             )

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:noodo/core/theme/app_spacing.dart';
 import 'package:noodo/core/l10n/generated/app_localizations.dart';
 import 'package:noodo/core/router/app_routes.dart';
 import 'package:noodo/features/profits/presentation/widgets/anomaly_cards.dart';
@@ -32,14 +33,19 @@ class HomeScreen extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           SliverPadding(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+            padding: const EdgeInsets.fromLTRB(
+              AppSpacing.lg,
+              0,
+              AppSpacing.lg,
+              AppSpacing.sm,
+            ),
             sliver: SliverList.list(
               children: [
                 const TodaySummaryCard(),
                 const AnomalyCards(),
-                const SizedBox(height: 24),
+                const SizedBox(height: AppSpacing.xl),
                 const VoiceRecorder(),
-                const SizedBox(height: 24),
+                const SizedBox(height: AppSpacing.xl),
                 Text(
                   l10n.recentTransactions,
                   style: Theme.of(context).textTheme.titleMedium,

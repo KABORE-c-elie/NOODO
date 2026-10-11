@@ -286,12 +286,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get historyEmpty => 'No transactions match these filters.';
 
   @override
-  String dayProfit(int amount) {
-    final intl.NumberFormat amountNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String amountString = amountNumberFormat.format(amount);
-
-    return 'Profit: $amountString FCFA';
+  String dayProfit(String amount) {
+    return 'Profit: $amount FCFA';
   }
 
   @override
@@ -932,4 +928,94 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sensitivityHighHelp => 'Even small deviations: more alerts.';
+
+  @override
+  String get developerSection => 'Development';
+
+  @override
+  String get generateDemoData => 'Generate 2,000 demo transactions';
+
+  @override
+  String demoDataGenerated(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return '$countString demo transactions added';
+  }
+
+  @override
+  String get scheduleTestReminder => 'Schedule a test reminder in 2 minutes';
+
+  @override
+  String get testReminderScheduled => 'Test reminder scheduled in 2 minutes';
+
+  @override
+  String get testReminderTitle => 'NOODO test reminder';
+
+  @override
+  String get testReminderBody => 'If you can read this, reminders work.';
+
+  @override
+  String get saveAll => 'Save all';
+
+  @override
+  String get saveAllTooltip => 'Save all transactions';
+
+  @override
+  String transactionNumber(int index, int count) {
+    return 'Transaction $index of $count';
+  }
+
+  @override
+  String get removeTransaction => 'Remove this transaction';
+
+  @override
+  String get priceBasisTotal => 'Total price';
+
+  @override
+  String get priceBasisUnit => 'Unit price';
+
+  @override
+  String priceCalculation(String quantity, int unitPrice, int total) {
+    final intl.NumberFormat unitPriceNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String unitPriceString = unitPriceNumberFormat.format(unitPrice);
+    final intl.NumberFormat totalNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String totalString = totalNumberFormat.format(total);
+
+    return '$quantity × $unitPriceString = $totalString FCFA';
+  }
+
+  @override
+  String transactionsSaved(int count) {
+    return '$count transactions saved';
+  }
+
+  @override
+  String transactionsSavedWithTax(int count, int amount) {
+    final intl.NumberFormat amountNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String amountString = amountNumberFormat.format(amount);
+
+    return '$count transactions saved · $amountString FCFA set aside for your taxes';
+  }
+
+  @override
+  String get appearanceSection => 'Appearance';
+
+  @override
+  String get themeSystem => 'System';
+
+  @override
+  String get themeLight => 'Light';
+
+  @override
+  String get themeDark => 'Dark';
+
+  @override
+  String signedAmountFcfa(String amount) {
+    return '$amount FCFA';
+  }
 }

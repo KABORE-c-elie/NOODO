@@ -22,7 +22,7 @@ final class CreditorActionsProvider
         argument: null,
         retry: null,
         name: r'creditorActionsProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -49,4 +49,4 @@ final class CreditorActionsProvider
   }
 }
 
-String _$creditorActionsHash() => r'054e043e5b986cc2f3fa71782669c393003089ff';
+String _$creditorActionsHash() => r'f40f3a5339cbd7700f4c2cd644bc32e2f63eaf37';

@@ -33,6 +33,8 @@ abstract interface class ReminderScheduler {
   Future<bool> requestPermission();
 
   Future<void> replaceAll(List<ScheduledReminder> reminders);
+
+  Future<void> scheduleOne(ScheduledReminder reminder);
 }
 
 const _taxFifteenDaysId = 1;

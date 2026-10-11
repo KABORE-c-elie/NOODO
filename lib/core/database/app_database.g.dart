@@ -2540,7 +2540,22 @@ class $AppSettingsTableTable extends AppSettingsTable
         $AppSettingsTableTable.$converteralertSensitivity,
       );
   @override
-  List<GeneratedColumn> get $columns => [id, languageCode, alertSensitivity];
+  late final GeneratedColumnWithTypeConverter<AppThemeMode, String> themeMode =
+      GeneratedColumn<String>(
+        'theme_mode',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+        defaultValue: Constant(AppThemeMode.system.name),
+      ).withConverter<AppThemeMode>($AppSettingsTableTable.$converterthemeMode);
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    languageCode,
+    alertSensitivity,
+    themeMode,
+  ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -2589,6 +2604,12 @@ class $AppSettingsTableTable extends AppSettingsTable
               data['${effectivePrefix}alert_sensitivity'],
             )!,
           ),
+      themeMode: $AppSettingsTableTable.$converterthemeMode.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}theme_mode'],
+        )!,
+      ),
     );
   }
 
@@ -2601,16 +2622,20 @@ class $AppSettingsTableTable extends AppSettingsTable
   $converteralertSensitivity = const EnumNameConverter<AlertSensitivity>(
     AlertSensitivity.values,
   );
+  static JsonTypeConverter2<AppThemeMode, String, String> $converterthemeMode =
+      const EnumNameConverter<AppThemeMode>(AppThemeMode.values);
 }
 
 class AppSettingsRow extends DataClass implements Insertable<AppSettingsRow> {
   final int id;
   final String languageCode;
   final AlertSensitivity alertSensitivity;
+  final AppThemeMode themeMode;
   const AppSettingsRow({
     required this.id,
     required this.languageCode,
     required this.alertSensitivity,
+    required this.themeMode,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -2624,6 +2649,11 @@ class AppSettingsRow extends DataClass implements Insertable<AppSettingsRow> {
         ),
       );
     }
+    {
+      map['theme_mode'] = Variable<String>(
+        $AppSettingsTableTable.$converterthemeMode.toSql(themeMode),
+      );
+    }
     return map;
   }
 
@@ -2632,6 +2662,7 @@ class AppSettingsRow extends DataClass implements Insertable<AppSettingsRow> {
       id: Value(id),
       languageCode: Value(languageCode),
       alertSensitivity: Value(alertSensitivity),
+      themeMode: Value(themeMode),
     );
   }
 
@@ -2645,6 +2676,9 @@ class AppSettingsRow extends DataClass implements Insertable<AppSettingsRow> {
       languageCode: serializer.fromJson<String>(json['languageCode']),
       alertSensitivity: $AppSettingsTableTable.$converteralertSensitivity
           .fromJson(serializer.fromJson<String>(json['alertSensitivity'])),
+      themeMode: $AppSettingsTableTable.$converterthemeMode.fromJson(
+        serializer.fromJson<String>(json['themeMode']),
+      ),
     );
   }
   @override
@@ -2658,6 +2692,9 @@ class AppSettingsRow extends DataClass implements Insertable<AppSettingsRow> {
           alertSensitivity,
         ),
       ),
+      'themeMode': serializer.toJson<String>(
+        $AppSettingsTableTable.$converterthemeMode.toJson(themeMode),
+      ),
     };
   }
 
@@ -2665,10 +2702,12 @@ class AppSettingsRow extends DataClass implements Insertable<AppSettingsRow> {
     int? id,
     String? languageCode,
     AlertSensitivity? alertSensitivity,
+    AppThemeMode? themeMode,
   }) => AppSettingsRow(
     id: id ?? this.id,
     languageCode: languageCode ?? this.languageCode,
     alertSensitivity: alertSensitivity ?? this.alertSensitivity,
+    themeMode: themeMode ?? this.themeMode,
   );
   AppSettingsRow copyWithCompanion(AppSettingsTableCompanion data) {
     return AppSettingsRow(
@@ -2679,6 +2718,7 @@ class AppSettingsRow extends DataClass implements Insertable<AppSettingsRow> {
       alertSensitivity: data.alertSensitivity.present
           ? data.alertSensitivity.value
           : this.alertSensitivity,
+      themeMode: data.themeMode.present ? data.themeMode.value : this.themeMode,
     );
   }
 
@@ -2687,45 +2727,53 @@ class AppSettingsRow extends DataClass implements Insertable<AppSettingsRow> {
     return (StringBuffer('AppSettingsRow(')
           ..write('id: $id, ')
           ..write('languageCode: $languageCode, ')
-          ..write('alertSensitivity: $alertSensitivity')
+          ..write('alertSensitivity: $alertSensitivity, ')
+          ..write('themeMode: $themeMode')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, languageCode, alertSensitivity);
+  int get hashCode =>
+      Object.hash(id, languageCode, alertSensitivity, themeMode);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is AppSettingsRow &&
           other.id == this.id &&
           other.languageCode == this.languageCode &&
-          other.alertSensitivity == this.alertSensitivity);
+          other.alertSensitivity == this.alertSensitivity &&
+          other.themeMode == this.themeMode);
 }
 
 class AppSettingsTableCompanion extends UpdateCompanion<AppSettingsRow> {
   final Value<int> id;
   final Value<String> languageCode;
   final Value<AlertSensitivity> alertSensitivity;
+  final Value<AppThemeMode> themeMode;
   const AppSettingsTableCompanion({
     this.id = const Value.absent(),
     this.languageCode = const Value.absent(),
     this.alertSensitivity = const Value.absent(),
+    this.themeMode = const Value.absent(),
   });
   AppSettingsTableCompanion.insert({
     this.id = const Value.absent(),
     this.languageCode = const Value.absent(),
     this.alertSensitivity = const Value.absent(),
+    this.themeMode = const Value.absent(),
   });
   static Insertable<AppSettingsRow> custom({
     Expression<int>? id,
     Expression<String>? languageCode,
     Expression<String>? alertSensitivity,
+    Expression<String>? themeMode,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
       if (languageCode != null) 'language_code': languageCode,
       if (alertSensitivity != null) 'alert_sensitivity': alertSensitivity,
+      if (themeMode != null) 'theme_mode': themeMode,
     });
   }
 
@@ -2733,11 +2781,13 @@ class AppSettingsTableCompanion extends UpdateCompanion<AppSettingsRow> {
     Value<int>? id,
     Value<String>? languageCode,
     Value<AlertSensitivity>? alertSensitivity,
+    Value<AppThemeMode>? themeMode,
   }) {
     return AppSettingsTableCompanion(
       id: id ?? this.id,
       languageCode: languageCode ?? this.languageCode,
       alertSensitivity: alertSensitivity ?? this.alertSensitivity,
+      themeMode: themeMode ?? this.themeMode,
     );
   }
 
@@ -2757,6 +2807,11 @@ class AppSettingsTableCompanion extends UpdateCompanion<AppSettingsRow> {
         ),
       );
     }
+    if (themeMode.present) {
+      map['theme_mode'] = Variable<String>(
+        $AppSettingsTableTable.$converterthemeMode.toSql(themeMode.value),
+      );
+    }
     return map;
   }
 
@@ -2765,7 +2820,8 @@ class AppSettingsTableCompanion extends UpdateCompanion<AppSettingsRow> {
     return (StringBuffer('AppSettingsTableCompanion(')
           ..write('id: $id, ')
           ..write('languageCode: $languageCode, ')
-          ..write('alertSensitivity: $alertSensitivity')
+          ..write('alertSensitivity: $alertSensitivity, ')
+          ..write('themeMode: $themeMode')
           ..write(')'))
         .toString();
   }
@@ -5779,12 +5835,14 @@ typedef $$AppSettingsTableTableCreateCompanionBuilder =
       Value<int> id,
       Value<String> languageCode,
       Value<AlertSensitivity> alertSensitivity,
+      Value<AppThemeMode> themeMode,
     });
 typedef $$AppSettingsTableTableUpdateCompanionBuilder =
     AppSettingsTableCompanion Function({
       Value<int> id,
       Value<String> languageCode,
       Value<AlertSensitivity> alertSensitivity,
+      Value<AppThemeMode> themeMode,
     });
 
 class $$AppSettingsTableTableFilterComposer
@@ -5809,6 +5867,12 @@ class $$AppSettingsTableTableFilterComposer
   ColumnWithTypeConverterFilters<AlertSensitivity, AlertSensitivity, String>
   get alertSensitivity => $composableBuilder(
     column: $table.alertSensitivity,
+    builder: (column) => ColumnWithTypeConverterFilters(column),
+  );
+
+  ColumnWithTypeConverterFilters<AppThemeMode, AppThemeMode, String>
+  get themeMode => $composableBuilder(
+    column: $table.themeMode,
     builder: (column) => ColumnWithTypeConverterFilters(column),
   );
 }
@@ -5836,6 +5900,11 @@ class $$AppSettingsTableTableOrderingComposer
     column: $table.alertSensitivity,
     builder: (column) => ColumnOrderings(column),
   );
+
+  ColumnOrderings<String> get themeMode => $composableBuilder(
+    column: $table.themeMode,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
 class $$AppSettingsTableTableAnnotationComposer
@@ -5860,6 +5929,9 @@ class $$AppSettingsTableTableAnnotationComposer
     column: $table.alertSensitivity,
     builder: (column) => column,
   );
+
+  GeneratedColumnWithTypeConverter<AppThemeMode, String> get themeMode =>
+      $composableBuilder(column: $table.themeMode, builder: (column) => column);
 }
 
 class $$AppSettingsTableTableTableManager
@@ -5902,20 +5974,24 @@ class $$AppSettingsTableTableTableManager
                 Value<int> id = const Value.absent(),
                 Value<String> languageCode = const Value.absent(),
                 Value<AlertSensitivity> alertSensitivity = const Value.absent(),
+                Value<AppThemeMode> themeMode = const Value.absent(),
               }) => AppSettingsTableCompanion(
                 id: id,
                 languageCode: languageCode,
                 alertSensitivity: alertSensitivity,
+                themeMode: themeMode,
               ),
           createCompanionCallback:
               ({
                 Value<int> id = const Value.absent(),
                 Value<String> languageCode = const Value.absent(),
                 Value<AlertSensitivity> alertSensitivity = const Value.absent(),
+                Value<AppThemeMode> themeMode = const Value.absent(),
               }) => AppSettingsTableCompanion.insert(
                 id: id,
                 languageCode: languageCode,
                 alertSensitivity: alertSensitivity,
+                themeMode: themeMode,
               ),
           withReferenceMapper: (p0) => p0
               .map(

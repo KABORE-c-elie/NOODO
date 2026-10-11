@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:noodo/core/theme/app_spacing.dart';
 import 'package:noodo/core/l10n/generated/app_localizations.dart';
 import 'package:noodo/features/nodes/data/node_providers.dart';
 import 'package:noodo/features/receipts/data/photo_providers.dart';
@@ -92,7 +93,7 @@ class PhotoViewerScreen extends ConsumerWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(AppSpacing.lg),
                   child: Text(
                     DateFormat.yMMMMEEEEd(locale)
                         .add_Hm()

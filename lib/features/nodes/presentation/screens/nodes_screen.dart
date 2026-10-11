@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:noodo/core/theme/app_spacing.dart';
 import 'package:noodo/core/l10n/generated/app_localizations.dart';
 import 'package:noodo/features/nodes/data/node_providers.dart';
 import 'package:noodo/features/nodes/presentation/widgets/add_creditor_sheet.dart';
@@ -23,11 +24,16 @@ class NodesScreen extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           const SliverPadding(
-            padding: EdgeInsets.fromLTRB(16, 8, 16, 16),
+            padding: EdgeInsets.fromLTRB(
+              AppSpacing.lg,
+              AppSpacing.sm,
+              AppSpacing.lg,
+              AppSpacing.lg,
+            ),
             sliver: SliverToBoxAdapter(child: TaxNodeCard()),
           ),
           SliverPadding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
             sliver: SliverToBoxAdapter(
               child: Text(
                 l10n.creditorsTitle,
@@ -53,7 +59,7 @@ class _CreditorsSliver extends ConsumerWidget {
     return switch (creditors) {
       AsyncData(:final value) when value.isEmpty => SliverToBoxAdapter(
         child: Padding(
-          padding: const EdgeInsets.all(24),
+          padding: const EdgeInsets.all(AppSpacing.xl),
           child: Text(l10n.noCreditors, textAlign: TextAlign.center),
         ),
       ),

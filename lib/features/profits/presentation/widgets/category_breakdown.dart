@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:noodo/core/utils/amount_format.dart';
+import 'package:noodo/core/theme/app_spacing.dart';
+import 'package:noodo/core/theme/app_colors.dart';
 import 'package:noodo/core/l10n/generated/app_localizations.dart';
 import 'package:noodo/features/profits/domain/profit_models.dart';
 import 'package:noodo/features/profits/presentation/providers/profit_report_provider.dart';
@@ -48,7 +51,8 @@ class _CategoryRow extends StatelessWidget {
     final theme = Theme.of(context);
     final net = category.netFcfa;
     final name = category.category.label(l10n);
-    final color = net < 0 ? theme.colorScheme.error : theme.colorScheme.primary;
+    final appColors = AppColors.of(context);
+    final color = appColors.forNet(net, theme.colorScheme.onSurfaceVariant);
     final fraction = maxMagnitude == 0 ? 0.0 : net.abs() / maxMagnitude;
     return Semantics(
       container: true,
@@ -57,7 +61,7 @@ class _CategoryRow extends StatelessWidget {
           ? l10n.lossSemantics(name, -net)
           : l10n.profitSemantics(name, net),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 6),
+        padding: const EdgeInsets.symmetric(vertical: AppSpacing.sm),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -65,12 +69,21 @@ class _CategoryRow extends StatelessWidget {
               children: [
                 Expanded(child: Text(name)),
                 Text(
-                  l10n.amountFcfa(net),
-                  style: TextStyle(color: color, fontWeight: FontWeight.bold),
+                  l10n.signedAmountFcfa(
+                    formatAmount(
+                      net,
+                      Localizations.localeOf(context).toLanguageTag(),
+                    ),
+                  ),
+                  style: TextStyle(
+                    color: color,
+                    fontWeight: FontWeight.w800,
+                    fontFeatures: const [FontFeature.tabularFigures()],
+                  ),
                 ),
               ],
             ),
-            const SizedBox(height: 4),
+            const SizedBox(height: AppSpacing.xs),
             ClipRRect(
               borderRadius: BorderRadius.circular(_barHeight / 2),
               child: Container(

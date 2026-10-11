@@ -19,3 +19,12 @@ String formatPeriod(
 
 String formatChartDay(String locale, DateTime day) =>
     DateFormat.MMMMEEEEd(locale).format(day);
+
+String chartBarLabel(String locale, PeriodUnit unit, DateTime day) =>
+    switch (unit) {
+      PeriodUnit.day => DateFormat.MMMd(locale).format(day),
+      PeriodUnit.week => DateFormat.E(
+        locale,
+      ).format(day).substring(0, 1).toUpperCase(),
+      PeriodUnit.month => day.day == 1 || day.day % 5 == 0 ? '${day.day}' : '',
+    };

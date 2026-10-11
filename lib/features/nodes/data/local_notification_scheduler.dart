@@ -66,22 +66,30 @@ final class LocalNotificationScheduler implements ReminderScheduler {
     await _ensureInitialized();
     await _plugin.cancelAll();
     for (final reminder in reminders) {
-      await _plugin.zonedSchedule(
-        id: reminder.id,
-        title: reminder.title,
-        body: reminder.body,
-        scheduledDate: tz.TZDateTime.from(reminder.at, tz.local),
-        notificationDetails: const NotificationDetails(
-          android: AndroidNotificationDetails(
-            _channelId,
-            _channelName,
-            importance: Importance.high,
-            priority: Priority.high,
-          ),
-          iOS: DarwinNotificationDetails(),
-        ),
-        androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
-      );
+      await _schedule(reminder);
     }
   }
+
+  @override
+  Future<void> scheduleOne(ScheduledReminder reminder) async {
+    await _ensureInitialized();
+    await _schedule(reminder);
+  }
+
+  Future<void> _schedule(ScheduledReminder reminder) => _plugin.zonedSchedule(
+    id: reminder.id,
+    title: reminder.title,
+    body: reminder.body,
+    scheduledDate: tz.TZDateTime.from(reminder.at, tz.local),
+    notificationDetails: const NotificationDetails(
+      android: AndroidNotificationDetails(
+        _channelId,
+        _channelName,
+        importance: Importance.high,
+        priority: Priority.high,
+      ),
+      iOS: DarwinNotificationDetails(),
+    ),
+    androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+  );
 }

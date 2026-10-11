@@ -534,7 +534,7 @@ abstract class AppLocalizations {
   ///
   /// In fr, this message translates to:
   /// **'Bénéfice : {amount} FCFA'**
-  String dayProfit(int amount);
+  String dayProfit(String amount);
 
   /// No description provided for @deleteConfirmTitle.
   ///
@@ -1374,6 +1374,132 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Même les petits écarts : plus d\'alertes.'**
   String get sensitivityHighHelp;
+
+  /// No description provided for @developerSection.
+  ///
+  /// In fr, this message translates to:
+  /// **'Développement'**
+  String get developerSection;
+
+  /// No description provided for @generateDemoData.
+  ///
+  /// In fr, this message translates to:
+  /// **'Générer 2 000 transactions de démonstration'**
+  String get generateDemoData;
+
+  /// No description provided for @demoDataGenerated.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count} transactions de démonstration ajoutées'**
+  String demoDataGenerated(int count);
+
+  /// No description provided for @scheduleTestReminder.
+  ///
+  /// In fr, this message translates to:
+  /// **'Programmer un rappel de test dans 2 minutes'**
+  String get scheduleTestReminder;
+
+  /// No description provided for @testReminderScheduled.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rappel de test programmé dans 2 minutes'**
+  String get testReminderScheduled;
+
+  /// No description provided for @testReminderTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rappel de test NOODO'**
+  String get testReminderTitle;
+
+  /// No description provided for @testReminderBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'Si tu lis ce message, les rappels fonctionnent.'**
+  String get testReminderBody;
+
+  /// No description provided for @saveAll.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tout enregistrer'**
+  String get saveAll;
+
+  /// No description provided for @saveAllTooltip.
+  ///
+  /// In fr, this message translates to:
+  /// **'Enregistrer toutes les transactions'**
+  String get saveAllTooltip;
+
+  /// No description provided for @transactionNumber.
+  ///
+  /// In fr, this message translates to:
+  /// **'Transaction {index} sur {count}'**
+  String transactionNumber(int index, int count);
+
+  /// No description provided for @removeTransaction.
+  ///
+  /// In fr, this message translates to:
+  /// **'Retirer cette transaction'**
+  String get removeTransaction;
+
+  /// No description provided for @priceBasisTotal.
+  ///
+  /// In fr, this message translates to:
+  /// **'Prix total'**
+  String get priceBasisTotal;
+
+  /// No description provided for @priceBasisUnit.
+  ///
+  /// In fr, this message translates to:
+  /// **'Prix unitaire'**
+  String get priceBasisUnit;
+
+  /// No description provided for @priceCalculation.
+  ///
+  /// In fr, this message translates to:
+  /// **'{quantity} × {unitPrice} = {total} FCFA'**
+  String priceCalculation(String quantity, int unitPrice, int total);
+
+  /// No description provided for @transactionsSaved.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count} transactions enregistrées'**
+  String transactionsSaved(int count);
+
+  /// No description provided for @transactionsSavedWithTax.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count} transactions enregistrées · {amount} FCFA mis de côté pour tes impôts'**
+  String transactionsSavedWithTax(int count, int amount);
+
+  /// No description provided for @appearanceSection.
+  ///
+  /// In fr, this message translates to:
+  /// **'Apparence'**
+  String get appearanceSection;
+
+  /// No description provided for @themeSystem.
+  ///
+  /// In fr, this message translates to:
+  /// **'Système'**
+  String get themeSystem;
+
+  /// No description provided for @themeLight.
+  ///
+  /// In fr, this message translates to:
+  /// **'Clair'**
+  String get themeLight;
+
+  /// No description provided for @themeDark.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sombre'**
+  String get themeDark;
+
+  /// No description provided for @signedAmountFcfa.
+  ///
+  /// In fr, this message translates to:
+  /// **'{amount} FCFA'**
+  String signedAmountFcfa(String amount);
 }
 
 class _AppLocalizationsDelegate

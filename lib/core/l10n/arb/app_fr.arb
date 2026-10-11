@@ -170,8 +170,7 @@
   "@dayProfit": {
     "placeholders": {
       "amount": {
-        "type": "int",
-        "format": "decimalPattern"
+        "type": "String"
       }
     }
   },
@@ -727,5 +726,84 @@
   "sensitivityHigh": "Forte",
   "sensitivityLowHelp": "Seulement les écarts très importants.",
   "sensitivityNormalHelp": "Les écarts nets par rapport à tes habitudes.",
-  "sensitivityHighHelp": "Même les petits écarts : plus d'alertes."
+  "sensitivityHighHelp": "Même les petits écarts : plus d'alertes.",
+  "developerSection": "Développement",
+  "generateDemoData": "Générer 2 000 transactions de démonstration",
+  "demoDataGenerated": "{count} transactions de démonstration ajoutées",
+  "@demoDataGenerated": {
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "scheduleTestReminder": "Programmer un rappel de test dans 2 minutes",
+  "testReminderScheduled": "Rappel de test programmé dans 2 minutes",
+  "testReminderTitle": "Rappel de test NOODO",
+  "testReminderBody": "Si tu lis ce message, les rappels fonctionnent.",
+  "saveAll": "Tout enregistrer",
+  "saveAllTooltip": "Enregistrer toutes les transactions",
+  "transactionNumber": "Transaction {index} sur {count}",
+  "@transactionNumber": {
+    "placeholders": {
+      "index": {
+        "type": "int"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "removeTransaction": "Retirer cette transaction",
+  "priceBasisTotal": "Prix total",
+  "priceBasisUnit": "Prix unitaire",
+  "priceCalculation": "{quantity} × {unitPrice} = {total} FCFA",
+  "@priceCalculation": {
+    "placeholders": {
+      "quantity": {
+        "type": "String"
+      },
+      "unitPrice": {
+        "type": "int",
+        "format": "decimalPattern"
+      },
+      "total": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "transactionsSaved": "{count} transactions enregistrées",
+  "@transactionsSaved": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "transactionsSavedWithTax": "{count} transactions enregistrées · {amount} FCFA mis de côté pour tes impôts",
+  "@transactionsSavedWithTax": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "appearanceSection": "Apparence",
+  "themeSystem": "Système",
+  "themeLight": "Clair",
+  "themeDark": "Sombre",
+  "signedAmountFcfa": "{amount} FCFA",
+  "@signedAmountFcfa": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  }
 }

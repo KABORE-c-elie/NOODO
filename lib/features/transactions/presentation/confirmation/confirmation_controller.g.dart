@@ -13,7 +13,7 @@ part of 'confirmation_controller.dart';
 final confirmationControllerProvider = ConfirmationControllerProvider._();
 
 final class ConfirmationControllerProvider
-    extends $NotifierProvider<ConfirmationController, TransactionDraft> {
+    extends $NotifierProvider<ConfirmationController, ConfirmationState> {
   ConfirmationControllerProvider._()
     : super(
         from: null,
@@ -33,28 +33,28 @@ final class ConfirmationControllerProvider
   ConfirmationController create() => ConfirmationController();
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(TransactionDraft value) {
+  Override overrideWithValue(ConfirmationState value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<TransactionDraft>(value),
+      providerOverride: $SyncValueProvider<ConfirmationState>(value),
     );
   }
 }
 
 String _$confirmationControllerHash() =>
-    r'826dafe6803ca79c27a5427a65fe2d8272b73564';
+    r'696509cdd4747c069f3cbc2382fcfeafeff904e1';
 
-abstract class _$ConfirmationController extends $Notifier<TransactionDraft> {
-  TransactionDraft build();
+abstract class _$ConfirmationController extends $Notifier<ConfirmationState> {
+  ConfirmationState build();
   @$mustCallSuper
   @override
   WhenComplete runBuild() {
-    final ref = this.ref as $Ref<TransactionDraft, TransactionDraft>;
+    final ref = this.ref as $Ref<ConfirmationState, ConfirmationState>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<TransactionDraft, TransactionDraft>,
-              TransactionDraft,
+              AnyNotifier<ConfirmationState, ConfirmationState>,
+              ConfirmationState,
               Object?,
               Object?
             >;

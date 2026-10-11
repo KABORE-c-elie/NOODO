@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:intl/intl.dart';
+import 'package:noodo/core/theme/app_spacing.dart';
+import 'package:noodo/core/theme/app_colors.dart';
 import 'package:noodo/core/l10n/generated/app_localizations.dart';
 import 'package:noodo/features/transactions/domain/transaction.dart';
 import 'package:noodo/features/transactions/domain/transaction_type.dart';
@@ -23,7 +25,8 @@ class TransactionTile extends StatelessWidget {
     final l10n = AppLocalizations.of(context);
     final colors = Theme.of(context).colorScheme;
     final isSale = transaction.type == TransactionType.sale;
-    final color = isSale ? colors.primary : colors.error;
+    final appColors = AppColors.of(context);
+    final color = isSale ? appColors.sale : appColors.expense;
     final time = DateFormat.Hm(Localizations.localeOf(context).toLanguageTag())
         .format(transaction.date);
     final label = transaction.product ?? transaction.rawText;
@@ -59,7 +62,7 @@ class TransactionTile extends StatelessWidget {
             ? Row(
                 children: [
                   Flexible(child: Text(label)),
-                  const SizedBox(width: 6),
+                  const SizedBox(width: AppSpacing.sm),
                   Icon(
                     Icons.receipt_long,
                     size: 16,
@@ -73,7 +76,11 @@ class TransactionTile extends StatelessWidget {
           isSale
               ? l10n.saleAmount(transaction.amountFcfa)
               : l10n.expenseAmount(transaction.amountFcfa),
-          style: TextStyle(color: color, fontWeight: FontWeight.bold),
+          style: TextStyle(
+            color: color,
+            fontWeight: FontWeight.w800,
+            fontFeatures: const [FontFeature.tabularFigures()],
+          ),
         ),
       ),
     );

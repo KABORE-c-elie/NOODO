@@ -13,6 +13,10 @@ class AppSettingsTable extends Table {
     Constant(AlertSensitivity.normal.name),
   )();
 
+  TextColumn get themeMode => textEnum<AppThemeMode>().withDefault(
+    Constant(AppThemeMode.system.name),
+  )();
+
   @override
   Set<Column<Object>> get primaryKey => {id};
 }

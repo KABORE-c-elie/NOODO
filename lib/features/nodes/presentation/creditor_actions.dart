@@ -8,7 +8,7 @@ import 'package:uuid/uuid.dart';
 
 part 'creditor_actions.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 CreditorActions creditorActions(Ref ref) => CreditorActions(ref);
 
 final class CreditorActions {
