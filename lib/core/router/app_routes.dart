@@ -11,6 +11,8 @@ abstract final class AppRoutes {
   static const transcriptParameter = 'text';
   static const transactionIdParameter = 'id';
   static const creditorIdParameter = 'creditorId';
+  static const photo = ':photoId';
+  static const photoIdParameter = 'photoId';
 
   static String confirmationPath([String? transcript]) => Uri(
     path: confirmation,
@@ -23,6 +25,9 @@ abstract final class AppRoutes {
     path: confirmation,
     queryParameters: {transactionIdParameter: transactionId},
   ).toString();
+
+  static String photoPath(String photoId) =>
+      '$receipts/${Uri.encodeComponent(photoId)}';
 
   static String creditorPath(String creditorId) =>
       '$nodes/creditors/${Uri.encodeComponent(creditorId)}';

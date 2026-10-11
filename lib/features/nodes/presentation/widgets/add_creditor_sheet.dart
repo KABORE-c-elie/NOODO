@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:noodo/core/l10n/generated/app_localizations.dart';
 import 'package:noodo/core/utils/current_day_provider.dart';
 import 'package:noodo/features/nodes/presentation/creditor_actions.dart';
+import 'package:noodo/features/nodes/presentation/reminder_sync.dart';
 
 Future<void> showAddCreditorSheet(BuildContext context) =>
     showModalBottomSheet<void>(
@@ -51,17 +52,26 @@ class _AddCreditorSheetState extends ConsumerState<_AddCreditorSheet> {
     if (!_formKey.currentState!.validate()) return;
     final navigator = Navigator.of(context);
     final messenger = ScaffoldMessenger.of(context);
-    final message = AppLocalizations.of(context).creditorAdded;
+    final l10n = AppLocalizations.of(context);
+    final scheduler = ref.read(reminderSchedulerProvider);
+    final dueDate = _dueDate;
     await ref
         .read(creditorActionsProvider)
         .addCreditor(
           supplierName: _name.text,
           phone: _phone.text,
           balanceDueFcfa: int.parse(_amount.text),
-          dueDate: _dueDate,
+          dueDate: dueDate,
         );
     navigator.pop();
-    messenger.showSnackBar(SnackBar(content: Text(message)));
+    messenger.showSnackBar(SnackBar(content: Text(l10n.creditorAdded)));
+    if (dueDate != null) {
+      await requestReminderPermission(
+        scheduler: scheduler,
+        messenger: messenger,
+        deniedMessage: l10n.notificationsDenied,
+      );
+    }
   }
 
   @override

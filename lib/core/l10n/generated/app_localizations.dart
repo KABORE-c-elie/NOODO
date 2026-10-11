@@ -1087,6 +1087,293 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Reste à devoir : {amount} FCFA'**
   String receiptRemainingLine(int amount);
+
+  /// No description provided for @openCreditorHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'ouvrir la fiche du créancier'**
+  String get openCreditorHint;
+
+  /// No description provided for @notificationsDenied.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sans autorisation des notifications, NOODO ne pourra pas te rappeler tes échéances. Tu peux l\'activer dans les réglages du téléphone.'**
+  String get notificationsDenied;
+
+  /// No description provided for @taxReminderTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Échéance des impôts'**
+  String get taxReminderTitle;
+
+  /// No description provided for @taxReminderBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'Plus que {days} jours avant l\'échéance du {date}. Ton Nœud Impôts est prêt.'**
+  String taxReminderBody(int days, String date);
+
+  /// No description provided for @creditorReminderTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Demain : paiement à {name}'**
+  String creditorReminderTitle(String name);
+
+  /// No description provided for @creditorReminderBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'Il reste {amount} FCFA à payer.'**
+  String creditorReminderBody(int amount);
+
+  /// No description provided for @unusualExpenseMessage.
+  ///
+  /// In fr, this message translates to:
+  /// **'« {label} » : {amount} FCFA, bien plus que d\'habitude en {category} ({average} FCFA en moyenne).'**
+  String unusualExpenseMessage(
+    String label,
+    int amount,
+    String category,
+    int average,
+  );
+
+  /// No description provided for @unusualExpenseAdvice.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vérifie le prix et garde le reçu en photo.'**
+  String get unusualExpenseAdvice;
+
+  /// No description provided for @lowProfitMessage.
+  ///
+  /// In fr, this message translates to:
+  /// **'Hier ton bénéfice était de {amount} FCFA, bien en dessous de ta moyenne de {average} FCFA.'**
+  String lowProfitMessage(int amount, int average);
+
+  /// No description provided for @lowProfitAdvice.
+  ///
+  /// In fr, this message translates to:
+  /// **'Regarde si un prix d\'achat a augmenté ou si une vente a été oubliée.'**
+  String get lowProfitAdvice;
+
+  /// No description provided for @dismissAlert.
+  ///
+  /// In fr, this message translates to:
+  /// **'Fermer l\'alerte'**
+  String get dismissAlert;
+
+  /// No description provided for @takePhoto.
+  ///
+  /// In fr, this message translates to:
+  /// **'Prendre une photo'**
+  String get takePhoto;
+
+  /// No description provided for @takePhotoTooltip.
+  ///
+  /// In fr, this message translates to:
+  /// **'Photographier un reçu ou une facture'**
+  String get takePhotoTooltip;
+
+  /// No description provided for @allCreditors.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tous les créanciers'**
+  String get allCreditors;
+
+  /// No description provided for @filterByCreditor.
+  ///
+  /// In fr, this message translates to:
+  /// **'Filtrer par créancier'**
+  String get filterByCreditor;
+
+  /// No description provided for @allDates.
+  ///
+  /// In fr, this message translates to:
+  /// **'Toutes les dates'**
+  String get allDates;
+
+  /// No description provided for @filterByDate.
+  ///
+  /// In fr, this message translates to:
+  /// **'Filtrer par date'**
+  String get filterByDate;
+
+  /// No description provided for @clearFilter.
+  ///
+  /// In fr, this message translates to:
+  /// **'Retirer le filtre'**
+  String get clearFilter;
+
+  /// No description provided for @noPhotos.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune photo pour l\'instant.'**
+  String get noPhotos;
+
+  /// No description provided for @photoSemantics.
+  ///
+  /// In fr, this message translates to:
+  /// **'Photo de reçu : {creditor}, {date}'**
+  String photoSemantics(String creditor, String date);
+
+  /// No description provided for @photoNoCreditor.
+  ///
+  /// In fr, this message translates to:
+  /// **'sans créancier'**
+  String get photoNoCreditor;
+
+  /// No description provided for @attachPhotoTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ranger la photo'**
+  String get attachPhotoTitle;
+
+  /// No description provided for @noCreditorsForPhoto.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucun créancier enregistré : la photo sera rangée sans créancier.'**
+  String get noCreditorsForPhoto;
+
+  /// No description provided for @photoCreditorLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Créancier'**
+  String get photoCreditorLabel;
+
+  /// No description provided for @photoLinkLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Lier à (facultatif)'**
+  String get photoLinkLabel;
+
+  /// No description provided for @photoNoLink.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rien'**
+  String get photoNoLink;
+
+  /// No description provided for @photoPaymentLink.
+  ///
+  /// In fr, this message translates to:
+  /// **'Paiement {number} · {amount} FCFA'**
+  String photoPaymentLink(String number, int amount);
+
+  /// No description provided for @photoTransactionLink.
+  ///
+  /// In fr, this message translates to:
+  /// **'{label} · {amount} FCFA'**
+  String photoTransactionLink(String label, int amount);
+
+  /// No description provided for @savePhotoTooltip.
+  ///
+  /// In fr, this message translates to:
+  /// **'Enregistrer la photo'**
+  String get savePhotoTooltip;
+
+  /// No description provided for @deletePhotoTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Supprimer cette photo ?'**
+  String get deletePhotoTitle;
+
+  /// No description provided for @deletePhotoBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'La photo sera effacée du téléphone.'**
+  String get deletePhotoBody;
+
+  /// No description provided for @deletePhotoTooltip.
+  ///
+  /// In fr, this message translates to:
+  /// **'Supprimer la photo'**
+  String get deletePhotoTooltip;
+
+  /// No description provided for @photosTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Photos'**
+  String get photosTitle;
+
+  /// No description provided for @takePhotoForCreditorTooltip.
+  ///
+  /// In fr, this message translates to:
+  /// **'Photographier un reçu de ce créancier'**
+  String get takePhotoForCreditorTooltip;
+
+  /// No description provided for @languageSection.
+  ///
+  /// In fr, this message translates to:
+  /// **'Langue'**
+  String get languageSection;
+
+  /// No description provided for @taxSection.
+  ///
+  /// In fr, this message translates to:
+  /// **'Impôts'**
+  String get taxSection;
+
+  /// No description provided for @alertsSection.
+  ///
+  /// In fr, this message translates to:
+  /// **'Alertes'**
+  String get alertsSection;
+
+  /// No description provided for @languageFrench.
+  ///
+  /// In fr, this message translates to:
+  /// **'Français'**
+  String get languageFrench;
+
+  /// No description provided for @languageEnglish.
+  ///
+  /// In fr, this message translates to:
+  /// **'English'**
+  String get languageEnglish;
+
+  /// No description provided for @taxRateExplanation.
+  ///
+  /// In fr, this message translates to:
+  /// **'Part de chaque vente mise de côté dans ton Nœud Impôts.'**
+  String get taxRateExplanation;
+
+  /// No description provided for @chooseTaxDueDate.
+  ///
+  /// In fr, this message translates to:
+  /// **'Choisir la prochaine échéance fiscale'**
+  String get chooseTaxDueDate;
+
+  /// No description provided for @sensitivityLow.
+  ///
+  /// In fr, this message translates to:
+  /// **'Faible'**
+  String get sensitivityLow;
+
+  /// No description provided for @sensitivityNormal.
+  ///
+  /// In fr, this message translates to:
+  /// **'Normale'**
+  String get sensitivityNormal;
+
+  /// No description provided for @sensitivityHigh.
+  ///
+  /// In fr, this message translates to:
+  /// **'Forte'**
+  String get sensitivityHigh;
+
+  /// No description provided for @sensitivityLowHelp.
+  ///
+  /// In fr, this message translates to:
+  /// **'Seulement les écarts très importants.'**
+  String get sensitivityLowHelp;
+
+  /// No description provided for @sensitivityNormalHelp.
+  ///
+  /// In fr, this message translates to:
+  /// **'Les écarts nets par rapport à tes habitudes.'**
+  String get sensitivityNormalHelp;
+
+  /// No description provided for @sensitivityHighHelp.
+  ///
+  /// In fr, this message translates to:
+  /// **'Même les petits écarts : plus d\'alertes.'**
+  String get sensitivityHighHelp;
 }
 
 class _AppLocalizationsDelegate

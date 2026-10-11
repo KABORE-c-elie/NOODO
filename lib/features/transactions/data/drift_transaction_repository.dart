@@ -36,6 +36,7 @@ final class DriftTransactionRepository implements TransactionRepository {
     if (previous == null) {
       throw StateError('Transaction ${transaction.id} introuvable');
     }
+    await _ensureNotCreditorPayment(transaction.id);
     final taxSaved = await _taxSavingsFor(transaction);
     await _db
         .update(_db.transactions)
@@ -47,6 +48,7 @@ final class DriftTransactionRepository implements TransactionRepository {
   Future<void> delete(String id) => _db.transaction(() async {
     final previous = await _findRow(id);
     if (previous == null) return;
+    await _ensureNotCreditorPayment(id);
     await (_db.delete(_db.transactions)..where((t) => t.id.equals(id))).go();
     await _adjustTaxBalance(-previous.taxSavedFcfa);
   });
@@ -54,6 +56,15 @@ final class DriftTransactionRepository implements TransactionRepository {
   Future<TransactionRow?> _findRow(String id) => (_db.select(
     _db.transactions,
   )..where((t) => t.id.equals(id))).getSingleOrNull();
+
+  Future<void> _ensureNotCreditorPayment(String id) async {
+    final payment = await (_db.select(
+      _db.creditorPayments,
+    )..where((p) => p.transactionId.equals(id))).getSingleOrNull();
+    if (payment != null) {
+      throw StateError('Transaction $id liée au paiement ${payment.id}');
+    }
+  }
 
   Future<int> _taxSavingsFor(Transaction transaction) async {
     if (transaction.type != TransactionType.sale) return 0;
@@ -138,6 +149,10 @@ final class DriftTransactionRepository implements TransactionRepository {
     final t = _db.transactions;
     return _db.select(t).join([
       leftOuterJoin(_db.localUnits, _db.localUnits.id.equalsExp(t.unitId)),
+      leftOuterJoin(
+        _db.creditorPayments,
+        _db.creditorPayments.transactionId.equalsExp(t.id),
+      ),
     ])..orderBy([OrderingTerm.desc(t.date), OrderingTerm.desc(t.id)]);
   }
 
@@ -155,6 +170,7 @@ final class DriftTransactionRepository implements TransactionRepository {
   Transaction _toDomain(TypedResult result) {
     final row = result.readTable(_db.transactions);
     final unit = result.readTableOrNull(_db.localUnits);
+    final payment = result.readTableOrNull(_db.creditorPayments);
     return Transaction(
       id: row.id,
       type: row.type,
@@ -165,6 +181,7 @@ final class DriftTransactionRepository implements TransactionRepository {
       category: row.category,
       rawText: row.rawText,
       date: row.date,
+      paymentCreditorId: payment?.creditorId,
     );
   }
 

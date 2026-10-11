@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:noodo/core/l10n/app_locale_provider.dart';
+import 'package:noodo/features/settings/data/settings_providers.dart';
 import 'package:noodo/features/transactions/data/speech_providers.dart';
 import 'package:noodo/features/transactions/domain/speech/speech_service.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

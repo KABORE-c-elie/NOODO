@@ -738,4 +738,198 @@ class AppLocalizationsEn extends AppLocalizations {
 
     return 'Still owed: $amountString FCFA';
   }
+
+  @override
+  String get openCreditorHint => 'open the creditor details';
+
+  @override
+  String get notificationsDenied =>
+      'Without notification permission, NOODO can\'t remind you of due dates. You can enable it in your phone settings.';
+
+  @override
+  String get taxReminderTitle => 'Tax due date';
+
+  @override
+  String taxReminderBody(int days, String date) {
+    return '$days days left before the $date due date. Your tax node is ready.';
+  }
+
+  @override
+  String creditorReminderTitle(String name) {
+    return 'Tomorrow: payment to $name';
+  }
+
+  @override
+  String creditorReminderBody(int amount) {
+    final intl.NumberFormat amountNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String amountString = amountNumberFormat.format(amount);
+
+    return '$amountString FCFA left to pay.';
+  }
+
+  @override
+  String unusualExpenseMessage(
+    String label,
+    int amount,
+    String category,
+    int average,
+  ) {
+    final intl.NumberFormat amountNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String amountString = amountNumberFormat.format(amount);
+    final intl.NumberFormat averageNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String averageString = averageNumberFormat.format(average);
+
+    return '\"$label\": $amountString FCFA, much more than usual for $category ($averageString FCFA on average).';
+  }
+
+  @override
+  String get unusualExpenseAdvice =>
+      'Check the price and keep a photo of the receipt.';
+
+  @override
+  String lowProfitMessage(int amount, int average) {
+    final intl.NumberFormat amountNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String amountString = amountNumberFormat.format(amount);
+    final intl.NumberFormat averageNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String averageString = averageNumberFormat.format(average);
+
+    return 'Yesterday your profit was $amountString FCFA, well below your average of $averageString FCFA.';
+  }
+
+  @override
+  String get lowProfitAdvice =>
+      'Check whether a purchase price went up or a sale was forgotten.';
+
+  @override
+  String get dismissAlert => 'Dismiss the alert';
+
+  @override
+  String get takePhoto => 'Take a photo';
+
+  @override
+  String get takePhotoTooltip => 'Photograph a receipt or an invoice';
+
+  @override
+  String get allCreditors => 'All creditors';
+
+  @override
+  String get filterByCreditor => 'Filter by creditor';
+
+  @override
+  String get allDates => 'All dates';
+
+  @override
+  String get filterByDate => 'Filter by date';
+
+  @override
+  String get clearFilter => 'Remove the filter';
+
+  @override
+  String get noPhotos => 'No photos yet.';
+
+  @override
+  String photoSemantics(String creditor, String date) {
+    return 'Receipt photo: $creditor, $date';
+  }
+
+  @override
+  String get photoNoCreditor => 'no creditor';
+
+  @override
+  String get attachPhotoTitle => 'File the photo';
+
+  @override
+  String get noCreditorsForPhoto =>
+      'No creditors yet: the photo will be filed without a creditor.';
+
+  @override
+  String get photoCreditorLabel => 'Creditor';
+
+  @override
+  String get photoLinkLabel => 'Link to (optional)';
+
+  @override
+  String get photoNoLink => 'Nothing';
+
+  @override
+  String photoPaymentLink(String number, int amount) {
+    final intl.NumberFormat amountNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String amountString = amountNumberFormat.format(amount);
+
+    return 'Payment $number · $amountString FCFA';
+  }
+
+  @override
+  String photoTransactionLink(String label, int amount) {
+    final intl.NumberFormat amountNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String amountString = amountNumberFormat.format(amount);
+
+    return '$label · $amountString FCFA';
+  }
+
+  @override
+  String get savePhotoTooltip => 'Save the photo';
+
+  @override
+  String get deletePhotoTitle => 'Delete this photo?';
+
+  @override
+  String get deletePhotoBody => 'The photo will be erased from the phone.';
+
+  @override
+  String get deletePhotoTooltip => 'Delete the photo';
+
+  @override
+  String get photosTitle => 'Photos';
+
+  @override
+  String get takePhotoForCreditorTooltip =>
+      'Photograph a receipt from this creditor';
+
+  @override
+  String get languageSection => 'Language';
+
+  @override
+  String get taxSection => 'Taxes';
+
+  @override
+  String get alertsSection => 'Alerts';
+
+  @override
+  String get languageFrench => 'Français';
+
+  @override
+  String get languageEnglish => 'English';
+
+  @override
+  String get taxRateExplanation =>
+      'Share of each sale set aside in your tax node.';
+
+  @override
+  String get chooseTaxDueDate => 'Choose the next tax due date';
+
+  @override
+  String get sensitivityLow => 'Low';
+
+  @override
+  String get sensitivityNormal => 'Normal';
+
+  @override
+  String get sensitivityHigh => 'High';
+
+  @override
+  String get sensitivityLowHelp => 'Only very large deviations.';
+
+  @override
+  String get sensitivityNormalHelp => 'Clear deviations from your habits.';
+
+  @override
+  String get sensitivityHighHelp => 'Even small deviations: more alerts.';
 }

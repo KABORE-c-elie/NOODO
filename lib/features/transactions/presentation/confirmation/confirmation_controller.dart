@@ -43,7 +43,9 @@ class ConfirmationController extends _$ConfirmationController {
     final transaction = await ref
         .read(transactionRepositoryProvider)
         .findById(id);
-    if (transaction == null || !ref.mounted) return false;
+    if (transaction == null || transaction.isCreditorPayment || !ref.mounted) {
+      return false;
+    }
     state = TransactionDraft.fromTransaction(
       transaction,
       revision: state.revision + 1,

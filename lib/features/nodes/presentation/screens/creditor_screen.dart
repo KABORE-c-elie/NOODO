@@ -10,6 +10,7 @@ import 'package:noodo/features/nodes/presentation/node_labels.dart';
 import 'package:noodo/features/nodes/presentation/widgets/creditor_tile.dart';
 import 'package:noodo/features/nodes/presentation/widgets/payment_sheet.dart';
 import 'package:noodo/features/nodes/presentation/widgets/receipt_dialog.dart';
+import 'package:noodo/features/receipts/presentation/widgets/creditor_photos.dart';
 
 class CreditorScreen extends ConsumerWidget {
   const CreditorScreen({super.key, required this.creditorId});
@@ -31,6 +32,12 @@ class CreditorScreen extends ConsumerWidget {
               padding: const EdgeInsets.all(16),
               sliver: SliverToBoxAdapter(
                 child: _CreditorSummary(creditor: value),
+              ),
+            ),
+            SliverPadding(
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+              sliver: SliverToBoxAdapter(
+                child: CreditorPhotos(creditorId: creditorId),
               ),
             ),
             SliverPadding(

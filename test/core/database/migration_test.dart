@@ -4,6 +4,8 @@ import 'package:noodo/core/database/app_database.dart';
 import 'package:noodo/features/nodes/data/drift_node_repository.dart';
 import 'package:noodo/features/nodes/domain/creditor_payment.dart';
 import 'package:noodo/features/nodes/domain/payment_method.dart';
+import 'package:noodo/features/settings/data/drift_settings_repository.dart';
+import 'package:noodo/features/settings/domain/app_settings.dart';
 import 'package:noodo/features/transactions/data/drift_transaction_repository.dart';
 
 import '../../helpers/fixtures.dart';
@@ -21,7 +23,7 @@ const _schemaV1 = [
 ];
 
 void main() {
-  test('une base v1 existante passe en v2 sans perte de données', () async {
+  test('une base v1 existante passe en v3 sans perte de données', () async {
     final db = AppDatabase(
       NativeDatabase.memory(
         setup: (raw) {
@@ -63,6 +65,11 @@ void main() {
     );
     expect(payment.receiptNumber, 'Rec-2026-0001');
     expect((await nodes.findCreditor('awa'))!.balanceDueFcfa, 3000);
+
+    expect(await DriftSettingsRepository(db).get(), const AppSettings());
+    expect(await db.select(db.receiptPhotos).get(), isEmpty);
+    expect(await db.select(db.dismissedAnomalies).get(), isEmpty);
+    expect((await transactions.findById('tx-p1'))!.paymentCreditorId, 'awa');
 
     final version = await db.customSelect('PRAGMA user_version').getSingle();
     expect(version.read<int>('user_version'), db.schemaVersion);

@@ -593,5 +593,139 @@
         "format": "decimalPattern"
       }
     }
-  }
+  },
+  "openCreditorHint": "ouvrir la fiche du créancier",
+  "notificationsDenied": "Sans autorisation des notifications, NOODO ne pourra pas te rappeler tes échéances. Tu peux l'activer dans les réglages du téléphone.",
+  "taxReminderTitle": "Échéance des impôts",
+  "taxReminderBody": "Plus que {days} jours avant l'échéance du {date}. Ton Nœud Impôts est prêt.",
+  "@taxReminderBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "creditorReminderTitle": "Demain : paiement à {name}",
+  "@creditorReminderTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "creditorReminderBody": "Il reste {amount} FCFA à payer.",
+  "@creditorReminderBody": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "unusualExpenseMessage": "« {label} » : {amount} FCFA, bien plus que d'habitude en {category} ({average} FCFA en moyenne).",
+  "@unusualExpenseMessage": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      },
+      "category": {
+        "type": "String"
+      },
+      "average": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "unusualExpenseAdvice": "Vérifie le prix et garde le reçu en photo.",
+  "lowProfitMessage": "Hier ton bénéfice était de {amount} FCFA, bien en dessous de ta moyenne de {average} FCFA.",
+  "@lowProfitMessage": {
+    "placeholders": {
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      },
+      "average": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "lowProfitAdvice": "Regarde si un prix d'achat a augmenté ou si une vente a été oubliée.",
+  "dismissAlert": "Fermer l'alerte",
+  "takePhoto": "Prendre une photo",
+  "takePhotoTooltip": "Photographier un reçu ou une facture",
+  "allCreditors": "Tous les créanciers",
+  "filterByCreditor": "Filtrer par créancier",
+  "allDates": "Toutes les dates",
+  "filterByDate": "Filtrer par date",
+  "clearFilter": "Retirer le filtre",
+  "noPhotos": "Aucune photo pour l'instant.",
+  "photoSemantics": "Photo de reçu : {creditor}, {date}",
+  "@photoSemantics": {
+    "placeholders": {
+      "creditor": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "photoNoCreditor": "sans créancier",
+  "attachPhotoTitle": "Ranger la photo",
+  "noCreditorsForPhoto": "Aucun créancier enregistré : la photo sera rangée sans créancier.",
+  "photoCreditorLabel": "Créancier",
+  "photoLinkLabel": "Lier à (facultatif)",
+  "photoNoLink": "Rien",
+  "photoPaymentLink": "Paiement {number} · {amount} FCFA",
+  "@photoPaymentLink": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "photoTransactionLink": "{label} · {amount} FCFA",
+  "@photoTransactionLink": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "savePhotoTooltip": "Enregistrer la photo",
+  "deletePhotoTitle": "Supprimer cette photo ?",
+  "deletePhotoBody": "La photo sera effacée du téléphone.",
+  "deletePhotoTooltip": "Supprimer la photo",
+  "photosTitle": "Photos",
+  "takePhotoForCreditorTooltip": "Photographier un reçu de ce créancier",
+  "languageSection": "Langue",
+  "taxSection": "Impôts",
+  "alertsSection": "Alertes",
+  "languageFrench": "Français",
+  "languageEnglish": "English",
+  "taxRateExplanation": "Part de chaque vente mise de côté dans ton Nœud Impôts.",
+  "chooseTaxDueDate": "Choisir la prochaine échéance fiscale",
+  "sensitivityLow": "Faible",
+  "sensitivityNormal": "Normale",
+  "sensitivityHigh": "Forte",
+  "sensitivityLowHelp": "Seulement les écarts très importants.",
+  "sensitivityNormalHelp": "Les écarts nets par rapport à tes habitudes.",
+  "sensitivityHighHelp": "Même les petits écarts : plus d'alertes."
 }

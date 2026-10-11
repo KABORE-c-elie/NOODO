@@ -4,6 +4,7 @@ import 'package:noodo/core/router/app_shell.dart';
 import 'package:noodo/features/nodes/presentation/screens/creditor_screen.dart';
 import 'package:noodo/features/nodes/presentation/screens/nodes_screen.dart';
 import 'package:noodo/features/profits/presentation/screens/profits_screen.dart';
+import 'package:noodo/features/receipts/presentation/screens/photo_viewer_screen.dart';
 import 'package:noodo/features/receipts/presentation/screens/receipts_screen.dart';
 import 'package:noodo/features/settings/presentation/screens/settings_screen.dart';
 import 'package:noodo/features/transactions/presentation/screens/confirmation_screen.dart';
@@ -77,6 +78,14 @@ GoRouter appRouter(Ref ref) {
       GoRoute(
         path: AppRoutes.receipts,
         builder: (context, state) => const ReceiptsScreen(),
+        routes: [
+          GoRoute(
+            path: AppRoutes.photo,
+            builder: (context, state) => PhotoViewerScreen(
+              photoId: state.pathParameters[AppRoutes.photoIdParameter]!,
+            ),
+          ),
+        ],
       ),
       GoRoute(
         path: AppRoutes.settings,

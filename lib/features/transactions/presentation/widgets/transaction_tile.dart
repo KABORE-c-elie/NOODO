@@ -33,7 +33,11 @@ class TransactionTile extends StatelessWidget {
       excludeSemantics: true,
       button: onTap != null,
       onTap: onTap,
-      onTapHint: onTap == null ? null : l10n.editTransactionHint,
+      onTapHint: onTap == null
+          ? null
+          : transaction.isCreditorPayment
+          ? l10n.openCreditorHint
+          : l10n.editTransactionHint,
       label: l10n.transactionSemantics(
         transaction.type.label(l10n),
         label,
@@ -51,7 +55,19 @@ class TransactionTile extends StatelessWidget {
           isSale ? Icons.south_west : Icons.north_east,
           color: color,
         ),
-        title: Text(label),
+        title: transaction.isCreditorPayment
+            ? Row(
+                children: [
+                  Flexible(child: Text(label)),
+                  const SizedBox(width: 6),
+                  Icon(
+                    Icons.receipt_long,
+                    size: 16,
+                    color: colors.onSurfaceVariant,
+                  ),
+                ],
+              )
+            : Text(label),
         subtitle: Text(time),
         trailing: Text(
           isSale

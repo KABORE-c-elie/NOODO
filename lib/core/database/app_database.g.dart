@@ -2499,6 +2499,925 @@ class ReceiptSequencesCompanion extends UpdateCompanion<ReceiptSequenceRow> {
   }
 }
 
+class $AppSettingsTableTable extends AppSettingsTable
+    with TableInfo<$AppSettingsTableTable, AppSettingsRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $AppSettingsTableTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _languageCodeMeta = const VerificationMeta(
+    'languageCode',
+  );
+  @override
+  late final GeneratedColumn<String> languageCode = GeneratedColumn<String>(
+    'language_code',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(defaultLanguageCode),
+  );
+  @override
+  late final GeneratedColumnWithTypeConverter<AlertSensitivity, String>
+  alertSensitivity =
+      GeneratedColumn<String>(
+        'alert_sensitivity',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+        defaultValue: Constant(AlertSensitivity.normal.name),
+      ).withConverter<AlertSensitivity>(
+        $AppSettingsTableTable.$converteralertSensitivity,
+      );
+  @override
+  List<GeneratedColumn> get $columns => [id, languageCode, alertSensitivity];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'app_settings';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<AppSettingsRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('language_code')) {
+      context.handle(
+        _languageCodeMeta,
+        languageCode.isAcceptableOrUnknown(
+          data['language_code']!,
+          _languageCodeMeta,
+        ),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  AppSettingsRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return AppSettingsRow(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      languageCode: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}language_code'],
+      )!,
+      alertSensitivity: $AppSettingsTableTable.$converteralertSensitivity
+          .fromSql(
+            attachedDatabase.typeMapping.read(
+              DriftSqlType.string,
+              data['${effectivePrefix}alert_sensitivity'],
+            )!,
+          ),
+    );
+  }
+
+  @override
+  $AppSettingsTableTable createAlias(String alias) {
+    return $AppSettingsTableTable(attachedDatabase, alias);
+  }
+
+  static JsonTypeConverter2<AlertSensitivity, String, String>
+  $converteralertSensitivity = const EnumNameConverter<AlertSensitivity>(
+    AlertSensitivity.values,
+  );
+}
+
+class AppSettingsRow extends DataClass implements Insertable<AppSettingsRow> {
+  final int id;
+  final String languageCode;
+  final AlertSensitivity alertSensitivity;
+  const AppSettingsRow({
+    required this.id,
+    required this.languageCode,
+    required this.alertSensitivity,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['language_code'] = Variable<String>(languageCode);
+    {
+      map['alert_sensitivity'] = Variable<String>(
+        $AppSettingsTableTable.$converteralertSensitivity.toSql(
+          alertSensitivity,
+        ),
+      );
+    }
+    return map;
+  }
+
+  AppSettingsTableCompanion toCompanion(bool nullToAbsent) {
+    return AppSettingsTableCompanion(
+      id: Value(id),
+      languageCode: Value(languageCode),
+      alertSensitivity: Value(alertSensitivity),
+    );
+  }
+
+  factory AppSettingsRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return AppSettingsRow(
+      id: serializer.fromJson<int>(json['id']),
+      languageCode: serializer.fromJson<String>(json['languageCode']),
+      alertSensitivity: $AppSettingsTableTable.$converteralertSensitivity
+          .fromJson(serializer.fromJson<String>(json['alertSensitivity'])),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'languageCode': serializer.toJson<String>(languageCode),
+      'alertSensitivity': serializer.toJson<String>(
+        $AppSettingsTableTable.$converteralertSensitivity.toJson(
+          alertSensitivity,
+        ),
+      ),
+    };
+  }
+
+  AppSettingsRow copyWith({
+    int? id,
+    String? languageCode,
+    AlertSensitivity? alertSensitivity,
+  }) => AppSettingsRow(
+    id: id ?? this.id,
+    languageCode: languageCode ?? this.languageCode,
+    alertSensitivity: alertSensitivity ?? this.alertSensitivity,
+  );
+  AppSettingsRow copyWithCompanion(AppSettingsTableCompanion data) {
+    return AppSettingsRow(
+      id: data.id.present ? data.id.value : this.id,
+      languageCode: data.languageCode.present
+          ? data.languageCode.value
+          : this.languageCode,
+      alertSensitivity: data.alertSensitivity.present
+          ? data.alertSensitivity.value
+          : this.alertSensitivity,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('AppSettingsRow(')
+          ..write('id: $id, ')
+          ..write('languageCode: $languageCode, ')
+          ..write('alertSensitivity: $alertSensitivity')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, languageCode, alertSensitivity);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is AppSettingsRow &&
+          other.id == this.id &&
+          other.languageCode == this.languageCode &&
+          other.alertSensitivity == this.alertSensitivity);
+}
+
+class AppSettingsTableCompanion extends UpdateCompanion<AppSettingsRow> {
+  final Value<int> id;
+  final Value<String> languageCode;
+  final Value<AlertSensitivity> alertSensitivity;
+  const AppSettingsTableCompanion({
+    this.id = const Value.absent(),
+    this.languageCode = const Value.absent(),
+    this.alertSensitivity = const Value.absent(),
+  });
+  AppSettingsTableCompanion.insert({
+    this.id = const Value.absent(),
+    this.languageCode = const Value.absent(),
+    this.alertSensitivity = const Value.absent(),
+  });
+  static Insertable<AppSettingsRow> custom({
+    Expression<int>? id,
+    Expression<String>? languageCode,
+    Expression<String>? alertSensitivity,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (languageCode != null) 'language_code': languageCode,
+      if (alertSensitivity != null) 'alert_sensitivity': alertSensitivity,
+    });
+  }
+
+  AppSettingsTableCompanion copyWith({
+    Value<int>? id,
+    Value<String>? languageCode,
+    Value<AlertSensitivity>? alertSensitivity,
+  }) {
+    return AppSettingsTableCompanion(
+      id: id ?? this.id,
+      languageCode: languageCode ?? this.languageCode,
+      alertSensitivity: alertSensitivity ?? this.alertSensitivity,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (languageCode.present) {
+      map['language_code'] = Variable<String>(languageCode.value);
+    }
+    if (alertSensitivity.present) {
+      map['alert_sensitivity'] = Variable<String>(
+        $AppSettingsTableTable.$converteralertSensitivity.toSql(
+          alertSensitivity.value,
+        ),
+      );
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('AppSettingsTableCompanion(')
+          ..write('id: $id, ')
+          ..write('languageCode: $languageCode, ')
+          ..write('alertSensitivity: $alertSensitivity')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $ReceiptPhotosTable extends ReceiptPhotos
+    with TableInfo<$ReceiptPhotosTable, ReceiptPhotoRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $ReceiptPhotosTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _fileNameMeta = const VerificationMeta(
+    'fileName',
+  );
+  @override
+  late final GeneratedColumn<String> fileName = GeneratedColumn<String>(
+    'file_name',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _creditorIdMeta = const VerificationMeta(
+    'creditorId',
+  );
+  @override
+  late final GeneratedColumn<String> creditorId = GeneratedColumn<String>(
+    'creditor_id',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES creditor_nodes (id) ON DELETE SET NULL',
+    ),
+  );
+  static const VerificationMeta _transactionIdMeta = const VerificationMeta(
+    'transactionId',
+  );
+  @override
+  late final GeneratedColumn<String> transactionId = GeneratedColumn<String>(
+    'transaction_id',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES transactions (id) ON DELETE SET NULL',
+    ),
+  );
+  static const VerificationMeta _paymentIdMeta = const VerificationMeta(
+    'paymentId',
+  );
+  @override
+  late final GeneratedColumn<String> paymentId = GeneratedColumn<String>(
+    'payment_id',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES creditor_payments (id) ON DELETE SET NULL',
+    ),
+  );
+  static const VerificationMeta _takenAtMeta = const VerificationMeta(
+    'takenAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> takenAt = GeneratedColumn<DateTime>(
+    'taken_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    fileName,
+    creditorId,
+    transactionId,
+    paymentId,
+    takenAt,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'receipt_photos';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<ReceiptPhotoRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('file_name')) {
+      context.handle(
+        _fileNameMeta,
+        fileName.isAcceptableOrUnknown(data['file_name']!, _fileNameMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_fileNameMeta);
+    }
+    if (data.containsKey('creditor_id')) {
+      context.handle(
+        _creditorIdMeta,
+        creditorId.isAcceptableOrUnknown(data['creditor_id']!, _creditorIdMeta),
+      );
+    }
+    if (data.containsKey('transaction_id')) {
+      context.handle(
+        _transactionIdMeta,
+        transactionId.isAcceptableOrUnknown(
+          data['transaction_id']!,
+          _transactionIdMeta,
+        ),
+      );
+    }
+    if (data.containsKey('payment_id')) {
+      context.handle(
+        _paymentIdMeta,
+        paymentId.isAcceptableOrUnknown(data['payment_id']!, _paymentIdMeta),
+      );
+    }
+    if (data.containsKey('taken_at')) {
+      context.handle(
+        _takenAtMeta,
+        takenAt.isAcceptableOrUnknown(data['taken_at']!, _takenAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_takenAtMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  ReceiptPhotoRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return ReceiptPhotoRow(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      fileName: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}file_name'],
+      )!,
+      creditorId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}creditor_id'],
+      ),
+      transactionId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}transaction_id'],
+      ),
+      paymentId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}payment_id'],
+      ),
+      takenAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}taken_at'],
+      )!,
+    );
+  }
+
+  @override
+  $ReceiptPhotosTable createAlias(String alias) {
+    return $ReceiptPhotosTable(attachedDatabase, alias);
+  }
+}
+
+class ReceiptPhotoRow extends DataClass implements Insertable<ReceiptPhotoRow> {
+  final String id;
+  final String fileName;
+  final String? creditorId;
+  final String? transactionId;
+  final String? paymentId;
+  final DateTime takenAt;
+  const ReceiptPhotoRow({
+    required this.id,
+    required this.fileName,
+    this.creditorId,
+    this.transactionId,
+    this.paymentId,
+    required this.takenAt,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['file_name'] = Variable<String>(fileName);
+    if (!nullToAbsent || creditorId != null) {
+      map['creditor_id'] = Variable<String>(creditorId);
+    }
+    if (!nullToAbsent || transactionId != null) {
+      map['transaction_id'] = Variable<String>(transactionId);
+    }
+    if (!nullToAbsent || paymentId != null) {
+      map['payment_id'] = Variable<String>(paymentId);
+    }
+    map['taken_at'] = Variable<DateTime>(takenAt);
+    return map;
+  }
+
+  ReceiptPhotosCompanion toCompanion(bool nullToAbsent) {
+    return ReceiptPhotosCompanion(
+      id: Value(id),
+      fileName: Value(fileName),
+      creditorId: creditorId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(creditorId),
+      transactionId: transactionId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(transactionId),
+      paymentId: paymentId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(paymentId),
+      takenAt: Value(takenAt),
+    );
+  }
+
+  factory ReceiptPhotoRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return ReceiptPhotoRow(
+      id: serializer.fromJson<String>(json['id']),
+      fileName: serializer.fromJson<String>(json['fileName']),
+      creditorId: serializer.fromJson<String?>(json['creditorId']),
+      transactionId: serializer.fromJson<String?>(json['transactionId']),
+      paymentId: serializer.fromJson<String?>(json['paymentId']),
+      takenAt: serializer.fromJson<DateTime>(json['takenAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'fileName': serializer.toJson<String>(fileName),
+      'creditorId': serializer.toJson<String?>(creditorId),
+      'transactionId': serializer.toJson<String?>(transactionId),
+      'paymentId': serializer.toJson<String?>(paymentId),
+      'takenAt': serializer.toJson<DateTime>(takenAt),
+    };
+  }
+
+  ReceiptPhotoRow copyWith({
+    String? id,
+    String? fileName,
+    Value<String?> creditorId = const Value.absent(),
+    Value<String?> transactionId = const Value.absent(),
+    Value<String?> paymentId = const Value.absent(),
+    DateTime? takenAt,
+  }) => ReceiptPhotoRow(
+    id: id ?? this.id,
+    fileName: fileName ?? this.fileName,
+    creditorId: creditorId.present ? creditorId.value : this.creditorId,
+    transactionId: transactionId.present
+        ? transactionId.value
+        : this.transactionId,
+    paymentId: paymentId.present ? paymentId.value : this.paymentId,
+    takenAt: takenAt ?? this.takenAt,
+  );
+  ReceiptPhotoRow copyWithCompanion(ReceiptPhotosCompanion data) {
+    return ReceiptPhotoRow(
+      id: data.id.present ? data.id.value : this.id,
+      fileName: data.fileName.present ? data.fileName.value : this.fileName,
+      creditorId: data.creditorId.present
+          ? data.creditorId.value
+          : this.creditorId,
+      transactionId: data.transactionId.present
+          ? data.transactionId.value
+          : this.transactionId,
+      paymentId: data.paymentId.present ? data.paymentId.value : this.paymentId,
+      takenAt: data.takenAt.present ? data.takenAt.value : this.takenAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ReceiptPhotoRow(')
+          ..write('id: $id, ')
+          ..write('fileName: $fileName, ')
+          ..write('creditorId: $creditorId, ')
+          ..write('transactionId: $transactionId, ')
+          ..write('paymentId: $paymentId, ')
+          ..write('takenAt: $takenAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(id, fileName, creditorId, transactionId, paymentId, takenAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is ReceiptPhotoRow &&
+          other.id == this.id &&
+          other.fileName == this.fileName &&
+          other.creditorId == this.creditorId &&
+          other.transactionId == this.transactionId &&
+          other.paymentId == this.paymentId &&
+          other.takenAt == this.takenAt);
+}
+
+class ReceiptPhotosCompanion extends UpdateCompanion<ReceiptPhotoRow> {
+  final Value<String> id;
+  final Value<String> fileName;
+  final Value<String?> creditorId;
+  final Value<String?> transactionId;
+  final Value<String?> paymentId;
+  final Value<DateTime> takenAt;
+  final Value<int> rowid;
+  const ReceiptPhotosCompanion({
+    this.id = const Value.absent(),
+    this.fileName = const Value.absent(),
+    this.creditorId = const Value.absent(),
+    this.transactionId = const Value.absent(),
+    this.paymentId = const Value.absent(),
+    this.takenAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  ReceiptPhotosCompanion.insert({
+    required String id,
+    required String fileName,
+    this.creditorId = const Value.absent(),
+    this.transactionId = const Value.absent(),
+    this.paymentId = const Value.absent(),
+    required DateTime takenAt,
+    this.rowid = const Value.absent(),
+  }) : id = Value(id),
+       fileName = Value(fileName),
+       takenAt = Value(takenAt);
+  static Insertable<ReceiptPhotoRow> custom({
+    Expression<String>? id,
+    Expression<String>? fileName,
+    Expression<String>? creditorId,
+    Expression<String>? transactionId,
+    Expression<String>? paymentId,
+    Expression<DateTime>? takenAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (fileName != null) 'file_name': fileName,
+      if (creditorId != null) 'creditor_id': creditorId,
+      if (transactionId != null) 'transaction_id': transactionId,
+      if (paymentId != null) 'payment_id': paymentId,
+      if (takenAt != null) 'taken_at': takenAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  ReceiptPhotosCompanion copyWith({
+    Value<String>? id,
+    Value<String>? fileName,
+    Value<String?>? creditorId,
+    Value<String?>? transactionId,
+    Value<String?>? paymentId,
+    Value<DateTime>? takenAt,
+    Value<int>? rowid,
+  }) {
+    return ReceiptPhotosCompanion(
+      id: id ?? this.id,
+      fileName: fileName ?? this.fileName,
+      creditorId: creditorId ?? this.creditorId,
+      transactionId: transactionId ?? this.transactionId,
+      paymentId: paymentId ?? this.paymentId,
+      takenAt: takenAt ?? this.takenAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (fileName.present) {
+      map['file_name'] = Variable<String>(fileName.value);
+    }
+    if (creditorId.present) {
+      map['creditor_id'] = Variable<String>(creditorId.value);
+    }
+    if (transactionId.present) {
+      map['transaction_id'] = Variable<String>(transactionId.value);
+    }
+    if (paymentId.present) {
+      map['payment_id'] = Variable<String>(paymentId.value);
+    }
+    if (takenAt.present) {
+      map['taken_at'] = Variable<DateTime>(takenAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ReceiptPhotosCompanion(')
+          ..write('id: $id, ')
+          ..write('fileName: $fileName, ')
+          ..write('creditorId: $creditorId, ')
+          ..write('transactionId: $transactionId, ')
+          ..write('paymentId: $paymentId, ')
+          ..write('takenAt: $takenAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $DismissedAnomaliesTable extends DismissedAnomalies
+    with TableInfo<$DismissedAnomaliesTable, DismissedAnomalyRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $DismissedAnomaliesTable(this.attachedDatabase, [this._alias]);
+  @override
+  late final GeneratedColumnWithTypeConverter<AnomalyType, String> type =
+      GeneratedColumn<String>(
+        'type',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: true,
+      ).withConverter<AnomalyType>($DismissedAnomaliesTable.$convertertype);
+  static const VerificationMeta _dayMeta = const VerificationMeta('day');
+  @override
+  late final GeneratedColumn<DateTime> day = GeneratedColumn<DateTime>(
+    'day',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [type, day];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'dismissed_anomalies';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<DismissedAnomalyRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('day')) {
+      context.handle(
+        _dayMeta,
+        day.isAcceptableOrUnknown(data['day']!, _dayMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_dayMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {type, day};
+  @override
+  DismissedAnomalyRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return DismissedAnomalyRow(
+      type: $DismissedAnomaliesTable.$convertertype.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}type'],
+        )!,
+      ),
+      day: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}day'],
+      )!,
+    );
+  }
+
+  @override
+  $DismissedAnomaliesTable createAlias(String alias) {
+    return $DismissedAnomaliesTable(attachedDatabase, alias);
+  }
+
+  static JsonTypeConverter2<AnomalyType, String, String> $convertertype =
+      const EnumNameConverter<AnomalyType>(AnomalyType.values);
+}
+
+class DismissedAnomalyRow extends DataClass
+    implements Insertable<DismissedAnomalyRow> {
+  final AnomalyType type;
+  final DateTime day;
+  const DismissedAnomalyRow({required this.type, required this.day});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    {
+      map['type'] = Variable<String>(
+        $DismissedAnomaliesTable.$convertertype.toSql(type),
+      );
+    }
+    map['day'] = Variable<DateTime>(day);
+    return map;
+  }
+
+  DismissedAnomaliesCompanion toCompanion(bool nullToAbsent) {
+    return DismissedAnomaliesCompanion(type: Value(type), day: Value(day));
+  }
+
+  factory DismissedAnomalyRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return DismissedAnomalyRow(
+      type: $DismissedAnomaliesTable.$convertertype.fromJson(
+        serializer.fromJson<String>(json['type']),
+      ),
+      day: serializer.fromJson<DateTime>(json['day']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'type': serializer.toJson<String>(
+        $DismissedAnomaliesTable.$convertertype.toJson(type),
+      ),
+      'day': serializer.toJson<DateTime>(day),
+    };
+  }
+
+  DismissedAnomalyRow copyWith({AnomalyType? type, DateTime? day}) =>
+      DismissedAnomalyRow(type: type ?? this.type, day: day ?? this.day);
+  DismissedAnomalyRow copyWithCompanion(DismissedAnomaliesCompanion data) {
+    return DismissedAnomalyRow(
+      type: data.type.present ? data.type.value : this.type,
+      day: data.day.present ? data.day.value : this.day,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('DismissedAnomalyRow(')
+          ..write('type: $type, ')
+          ..write('day: $day')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(type, day);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is DismissedAnomalyRow &&
+          other.type == this.type &&
+          other.day == this.day);
+}
+
+class DismissedAnomaliesCompanion extends UpdateCompanion<DismissedAnomalyRow> {
+  final Value<AnomalyType> type;
+  final Value<DateTime> day;
+  final Value<int> rowid;
+  const DismissedAnomaliesCompanion({
+    this.type = const Value.absent(),
+    this.day = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  DismissedAnomaliesCompanion.insert({
+    required AnomalyType type,
+    required DateTime day,
+    this.rowid = const Value.absent(),
+  }) : type = Value(type),
+       day = Value(day);
+  static Insertable<DismissedAnomalyRow> custom({
+    Expression<String>? type,
+    Expression<DateTime>? day,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (type != null) 'type': type,
+      if (day != null) 'day': day,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  DismissedAnomaliesCompanion copyWith({
+    Value<AnomalyType>? type,
+    Value<DateTime>? day,
+    Value<int>? rowid,
+  }) {
+    return DismissedAnomaliesCompanion(
+      type: type ?? this.type,
+      day: day ?? this.day,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (type.present) {
+      map['type'] = Variable<String>(
+        $DismissedAnomaliesTable.$convertertype.toSql(type.value),
+      );
+    }
+    if (day.present) {
+      map['day'] = Variable<DateTime>(day.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('DismissedAnomaliesCompanion(')
+          ..write('type: $type, ')
+          ..write('day: $day, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -2512,6 +3431,12 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $ReceiptSequencesTable receiptSequences = $ReceiptSequencesTable(
     this,
   );
+  late final $AppSettingsTableTable appSettingsTable = $AppSettingsTableTable(
+    this,
+  );
+  late final $ReceiptPhotosTable receiptPhotos = $ReceiptPhotosTable(this);
+  late final $DismissedAnomaliesTable dismissedAnomalies =
+      $DismissedAnomaliesTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -2523,6 +3448,9 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     taxNodes,
     creditorPayments,
     receiptSequences,
+    appSettingsTable,
+    receiptPhotos,
+    dismissedAnomalies,
   ];
   @override
   StreamQueryUpdateRules get streamUpdateRules => const StreamQueryUpdateRules([
@@ -2539,6 +3467,27 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         limitUpdateKind: UpdateKind.delete,
       ),
       result: [TableUpdate('creditor_payments', kind: UpdateKind.update)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'creditor_nodes',
+        limitUpdateKind: UpdateKind.delete,
+      ),
+      result: [TableUpdate('receipt_photos', kind: UpdateKind.update)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'transactions',
+        limitUpdateKind: UpdateKind.delete,
+      ),
+      result: [TableUpdate('receipt_photos', kind: UpdateKind.update)],
+    ),
+    WritePropagation(
+      on: TableUpdateQuery.onTableName(
+        'creditor_payments',
+        limitUpdateKind: UpdateKind.delete,
+      ),
+      result: [TableUpdate('receipt_photos', kind: UpdateKind.update)],
     ),
   ]);
 }
@@ -2873,6 +3822,24 @@ final class $$TransactionsTableReferences
       manager.$state.copyWith(prefetchedData: cache),
     );
   }
+
+  static MultiTypedResultKey<$ReceiptPhotosTable, List<ReceiptPhotoRow>>
+  _receiptPhotosRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
+    db.receiptPhotos,
+    aliasName: 'transactions__id__receipt_photos__transaction_id',
+  );
+
+  $$ReceiptPhotosTableProcessedTableManager get receiptPhotosRefs {
+    final manager = $$ReceiptPhotosTableTableManager(
+      $_db,
+      $_db.receiptPhotos,
+    ).filter((f) => f.transactionId.id.sqlEquals($_itemColumn<String>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(_receiptPhotosRefsTable($_db));
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
 }
 
 class $$TransactionsTableFilterComposer
@@ -2974,6 +3941,31 @@ class $$TransactionsTableFilterComposer
           }) => $$CreditorPaymentsTableFilterComposer(
             $db: $db,
             $table: $db.creditorPayments,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+
+  Expression<bool> receiptPhotosRefs(
+    Expression<bool> Function($$ReceiptPhotosTableFilterComposer f) f,
+  ) {
+    final $$ReceiptPhotosTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.receiptPhotos,
+      getReferencedColumn: (t) => t.transactionId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ReceiptPhotosTableFilterComposer(
+            $db: $db,
+            $table: $db.receiptPhotos,
             $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
             joinBuilder: joinBuilder,
             $removeJoinBuilderFromRootComposer:
@@ -3149,6 +4141,31 @@ class $$TransactionsTableAnnotationComposer
     );
     return f(composer);
   }
+
+  Expression<T> receiptPhotosRefs<T extends Object>(
+    Expression<T> Function($$ReceiptPhotosTableAnnotationComposer a) f,
+  ) {
+    final $$ReceiptPhotosTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.receiptPhotos,
+      getReferencedColumn: (t) => t.transactionId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ReceiptPhotosTableAnnotationComposer(
+            $db: $db,
+            $table: $db.receiptPhotos,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
 }
 
 class $$TransactionsTableTableManager
@@ -3164,7 +4181,11 @@ class $$TransactionsTableTableManager
           $$TransactionsTableUpdateCompanionBuilder,
           (TransactionRow, $$TransactionsTableReferences),
           TransactionRow,
-          PrefetchHooks Function({bool unitId, bool creditorPaymentsRefs})
+          PrefetchHooks Function({
+            bool unitId,
+            bool creditorPaymentsRefs,
+            bool receiptPhotosRefs,
+          })
         > {
   $$TransactionsTableTableManager(_$AppDatabase db, $TransactionsTable table)
     : super(
@@ -3238,11 +4259,16 @@ class $$TransactionsTableTableManager
               )
               .toList(),
           prefetchHooksCallback:
-              ({unitId = false, creditorPaymentsRefs = false}) {
+              ({
+                unitId = false,
+                creditorPaymentsRefs = false,
+                receiptPhotosRefs = false,
+              }) {
                 return PrefetchHooks(
                   db: db,
                   explicitlyWatchedTables: [
                     if (creditorPaymentsRefs) db.creditorPayments,
+                    if (receiptPhotosRefs) db.receiptPhotos,
                   ],
                   addJoins:
                       <
@@ -3297,6 +4323,27 @@ class $$TransactionsTableTableManager
                               ),
                           typedResults: items,
                         ),
+                      if (receiptPhotosRefs)
+                        await $_getPrefetchedData<
+                          TransactionRow,
+                          $TransactionsTable,
+                          ReceiptPhotoRow
+                        >(
+                          currentTable: table,
+                          referencedTable: $$TransactionsTableReferences
+                              ._receiptPhotosRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$TransactionsTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).receiptPhotosRefs,
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.transactionId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
                     ];
                   },
                 );
@@ -3317,7 +4364,11 @@ typedef $$TransactionsTableProcessedTableManager =
       $$TransactionsTableUpdateCompanionBuilder,
       (TransactionRow, $$TransactionsTableReferences),
       TransactionRow,
-      PrefetchHooks Function({bool unitId, bool creditorPaymentsRefs})
+      PrefetchHooks Function({
+        bool unitId,
+        bool creditorPaymentsRefs,
+        bool receiptPhotosRefs,
+      })
     >;
 typedef $$CreditorNodesTableCreateCompanionBuilder =
     CreditorNodesCompanion Function({
@@ -3362,6 +4413,24 @@ final class $$CreditorNodesTableReferences
     final cache = $_typedResult.readTableOrNull(
       _creditorPaymentsRefsTable($_db),
     );
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
+
+  static MultiTypedResultKey<$ReceiptPhotosTable, List<ReceiptPhotoRow>>
+  _receiptPhotosRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
+    db.receiptPhotos,
+    aliasName: 'creditor_nodes__id__receipt_photos__creditor_id',
+  );
+
+  $$ReceiptPhotosTableProcessedTableManager get receiptPhotosRefs {
+    final manager = $$ReceiptPhotosTableTableManager(
+      $_db,
+      $_db.receiptPhotos,
+    ).filter((f) => f.creditorId.id.sqlEquals($_itemColumn<String>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(_receiptPhotosRefsTable($_db));
     return ProcessedTableManager(
       manager.$state.copyWith(prefetchedData: cache),
     );
@@ -3418,6 +4487,31 @@ class $$CreditorNodesTableFilterComposer
           }) => $$CreditorPaymentsTableFilterComposer(
             $db: $db,
             $table: $db.creditorPayments,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+
+  Expression<bool> receiptPhotosRefs(
+    Expression<bool> Function($$ReceiptPhotosTableFilterComposer f) f,
+  ) {
+    final $$ReceiptPhotosTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.receiptPhotos,
+      getReferencedColumn: (t) => t.creditorId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ReceiptPhotosTableFilterComposer(
+            $db: $db,
+            $table: $db.receiptPhotos,
             $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
             joinBuilder: joinBuilder,
             $removeJoinBuilderFromRootComposer:
@@ -3515,6 +4609,31 @@ class $$CreditorNodesTableAnnotationComposer
     );
     return f(composer);
   }
+
+  Expression<T> receiptPhotosRefs<T extends Object>(
+    Expression<T> Function($$ReceiptPhotosTableAnnotationComposer a) f,
+  ) {
+    final $$ReceiptPhotosTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.receiptPhotos,
+      getReferencedColumn: (t) => t.creditorId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ReceiptPhotosTableAnnotationComposer(
+            $db: $db,
+            $table: $db.receiptPhotos,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
 }
 
 class $$CreditorNodesTableTableManager
@@ -3530,7 +4649,10 @@ class $$CreditorNodesTableTableManager
           $$CreditorNodesTableUpdateCompanionBuilder,
           (CreditorNodeRow, $$CreditorNodesTableReferences),
           CreditorNodeRow,
-          PrefetchHooks Function({bool creditorPaymentsRefs})
+          PrefetchHooks Function({
+            bool creditorPaymentsRefs,
+            bool receiptPhotosRefs,
+          })
         > {
   $$CreditorNodesTableTableManager(_$AppDatabase db, $CreditorNodesTable table)
     : super(
@@ -3583,38 +4705,63 @@ class $$CreditorNodesTableTableManager
                 ),
               )
               .toList(),
-          prefetchHooksCallback: ({creditorPaymentsRefs = false}) {
-            return PrefetchHooks(
-              db: db,
-              explicitlyWatchedTables: [
-                if (creditorPaymentsRefs) db.creditorPayments,
-              ],
-              addJoins: null,
-              getPrefetchedDataCallback: (items) async {
-                return [
-                  if (creditorPaymentsRefs)
-                    await $_getPrefetchedData<
-                      CreditorNodeRow,
-                      $CreditorNodesTable,
-                      CreditorPaymentRow
-                    >(
-                      currentTable: table,
-                      referencedTable: $$CreditorNodesTableReferences
-                          ._creditorPaymentsRefsTable(db),
-                      managerFromTypedResult: (p0) =>
-                          $$CreditorNodesTableReferences(
-                            db,
-                            table,
-                            p0,
-                          ).creditorPaymentsRefs,
-                      referencedItemsForCurrentItem: (item, referencedItems) =>
-                          referencedItems.where((e) => e.creditorId == item.id),
-                      typedResults: items,
-                    ),
-                ];
+          prefetchHooksCallback:
+              ({creditorPaymentsRefs = false, receiptPhotosRefs = false}) {
+                return PrefetchHooks(
+                  db: db,
+                  explicitlyWatchedTables: [
+                    if (creditorPaymentsRefs) db.creditorPayments,
+                    if (receiptPhotosRefs) db.receiptPhotos,
+                  ],
+                  addJoins: null,
+                  getPrefetchedDataCallback: (items) async {
+                    return [
+                      if (creditorPaymentsRefs)
+                        await $_getPrefetchedData<
+                          CreditorNodeRow,
+                          $CreditorNodesTable,
+                          CreditorPaymentRow
+                        >(
+                          currentTable: table,
+                          referencedTable: $$CreditorNodesTableReferences
+                              ._creditorPaymentsRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$CreditorNodesTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).creditorPaymentsRefs,
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.creditorId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
+                      if (receiptPhotosRefs)
+                        await $_getPrefetchedData<
+                          CreditorNodeRow,
+                          $CreditorNodesTable,
+                          ReceiptPhotoRow
+                        >(
+                          currentTable: table,
+                          referencedTable: $$CreditorNodesTableReferences
+                              ._receiptPhotosRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$CreditorNodesTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).receiptPhotosRefs,
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.creditorId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
+                    ];
+                  },
+                );
               },
-            );
-          },
         ),
       );
 }
@@ -3631,7 +4778,10 @@ typedef $$CreditorNodesTableProcessedTableManager =
       $$CreditorNodesTableUpdateCompanionBuilder,
       (CreditorNodeRow, $$CreditorNodesTableReferences),
       CreditorNodeRow,
-      PrefetchHooks Function({bool creditorPaymentsRefs})
+      PrefetchHooks Function({
+        bool creditorPaymentsRefs,
+        bool receiptPhotosRefs,
+      })
     >;
 typedef $$TaxNodesTableCreateCompanionBuilder = TaxNodesCompanion Function({
   required String id,
@@ -3903,6 +5053,24 @@ final class $$CreditorPaymentsTableReferences
       manager.$state.copyWith(prefetchedData: [item]),
     );
   }
+
+  static MultiTypedResultKey<$ReceiptPhotosTable, List<ReceiptPhotoRow>>
+  _receiptPhotosRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
+    db.receiptPhotos,
+    aliasName: 'creditor_payments__id__receipt_photos__payment_id',
+  );
+
+  $$ReceiptPhotosTableProcessedTableManager get receiptPhotosRefs {
+    final manager = $$ReceiptPhotosTableTableManager(
+      $_db,
+      $_db.receiptPhotos,
+    ).filter((f) => f.paymentId.id.sqlEquals($_itemColumn<String>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(_receiptPhotosRefsTable($_db));
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
 }
 
 class $$CreditorPaymentsTableFilterComposer
@@ -4004,6 +5172,31 @@ class $$CreditorPaymentsTableFilterComposer
           ),
     );
     return composer;
+  }
+
+  Expression<bool> receiptPhotosRefs(
+    Expression<bool> Function($$ReceiptPhotosTableFilterComposer f) f,
+  ) {
+    final $$ReceiptPhotosTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.receiptPhotos,
+      getReferencedColumn: (t) => t.paymentId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ReceiptPhotosTableFilterComposer(
+            $db: $db,
+            $table: $db.receiptPhotos,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
   }
 }
 
@@ -4199,6 +5392,31 @@ class $$CreditorPaymentsTableAnnotationComposer
     );
     return composer;
   }
+
+  Expression<T> receiptPhotosRefs<T extends Object>(
+    Expression<T> Function($$ReceiptPhotosTableAnnotationComposer a) f,
+  ) {
+    final $$ReceiptPhotosTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.receiptPhotos,
+      getReferencedColumn: (t) => t.paymentId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ReceiptPhotosTableAnnotationComposer(
+            $db: $db,
+            $table: $db.receiptPhotos,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
 }
 
 class $$CreditorPaymentsTableTableManager
@@ -4214,7 +5432,11 @@ class $$CreditorPaymentsTableTableManager
           $$CreditorPaymentsTableUpdateCompanionBuilder,
           (CreditorPaymentRow, $$CreditorPaymentsTableReferences),
           CreditorPaymentRow,
-          PrefetchHooks Function({bool creditorId, bool transactionId})
+          PrefetchHooks Function({
+            bool creditorId,
+            bool transactionId,
+            bool receiptPhotosRefs,
+          })
         > {
   $$CreditorPaymentsTableTableManager(
     _$AppDatabase db,
@@ -4295,56 +5517,85 @@ class $$CreditorPaymentsTableTableManager
                 ),
               )
               .toList(),
-          prefetchHooksCallback: ({creditorId = false, transactionId = false}) {
-            return PrefetchHooks(
-              db: db,
-              explicitlyWatchedTables: [],
-              addJoins:
-                  <
-                    T extends TableManagerState<
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic
-                    >
-                  >(state) {
-                    if (creditorId) {
-                      state = state.withJoin(
-                        currentTable: table,
-                        currentColumn: table.creditorId,
-                        referencedTable: $$CreditorPaymentsTableReferences
-                            ._creditorIdTable(db),
-                        referencedColumn: $$CreditorPaymentsTableReferences
-                            ._creditorIdTable(db)
-                            .id,
-                      ) as T;
-                    }
-                    if (transactionId) {
-                      state = state.withJoin(
-                        currentTable: table,
-                        currentColumn: table.transactionId,
-                        referencedTable: $$CreditorPaymentsTableReferences
-                            ._transactionIdTable(db),
-                        referencedColumn: $$CreditorPaymentsTableReferences
-                            ._transactionIdTable(db)
-                            .id,
-                      ) as T;
-                    }
+          prefetchHooksCallback:
+              ({
+                creditorId = false,
+                transactionId = false,
+                receiptPhotosRefs = false,
+              }) {
+                return PrefetchHooks(
+                  db: db,
+                  explicitlyWatchedTables: [
+                    if (receiptPhotosRefs) db.receiptPhotos,
+                  ],
+                  addJoins:
+                      <
+                        T extends TableManagerState<
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic
+                        >
+                      >(state) {
+                        if (creditorId) {
+                          state = state.withJoin(
+                            currentTable: table,
+                            currentColumn: table.creditorId,
+                            referencedTable: $$CreditorPaymentsTableReferences
+                                ._creditorIdTable(db),
+                            referencedColumn: $$CreditorPaymentsTableReferences
+                                ._creditorIdTable(db)
+                                .id,
+                          ) as T;
+                        }
+                        if (transactionId) {
+                          state = state.withJoin(
+                            currentTable: table,
+                            currentColumn: table.transactionId,
+                            referencedTable: $$CreditorPaymentsTableReferences
+                                ._transactionIdTable(db),
+                            referencedColumn: $$CreditorPaymentsTableReferences
+                                ._transactionIdTable(db)
+                                .id,
+                          ) as T;
+                        }
 
-                    return state;
+                        return state;
+                      },
+                  getPrefetchedDataCallback: (items) async {
+                    return [
+                      if (receiptPhotosRefs)
+                        await $_getPrefetchedData<
+                          CreditorPaymentRow,
+                          $CreditorPaymentsTable,
+                          ReceiptPhotoRow
+                        >(
+                          currentTable: table,
+                          referencedTable: $$CreditorPaymentsTableReferences
+                              ._receiptPhotosRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$CreditorPaymentsTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).receiptPhotosRefs,
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.paymentId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
+                    ];
                   },
-              getPrefetchedDataCallback: (items) async {
-                return [];
+                );
               },
-            );
-          },
         ),
       );
 }
@@ -4361,7 +5612,11 @@ typedef $$CreditorPaymentsTableProcessedTableManager =
       $$CreditorPaymentsTableUpdateCompanionBuilder,
       (CreditorPaymentRow, $$CreditorPaymentsTableReferences),
       CreditorPaymentRow,
-      PrefetchHooks Function({bool creditorId, bool transactionId})
+      PrefetchHooks Function({
+        bool creditorId,
+        bool transactionId,
+        bool receiptPhotosRefs,
+      })
     >;
 typedef $$ReceiptSequencesTableCreateCompanionBuilder =
     ReceiptSequencesCompanion Function({
@@ -4519,6 +5774,865 @@ typedef $$ReceiptSequencesTableProcessedTableManager =
       ReceiptSequenceRow,
       PrefetchHooks Function()
     >;
+typedef $$AppSettingsTableTableCreateCompanionBuilder =
+    AppSettingsTableCompanion Function({
+      Value<int> id,
+      Value<String> languageCode,
+      Value<AlertSensitivity> alertSensitivity,
+    });
+typedef $$AppSettingsTableTableUpdateCompanionBuilder =
+    AppSettingsTableCompanion Function({
+      Value<int> id,
+      Value<String> languageCode,
+      Value<AlertSensitivity> alertSensitivity,
+    });
+
+class $$AppSettingsTableTableFilterComposer
+    extends Composer<_$AppDatabase, $AppSettingsTableTable> {
+  $$AppSettingsTableTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get languageCode => $composableBuilder(
+    column: $table.languageCode,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnWithTypeConverterFilters<AlertSensitivity, AlertSensitivity, String>
+  get alertSensitivity => $composableBuilder(
+    column: $table.alertSensitivity,
+    builder: (column) => ColumnWithTypeConverterFilters(column),
+  );
+}
+
+class $$AppSettingsTableTableOrderingComposer
+    extends Composer<_$AppDatabase, $AppSettingsTableTable> {
+  $$AppSettingsTableTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get languageCode => $composableBuilder(
+    column: $table.languageCode,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get alertSensitivity => $composableBuilder(
+    column: $table.alertSensitivity,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$AppSettingsTableTableAnnotationComposer
+    extends Composer<_$AppDatabase, $AppSettingsTableTable> {
+  $$AppSettingsTableTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get languageCode => $composableBuilder(
+    column: $table.languageCode,
+    builder: (column) => column,
+  );
+
+  GeneratedColumnWithTypeConverter<AlertSensitivity, String>
+  get alertSensitivity => $composableBuilder(
+    column: $table.alertSensitivity,
+    builder: (column) => column,
+  );
+}
+
+class $$AppSettingsTableTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $AppSettingsTableTable,
+          AppSettingsRow,
+          $$AppSettingsTableTableFilterComposer,
+          $$AppSettingsTableTableOrderingComposer,
+          $$AppSettingsTableTableAnnotationComposer,
+          $$AppSettingsTableTableCreateCompanionBuilder,
+          $$AppSettingsTableTableUpdateCompanionBuilder,
+          (
+            AppSettingsRow,
+            BaseReferences<
+              _$AppDatabase,
+              $AppSettingsTableTable,
+              AppSettingsRow
+            >,
+          ),
+          AppSettingsRow,
+          PrefetchHooks Function()
+        > {
+  $$AppSettingsTableTableTableManager(
+    _$AppDatabase db,
+    $AppSettingsTableTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$AppSettingsTableTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$AppSettingsTableTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$AppSettingsTableTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<String> languageCode = const Value.absent(),
+                Value<AlertSensitivity> alertSensitivity = const Value.absent(),
+              }) => AppSettingsTableCompanion(
+                id: id,
+                languageCode: languageCode,
+                alertSensitivity: alertSensitivity,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<String> languageCode = const Value.absent(),
+                Value<AlertSensitivity> alertSensitivity = const Value.absent(),
+              }) => AppSettingsTableCompanion.insert(
+                id: id,
+                languageCode: languageCode,
+                alertSensitivity: alertSensitivity,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$AppSettingsTableTable, AppSettingsRow>(table),
+                  BaseReferences<
+                    _$AppDatabase,
+                    $AppSettingsTableTable,
+                    AppSettingsRow
+                  >(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$AppSettingsTableTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $AppSettingsTableTable,
+      AppSettingsRow,
+      $$AppSettingsTableTableFilterComposer,
+      $$AppSettingsTableTableOrderingComposer,
+      $$AppSettingsTableTableAnnotationComposer,
+      $$AppSettingsTableTableCreateCompanionBuilder,
+      $$AppSettingsTableTableUpdateCompanionBuilder,
+      (
+        AppSettingsRow,
+        BaseReferences<_$AppDatabase, $AppSettingsTableTable, AppSettingsRow>,
+      ),
+      AppSettingsRow,
+      PrefetchHooks Function()
+    >;
+typedef $$ReceiptPhotosTableCreateCompanionBuilder =
+    ReceiptPhotosCompanion Function({
+      required String id,
+      required String fileName,
+      Value<String?> creditorId,
+      Value<String?> transactionId,
+      Value<String?> paymentId,
+      required DateTime takenAt,
+      Value<int> rowid,
+    });
+typedef $$ReceiptPhotosTableUpdateCompanionBuilder =
+    ReceiptPhotosCompanion Function({
+      Value<String> id,
+      Value<String> fileName,
+      Value<String?> creditorId,
+      Value<String?> transactionId,
+      Value<String?> paymentId,
+      Value<DateTime> takenAt,
+      Value<int> rowid,
+    });
+
+final class $$ReceiptPhotosTableReferences
+    extends
+        BaseReferences<_$AppDatabase, $ReceiptPhotosTable, ReceiptPhotoRow> {
+  $$ReceiptPhotosTableReferences(
+    super.$_db,
+    super.$_table,
+    super.$_typedResult,
+  );
+
+  static $CreditorNodesTable _creditorIdTable(_$AppDatabase db) => db
+      .creditorNodes
+      .createAlias('receipt_photos__creditor_id__creditor_nodes__id');
+
+  $$CreditorNodesTableProcessedTableManager? get creditorId {
+    final $_column = $_itemColumn<String>('creditor_id');
+    if ($_column == null) return null;
+    final manager = $$CreditorNodesTableTableManager(
+      $_db,
+      $_db.creditorNodes,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_creditorIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+
+  static $TransactionsTable _transactionIdTable(_$AppDatabase db) => db
+      .transactions
+      .createAlias('receipt_photos__transaction_id__transactions__id');
+
+  $$TransactionsTableProcessedTableManager? get transactionId {
+    final $_column = $_itemColumn<String>('transaction_id');
+    if ($_column == null) return null;
+    final manager = $$TransactionsTableTableManager(
+      $_db,
+      $_db.transactions,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_transactionIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+
+  static $CreditorPaymentsTable _paymentIdTable(_$AppDatabase db) => db
+      .creditorPayments
+      .createAlias('receipt_photos__payment_id__creditor_payments__id');
+
+  $$CreditorPaymentsTableProcessedTableManager? get paymentId {
+    final $_column = $_itemColumn<String>('payment_id');
+    if ($_column == null) return null;
+    final manager = $$CreditorPaymentsTableTableManager(
+      $_db,
+      $_db.creditorPayments,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_paymentIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+}
+
+class $$ReceiptPhotosTableFilterComposer
+    extends Composer<_$AppDatabase, $ReceiptPhotosTable> {
+  $$ReceiptPhotosTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get fileName => $composableBuilder(
+    column: $table.fileName,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get takenAt => $composableBuilder(
+    column: $table.takenAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  $$CreditorNodesTableFilterComposer get creditorId {
+    final $$CreditorNodesTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.creditorId,
+      referencedTable: $db.creditorNodes,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$CreditorNodesTableFilterComposer(
+            $db: $db,
+            $table: $db.creditorNodes,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$TransactionsTableFilterComposer get transactionId {
+    final $$TransactionsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.transactionId,
+      referencedTable: $db.transactions,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$TransactionsTableFilterComposer(
+            $db: $db,
+            $table: $db.transactions,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$CreditorPaymentsTableFilterComposer get paymentId {
+    final $$CreditorPaymentsTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.paymentId,
+      referencedTable: $db.creditorPayments,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$CreditorPaymentsTableFilterComposer(
+            $db: $db,
+            $table: $db.creditorPayments,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$ReceiptPhotosTableOrderingComposer
+    extends Composer<_$AppDatabase, $ReceiptPhotosTable> {
+  $$ReceiptPhotosTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get fileName => $composableBuilder(
+    column: $table.fileName,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get takenAt => $composableBuilder(
+    column: $table.takenAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  $$CreditorNodesTableOrderingComposer get creditorId {
+    final $$CreditorNodesTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.creditorId,
+      referencedTable: $db.creditorNodes,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$CreditorNodesTableOrderingComposer(
+            $db: $db,
+            $table: $db.creditorNodes,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$TransactionsTableOrderingComposer get transactionId {
+    final $$TransactionsTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.transactionId,
+      referencedTable: $db.transactions,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$TransactionsTableOrderingComposer(
+            $db: $db,
+            $table: $db.transactions,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$CreditorPaymentsTableOrderingComposer get paymentId {
+    final $$CreditorPaymentsTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.paymentId,
+      referencedTable: $db.creditorPayments,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$CreditorPaymentsTableOrderingComposer(
+            $db: $db,
+            $table: $db.creditorPayments,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$ReceiptPhotosTableAnnotationComposer
+    extends Composer<_$AppDatabase, $ReceiptPhotosTable> {
+  $$ReceiptPhotosTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get fileName =>
+      $composableBuilder(column: $table.fileName, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get takenAt =>
+      $composableBuilder(column: $table.takenAt, builder: (column) => column);
+
+  $$CreditorNodesTableAnnotationComposer get creditorId {
+    final $$CreditorNodesTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.creditorId,
+      referencedTable: $db.creditorNodes,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$CreditorNodesTableAnnotationComposer(
+            $db: $db,
+            $table: $db.creditorNodes,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$TransactionsTableAnnotationComposer get transactionId {
+    final $$TransactionsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.transactionId,
+      referencedTable: $db.transactions,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$TransactionsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.transactions,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$CreditorPaymentsTableAnnotationComposer get paymentId {
+    final $$CreditorPaymentsTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.paymentId,
+      referencedTable: $db.creditorPayments,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$CreditorPaymentsTableAnnotationComposer(
+            $db: $db,
+            $table: $db.creditorPayments,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$ReceiptPhotosTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $ReceiptPhotosTable,
+          ReceiptPhotoRow,
+          $$ReceiptPhotosTableFilterComposer,
+          $$ReceiptPhotosTableOrderingComposer,
+          $$ReceiptPhotosTableAnnotationComposer,
+          $$ReceiptPhotosTableCreateCompanionBuilder,
+          $$ReceiptPhotosTableUpdateCompanionBuilder,
+          (ReceiptPhotoRow, $$ReceiptPhotosTableReferences),
+          ReceiptPhotoRow,
+          PrefetchHooks Function({
+            bool creditorId,
+            bool transactionId,
+            bool paymentId,
+          })
+        > {
+  $$ReceiptPhotosTableTableManager(_$AppDatabase db, $ReceiptPhotosTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$ReceiptPhotosTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$ReceiptPhotosTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$ReceiptPhotosTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<String> id = const Value.absent(),
+                Value<String> fileName = const Value.absent(),
+                Value<String?> creditorId = const Value.absent(),
+                Value<String?> transactionId = const Value.absent(),
+                Value<String?> paymentId = const Value.absent(),
+                Value<DateTime> takenAt = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => ReceiptPhotosCompanion(
+                id: id,
+                fileName: fileName,
+                creditorId: creditorId,
+                transactionId: transactionId,
+                paymentId: paymentId,
+                takenAt: takenAt,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String id,
+                required String fileName,
+                Value<String?> creditorId = const Value.absent(),
+                Value<String?> transactionId = const Value.absent(),
+                Value<String?> paymentId = const Value.absent(),
+                required DateTime takenAt,
+                Value<int> rowid = const Value.absent(),
+              }) => ReceiptPhotosCompanion.insert(
+                id: id,
+                fileName: fileName,
+                creditorId: creditorId,
+                transactionId: transactionId,
+                paymentId: paymentId,
+                takenAt: takenAt,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$ReceiptPhotosTable, ReceiptPhotoRow>(table),
+                  $$ReceiptPhotosTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback:
+              ({creditorId = false, transactionId = false, paymentId = false}) {
+                return PrefetchHooks(
+                  db: db,
+                  explicitlyWatchedTables: [],
+                  addJoins:
+                      <
+                        T extends TableManagerState<
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic,
+                          dynamic
+                        >
+                      >(state) {
+                        if (creditorId) {
+                          state = state.withJoin(
+                            currentTable: table,
+                            currentColumn: table.creditorId,
+                            referencedTable: $$ReceiptPhotosTableReferences
+                                ._creditorIdTable(db),
+                            referencedColumn: $$ReceiptPhotosTableReferences
+                                ._creditorIdTable(db)
+                                .id,
+                          ) as T;
+                        }
+                        if (transactionId) {
+                          state = state.withJoin(
+                            currentTable: table,
+                            currentColumn: table.transactionId,
+                            referencedTable: $$ReceiptPhotosTableReferences
+                                ._transactionIdTable(db),
+                            referencedColumn: $$ReceiptPhotosTableReferences
+                                ._transactionIdTable(db)
+                                .id,
+                          ) as T;
+                        }
+                        if (paymentId) {
+                          state = state.withJoin(
+                            currentTable: table,
+                            currentColumn: table.paymentId,
+                            referencedTable: $$ReceiptPhotosTableReferences
+                                ._paymentIdTable(db),
+                            referencedColumn: $$ReceiptPhotosTableReferences
+                                ._paymentIdTable(db)
+                                .id,
+                          ) as T;
+                        }
+
+                        return state;
+                      },
+                  getPrefetchedDataCallback: (items) async {
+                    return [];
+                  },
+                );
+              },
+        ),
+      );
+}
+
+typedef $$ReceiptPhotosTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $ReceiptPhotosTable,
+      ReceiptPhotoRow,
+      $$ReceiptPhotosTableFilterComposer,
+      $$ReceiptPhotosTableOrderingComposer,
+      $$ReceiptPhotosTableAnnotationComposer,
+      $$ReceiptPhotosTableCreateCompanionBuilder,
+      $$ReceiptPhotosTableUpdateCompanionBuilder,
+      (ReceiptPhotoRow, $$ReceiptPhotosTableReferences),
+      ReceiptPhotoRow,
+      PrefetchHooks Function({
+        bool creditorId,
+        bool transactionId,
+        bool paymentId,
+      })
+    >;
+typedef $$DismissedAnomaliesTableCreateCompanionBuilder =
+    DismissedAnomaliesCompanion Function({
+      required AnomalyType type,
+      required DateTime day,
+      Value<int> rowid,
+    });
+typedef $$DismissedAnomaliesTableUpdateCompanionBuilder =
+    DismissedAnomaliesCompanion Function({
+      Value<AnomalyType> type,
+      Value<DateTime> day,
+      Value<int> rowid,
+    });
+
+class $$DismissedAnomaliesTableFilterComposer
+    extends Composer<_$AppDatabase, $DismissedAnomaliesTable> {
+  $$DismissedAnomaliesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnWithTypeConverterFilters<AnomalyType, AnomalyType, String> get type =>
+      $composableBuilder(
+        column: $table.type,
+        builder: (column) => ColumnWithTypeConverterFilters(column),
+      );
+
+  ColumnFilters<DateTime> get day => $composableBuilder(
+    column: $table.day,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$DismissedAnomaliesTableOrderingComposer
+    extends Composer<_$AppDatabase, $DismissedAnomaliesTable> {
+  $$DismissedAnomaliesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get type => $composableBuilder(
+    column: $table.type,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get day => $composableBuilder(
+    column: $table.day,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$DismissedAnomaliesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $DismissedAnomaliesTable> {
+  $$DismissedAnomaliesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumnWithTypeConverter<AnomalyType, String> get type =>
+      $composableBuilder(column: $table.type, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get day =>
+      $composableBuilder(column: $table.day, builder: (column) => column);
+}
+
+class $$DismissedAnomaliesTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $DismissedAnomaliesTable,
+          DismissedAnomalyRow,
+          $$DismissedAnomaliesTableFilterComposer,
+          $$DismissedAnomaliesTableOrderingComposer,
+          $$DismissedAnomaliesTableAnnotationComposer,
+          $$DismissedAnomaliesTableCreateCompanionBuilder,
+          $$DismissedAnomaliesTableUpdateCompanionBuilder,
+          (
+            DismissedAnomalyRow,
+            BaseReferences<
+              _$AppDatabase,
+              $DismissedAnomaliesTable,
+              DismissedAnomalyRow
+            >,
+          ),
+          DismissedAnomalyRow,
+          PrefetchHooks Function()
+        > {
+  $$DismissedAnomaliesTableTableManager(
+    _$AppDatabase db,
+    $DismissedAnomaliesTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$DismissedAnomaliesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$DismissedAnomaliesTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$DismissedAnomaliesTableAnnotationComposer(
+                $db: db,
+                $table: table,
+              ),
+          updateCompanionCallback: ({
+            Value<AnomalyType> type = const Value.absent(),
+            Value<DateTime> day = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) => DismissedAnomaliesCompanion(type: type, day: day, rowid: rowid),
+          createCompanionCallback:
+              ({
+                required AnomalyType type,
+                required DateTime day,
+                Value<int> rowid = const Value.absent(),
+              }) => DismissedAnomaliesCompanion.insert(
+                type: type,
+                day: day,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$DismissedAnomaliesTable, DismissedAnomalyRow>(
+                    table,
+                  ),
+                  BaseReferences<
+                    _$AppDatabase,
+                    $DismissedAnomaliesTable,
+                    DismissedAnomalyRow
+                  >(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$DismissedAnomaliesTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $DismissedAnomaliesTable,
+      DismissedAnomalyRow,
+      $$DismissedAnomaliesTableFilterComposer,
+      $$DismissedAnomaliesTableOrderingComposer,
+      $$DismissedAnomaliesTableAnnotationComposer,
+      $$DismissedAnomaliesTableCreateCompanionBuilder,
+      $$DismissedAnomaliesTableUpdateCompanionBuilder,
+      (
+        DismissedAnomalyRow,
+        BaseReferences<
+          _$AppDatabase,
+          $DismissedAnomaliesTable,
+          DismissedAnomalyRow
+        >,
+      ),
+      DismissedAnomalyRow,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -4535,4 +6649,10 @@ class $AppDatabaseManager {
       $$CreditorPaymentsTableTableManager(_db, _db.creditorPayments);
   $$ReceiptSequencesTableTableManager get receiptSequences =>
       $$ReceiptSequencesTableTableManager(_db, _db.receiptSequences);
+  $$AppSettingsTableTableTableManager get appSettingsTable =>
+      $$AppSettingsTableTableTableManager(_db, _db.appSettingsTable);
+  $$ReceiptPhotosTableTableManager get receiptPhotos =>
+      $$ReceiptPhotosTableTableManager(_db, _db.receiptPhotos);
+  $$DismissedAnomaliesTableTableManager get dismissedAnomalies =>
+      $$DismissedAnomaliesTableTableManager(_db, _db.dismissedAnomalies);
 }

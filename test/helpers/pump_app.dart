@@ -4,14 +4,17 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:noodo/app.dart';
 import 'package:noodo/core/database/app_database.dart';
 import 'package:noodo/core/database/database_provider.dart';
-import 'package:noodo/core/l10n/app_locale_provider.dart';
 import 'package:noodo/core/l10n/generated/app_localizations.dart';
 import 'package:noodo/core/router/app_router.dart';
 import 'package:noodo/core/utils/clock_provider.dart';
 import 'package:noodo/features/nodes/data/node_providers.dart';
+import 'package:noodo/features/nodes/presentation/reminder_sync.dart';
+import 'package:noodo/features/receipts/data/photo_providers.dart';
 import 'package:noodo/features/transactions/data/speech_providers.dart';
 
+import 'fake_photo_storage.dart';
 import 'fake_receipt_sharer.dart';
+import 'fake_reminder_scheduler.dart';
 import 'fake_speech_service.dart';
 
 const testLocale = Locale('fr');
@@ -27,6 +30,8 @@ Future<ProviderContainer> pumpNoodoApp(
   String? initialLocation,
   FakeSpeechService? speech,
   FakeReceiptSharer? sharer,
+  FakeReminderScheduler? reminders,
+  FakePhotoStorage? photos,
 }) async {
   tester.view
     ..physicalSize = phoneSize * 3
@@ -39,9 +44,14 @@ Future<ProviderContainer> pumpNoodoApp(
       overrides: [
         appDatabaseProvider.overrideWithValue(db),
         clockProvider.overrideWithValue(() => now),
-        appLocaleProvider.overrideWithValue(testLocale),
         speechServiceProvider.overrideWithValue(speech ?? FakeSpeechService()),
         receiptSharerProvider.overrideWithValue(sharer ?? FakeReceiptSharer()),
+        reminderSchedulerProvider.overrideWithValue(
+          reminders ?? FakeReminderScheduler(),
+        ),
+        photoStorageProvider.overrideWith(
+          (ref) async => photos ?? FakePhotoStorage(),
+        ),
       ],
       child: const NoodoApp(),
     ),

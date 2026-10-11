@@ -169,6 +169,13 @@ class _DismissibleTransaction extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final creditorId = transaction.paymentCreditorId;
+    if (creditorId != null) {
+      return TransactionTile(
+        transaction: transaction,
+        onTap: () => context.push(AppRoutes.creditorPath(creditorId)),
+      );
+    }
     final colors = Theme.of(context).colorScheme;
     return Dismissible(
       key: ValueKey('dismiss-${transaction.id}'),
